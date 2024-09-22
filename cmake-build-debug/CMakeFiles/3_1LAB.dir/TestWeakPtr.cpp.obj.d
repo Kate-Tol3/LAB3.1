@@ -1,6 +1,6 @@
 CMakeFiles/3_1LAB.dir/TestWeakPtr.cpp.obj: \
- D:\Docs\Documents\GitHub\LAB3.1\TestWeakPtr.cpp \
- D:\Docs\Documents\GitHub\LAB3.1\TestWeakPtr.h \
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\TestWeakPtr.cpp \
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\TestWeakPtr.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cassert \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \

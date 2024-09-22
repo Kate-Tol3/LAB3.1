@@ -1,8 +1,6 @@
 
 #include "ShrdPtrTest.h"
 
-#include "../LoadTest.h"
-
 class TestAccessClass{
 public:
     static bool check() {
@@ -25,7 +23,7 @@ void ShrdPtrTest::testConstructors() {
     ShrdPtr<int> p4(std::move(p2));
     assert(p2.isNull() && *p4.get() == a);//move
 
-    WeakPtr<int> w_p (new int (a));
+    WeakPtr<int> w_p (new int (a));//from weak
     ShrdPtr<int> p5 (w_p);
     assert(p5.get() == w_p.get());
 
@@ -51,7 +49,7 @@ void ShrdPtrTest::testGet() {
 }
 
 void ShrdPtrTest::testIsNull() {
-    ShrdPtr<int> p1(new int());
+    ShrdPtr<int> p1;
     assert(p1.isNull());
 }
 
@@ -92,21 +90,31 @@ void ShrdPtrTest::testMoveOperator() {
     ShrdPtr<int> p2(new int());
     assert(p2.get() != p1.get());
     assert(p1.useCount() == 1 && p2.useCount() == 1);
-    p2 = p1;
+    p2 = std::move(p1);
     assert(*p2.get() == a && p1.get() == nullptr);
-    assert(p1.useCount() == 1 && p2.useCount() == 1);
-
+    assert(p1.useCount() == 0 && p2.useCount() == 1);
 }
 
 void ShrdPtrTest::testSwap() {
     int a = 15, b = 500;
-    ShrdPtr<int> p1(new int(a));
-    ShrdPtr<int> p2(new int(b));
+    ShrdPtr<int> p1(new int(a));//кошечка
+    ShrdPtr<int> p2(new int(b));//собачка
+    ShrdPtr<int> p3(p2);
+    ShrdPtr<int> p4(p3);
+    ShrdPtr<int> p5(p1);
     assert(*p1.get() == a);
     assert(*p2.get() == b);
+    assert(*p3.get() == b);
+    assert(*p4.get() == b);
+    assert(*p5.get() == a);
+    assert((p1.useCount() == 2) && (p2.useCount() == 3) && (p3.useCount() == 3) && (p4.useCount() == 3) && (p5.useCount() == 2));
     p1.swap(p2);
     assert(*p1.get() == b);
     assert(*p2.get() == a);
+    assert(*p3.get() == a);
+    assert(*p4.get() == a);
+    assert(*p5.get() == b);
+    assert((p1.useCount() == 2) && (p2.useCount() == 3) && (p3.useCount() == 3) && (p4.useCount() == 3) && (p5.useCount() == 2));
 }
 
 void ShrdPtrTest::testUnique() {
@@ -116,11 +124,23 @@ void ShrdPtrTest::testUnique() {
     assert(p1.unique());
     p2 = p1;
     assert(!p1.unique());
-    assert(p2.unique());
-    p2.release();
     assert(!p2.unique());
+    p2.release();
+    assert(p1.unique());
 }
 
+void ShrdPtrTest::test() {
+    testConstructors();
+    testOperators();
+    testGet();
+    testIsNull();
+    testUseCount();
+    testRelease();
+    testCopyOperator();
+    testMoveOperator();
+    testSwap();
+    testUnique();
+}
 
 
 

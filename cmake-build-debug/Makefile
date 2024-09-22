@@ -224,54 +224,6 @@ Test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/Test.cpp.s
 .PHONY : Test.cpp.s
 
-TestShrdPtr.obj: TestShrdPtr.cpp.obj
-.PHONY : TestShrdPtr.obj
-
-# target to build an object file
-TestShrdPtr.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/TestShrdPtr.cpp.obj
-.PHONY : TestShrdPtr.cpp.obj
-
-TestShrdPtr.i: TestShrdPtr.cpp.i
-.PHONY : TestShrdPtr.i
-
-# target to preprocess a source file
-TestShrdPtr.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/TestShrdPtr.cpp.i
-.PHONY : TestShrdPtr.cpp.i
-
-TestShrdPtr.s: TestShrdPtr.cpp.s
-.PHONY : TestShrdPtr.s
-
-# target to generate assembly for a file
-TestShrdPtr.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/TestShrdPtr.cpp.s
-.PHONY : TestShrdPtr.cpp.s
-
-TestWeakPtr.obj: TestWeakPtr.cpp.obj
-.PHONY : TestWeakPtr.obj
-
-# target to build an object file
-TestWeakPtr.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/TestWeakPtr.cpp.obj
-.PHONY : TestWeakPtr.cpp.obj
-
-TestWeakPtr.i: TestWeakPtr.cpp.i
-.PHONY : TestWeakPtr.i
-
-# target to preprocess a source file
-TestWeakPtr.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/TestWeakPtr.cpp.i
-.PHONY : TestWeakPtr.cpp.i
-
-TestWeakPtr.s: TestWeakPtr.cpp.s
-.PHONY : TestWeakPtr.s
-
-# target to generate assembly for a file
-TestWeakPtr.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/TestWeakPtr.cpp.s
-.PHONY : TestWeakPtr.cpp.s
-
 UnqPtrTest.obj: UnqPtrTest.cpp.obj
 .PHONY : UnqPtrTest.obj
 
@@ -295,6 +247,30 @@ UnqPtrTest.s: UnqPtrTest.cpp.s
 UnqPtrTest.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/UnqPtrTest.cpp.s
 .PHONY : UnqPtrTest.cpp.s
+
+WeakPtrTest.obj: WeakPtrTest.cpp.obj
+.PHONY : WeakPtrTest.obj
+
+# target to build an object file
+WeakPtrTest.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/WeakPtrTest.cpp.obj
+.PHONY : WeakPtrTest.cpp.obj
+
+WeakPtrTest.i: WeakPtrTest.cpp.i
+.PHONY : WeakPtrTest.i
+
+# target to preprocess a source file
+WeakPtrTest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/WeakPtrTest.cpp.i
+.PHONY : WeakPtrTest.cpp.i
+
+WeakPtrTest.s: WeakPtrTest.cpp.s
+.PHONY : WeakPtrTest.s
+
+# target to generate assembly for a file
+WeakPtrTest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/WeakPtrTest.cpp.s
+.PHONY : WeakPtrTest.cpp.s
 
 main.obj: main.cpp.obj
 .PHONY : main.obj
@@ -341,15 +317,12 @@ help:
 	@echo ... Test.obj
 	@echo ... Test.i
 	@echo ... Test.s
-	@echo ... TestShrdPtr.obj
-	@echo ... TestShrdPtr.i
-	@echo ... TestShrdPtr.s
-	@echo ... TestWeakPtr.obj
-	@echo ... TestWeakPtr.i
-	@echo ... TestWeakPtr.s
 	@echo ... UnqPtrTest.obj
 	@echo ... UnqPtrTest.i
 	@echo ... UnqPtrTest.s
+	@echo ... WeakPtrTest.obj
+	@echo ... WeakPtrTest.i
+	@echo ... WeakPtrTest.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

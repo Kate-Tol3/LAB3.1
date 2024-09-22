@@ -8,8 +8,8 @@ add_executable(3_1LAB cmake-build-debug/main.cpp
         ShrdPtr1.h
         cmake-build-debug/UnqPtr.h
         cmake-build-debug/WeakPtr.h
-        TestWeakPtr.cpp
-        TestWeakPtr.h
+        cmake-build-debug/WeakPtrTest.cpp
+        cmake-build-debug/WeakPtrTest.h
         cmake-build-debug/UnqPtrTest.cpp
         cmake-build-debug/UnqPtrTest.h
         LoadTest.cpp

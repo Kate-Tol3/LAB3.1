@@ -126,8 +126,6 @@ private:
 
 public:
 
-    WeakPtr() : control_block(nullptr) {}
-
     // Конструктор с выделением нового объекта
     explicit WeakPtr(T* p = nullptr) : control_block(p ? new ControlBlock<T>(p) : nullptr) {}
 
@@ -199,20 +197,33 @@ public:
     }
 
     void swap(WeakPtr& other) noexcept {
-        this.swap(&other);
+        T* temp_ptr = control_block->s_ptr;
+        // int temp_w_count = control_block->weak_count;
+        // int temp_r_count = control_block->ref_count;
+        control_block->s_ptr = other.control_block->s_ptr;
+        // control_block->weak_count = other.control_block->weak_count;
+        // control_block->ref_count = other.control_block->ref_count;
+        other.control_block->s_ptr = temp_ptr;
+        // other.control_block->weak_count = temp_w_count;
+        // other.control_block->ref_count = temp_r_count;
     }
 
     int useCount() const { return control_block ? control_block->weak_count : 0; }
 
     // Проверка, является ли указатель нулевым
     bool isNull() const { return control_block == nullptr || control_block->s_ptr == nullptr; }
-    //
+
+
     // // Доступ к объекту
     T& operator*() const { return *control_block->s_ptr;}
     T* operator->() const { return control_block->s_ptr; }
     T* get() const { return control_block ? control_block->s_ptr : nullptr; }
 
-    friend class ShrdPtr<T>;
+    // Проверка на единственность
+    bool unique() const {
+        return control_block && control_block->weak_count == 1;
+    }
 
+    friend class ShrdPtr<T>;
 
 };

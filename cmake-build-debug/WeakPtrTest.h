@@ -2,21 +2,22 @@
 #include <cassert>
 #include <iostream>
 #include <memory>
-#include "ShrdPtr.h"
 #include "WeakPtr.h"
+#include "ShrdPtr.h"
 
-class ShrdPtrTest {
+class WeakPtrTest {
 public:
     void testConstructors();
     void testOperators();
-    void testMoveOperator();
-    void testCopyOperator();
     void testGet();
-    void testIsNull();
+    void testCopyAssignment();
+    void testMoveAssignment();
     void testRelease();
-    void testUseCount();
+    void testExpired();
+    void testIsNull();
+    void testLock();
     void testSwap();
+    void testUseCount();
     void testUnique();
     void test();
 };
-

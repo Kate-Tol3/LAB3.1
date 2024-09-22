@@ -5,6 +5,7 @@
 #include "UnqPtr.h"
 
 class UnqPtrTest {
+public:
     void testConstructors();
     void testOperators();
     void testMoveOperator();

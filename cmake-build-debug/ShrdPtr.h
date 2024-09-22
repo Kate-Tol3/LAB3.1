@@ -96,12 +96,22 @@ public:
     bool isNull() const { return control_block == nullptr || control_block->s_ptr == nullptr; }
 
     void swap(ShrdPtr& other) noexcept {
+        // T* temp_ptr = control_block->s_ptr;
+        // int temp_count = control_block->ref_count; ///
+        // control_block->s_ptr = other.control_block->s_ptr;
+        // control_block->ref_count = other.control_block->ref_count;
+        // other.control_block->s_ptr = temp_ptr;
+        // other.control_block->ref_count = temp_count;
+
         T* temp_ptr = control_block->s_ptr;
-        int* temp_count = control_block->ref_count;
+//        int temp_w_count = control_block->weak_count;
+//        int temp_r_count = control_block->ref_count;
         control_block->s_ptr = other.control_block->s_ptr;
-        control_block->ref_count = other.control_block->ref_count;
+        // control_block->weak_count = other.control_block->weak_count;
+        // control_block->ref_count = other.control_block->ref_count;
         other.control_block->s_ptr = temp_ptr;
-        other.control_block->ref_count = temp_count;
+        // other.control_block->weak_count = temp_w_count;
+        // other.control_block->ref_count = temp_r_count;
     }
 
     // Проверка на единственность

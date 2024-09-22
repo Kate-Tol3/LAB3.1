@@ -10,7 +10,7 @@ public:
 
 void UnqPtrTest::testConstructors(){
     int a = 6;
-    UnqPtr<int> p1(new int());//empty constructor
+    UnqPtr<int> p1;//empty constructor
     assert(p1.get() == nullptr);
     UnqPtr<int> p2(new int(a));//from ptr contructor
     assert(*(p2.get()) == a);
@@ -38,7 +38,7 @@ void UnqPtrTest::testGet() {
 }
 
 void UnqPtrTest::testIsNull() {
-    UnqPtr<int> p1(new int());
+    UnqPtr<int> p1;
     assert(p1.isNull());
 }
 
@@ -47,7 +47,7 @@ void UnqPtrTest::testMoveOperator() {
     UnqPtr<int> p1(new int(a));
     UnqPtr<int> p2(new int(b));
     assert(*p1.get() == a);
-    assert(*p1.get() == b);
+    assert(*p2.get() == b);
 
     p1 = std::move(p1);
     assert(!p1.isNull());
