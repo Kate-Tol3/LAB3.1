@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "3_1LAB::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-3_1LAB-Debug-3eed0fb6b706298a1eb7.json",
+					"jsonFile" : "target-3_1LAB-Debug-3f87ea1f5f34215cdad3.json",
 					"name" : "3_1LAB",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/Kate/Desktop/3.1LAB/cmake-build-debug",
-		"source" : "C:/Users/Kate/Desktop/3.1LAB"
+		"build" : "D:/Docs/Documents/GitHub/LAB3.1/cmake-build-debug",
+		"source" : "D:/Docs/Documents/GitHub/LAB3.1"
 	},
 	"version" : 
 	{

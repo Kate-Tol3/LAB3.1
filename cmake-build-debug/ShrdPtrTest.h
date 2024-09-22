@@ -2,17 +2,21 @@
 #include <cassert>
 #include <iostream>
 #include <memory>
-#include "UnqPtr.h"
+#include "ShrdPtr.h"
+#include "WeakPtr.h"
 
-class UnqPtrTest {
+class ShrdPtrTest {
     void testConstructors();
     void testOperators();
     void testMoveOperator();
+    void testCopyOperator();
     void testGet();
     void testIsNull();
     void testRelease();
-    void testReset();
+    void testUseCount();
     void testSwap();
+    void testUnique();
 
     void test();
 };
+

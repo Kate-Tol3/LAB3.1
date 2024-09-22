@@ -10,8 +10,6 @@ add_executable(3_1LAB cmake-build-debug/main.cpp
         cmake-build-debug/WeakPtr.h
         TestWeakPtr.cpp
         TestWeakPtr.h
-        TestShrdPtr.cpp
-        TestShrdPtr.h
         cmake-build-debug/UnqPtrTest.cpp
         cmake-build-debug/UnqPtrTest.h
         LoadTest.cpp
@@ -19,4 +17,6 @@ add_executable(3_1LAB cmake-build-debug/main.cpp
         cmake-build-debug/ShrdPtr.h
         cmake-build-debug/Test.cpp
         cmake-build-debug/Test.h
+        cmake-build-debug/ShrdPtrTest.cpp
+        cmake-build-debug/ShrdPtrTest.h
 )

@@ -6,8 +6,8 @@
 
 class Test {
     void testUnqPtr();
-    void testShrdPtr();
-    void testWeakPtr();
+    // void testShrdPtr();
+    // void testWeakPtr();
     void testAll();
 };
 

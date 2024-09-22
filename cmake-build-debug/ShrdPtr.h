@@ -1,6 +1,5 @@
 #pragma once
 
-
 template <typename T>
 struct ControlBlock {
     T* s_ptr;           // Указатель на управляемый объект
@@ -24,11 +23,6 @@ template <typename T>
 class ShrdPtr {
 private:
     ControlBlock<T>* control_block;  // Указатель на контрольный блок
-
-// protected:
-//     ControlBlock<T>* getControlBlock() {
-//         return control_block;
-//     }
 
 public:
 

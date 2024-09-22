@@ -1,7 +1,12 @@
-
 #include "UnqPtrTest.h"
-#include "UnqPtr.h"
 
+
+class TestAccessClass{
+public:
+    static bool check() {
+        return true;
+    }
+};
 
 void UnqPtrTest::testConstructors(){
     int a = 6;
@@ -16,11 +21,14 @@ void UnqPtrTest::testConstructors(){
 }
 
 void UnqPtrTest::testOperators() {
+    //*
     int a = 12;
-    UnqPtr<int> p1(new int(a));//*
+    UnqPtr<int> p1(new int(a));
     assert(*(p1.get()) == *p1);
     assert(*(p1.get()) == a);
     //->
+    UnqPtr<TestAccessClass> p2(new TestAccessClass());
+    assert(p2->check);
 }
 
 void UnqPtrTest::testGet() {
@@ -35,10 +43,19 @@ void UnqPtrTest::testIsNull() {
 }
 
 void UnqPtrTest::testMoveOperator() {
+    int a = 500, b = 600;
+    UnqPtr<int> p1(new int(a));
+    UnqPtr<int> p2(new int(b));
+    assert(*p1.get() == a);
+    assert(*p1.get() == b);
 
+    p1 = std::move(p1);
+    assert(!p1.isNull());
+
+    p2 = std::move(p1);
+    assert(p1.isNull());
+    assert(*p2.get() == a);
 }
-
-
 
 void UnqPtrTest::testRelease() {
     int a = 13;
@@ -68,9 +85,13 @@ void UnqPtrTest::testSwap() {
     assert(*(p2.get()) == a);
 }
 
-
-
 void UnqPtrTest::test() {
     testConstructors();
     testOperators();
+    testGet();
+    testIsNull();
+    testMoveOperator();
+    testRelease();
+    testReset();
+    testSwap();
 }
