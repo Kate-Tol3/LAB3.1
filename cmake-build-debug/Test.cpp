@@ -1,10 +1,13 @@
 #include "Test.h"
 
+
+
 void Test::testAll() {
     testUnqPtr();
     testShrdPtr();
     testWeakPtr();
-
+    testShrdPtrAtomic();
+    testWeakPtrAtomic();
 }
 
 void Test::testUnqPtr() {
@@ -15,7 +18,6 @@ void Test::testUnqPtr() {
 void Test::testShrdPtr() {
     ShrdPtrTest shrd_ptr;
     shrd_ptr.test();
-    shrd_ptr.testAtomic();
 }
 
 void Test::testWeakPtr() {
@@ -23,4 +25,12 @@ void Test::testWeakPtr() {
     weak_ptr.test();
 }
 
+void Test::testShrdPtrAtomic() {
+    ShrdPtrAtomicTest shrd_ptr_atom;
+    shrd_ptr_atom.test();
+}
 
+void Test::testWeakPtrAtomic() {
+    WeakPtrAtomicTest wk_ptr_atom;
+    wk_ptr_atom.test();
+}

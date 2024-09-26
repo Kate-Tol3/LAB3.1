@@ -15,12 +15,12 @@ struct ControlBlockAtomic {
         delete s_ptr;
         delete ref_count;
         delete weak_count;
-        //s_ptr = nullptr;
+        s_ptr = nullptr;
     }
 };
 
 template <typename T>
-class WeakPtr;  // Объявляем заранее
+class WeakPtrAtomic;  // Объявляем заранее
 
 template <typename T>
 class ShrdPtrAtomic {
@@ -42,7 +42,7 @@ public:
         other.control_block = nullptr;
     }
 
-    ShrdPtrAtomic(const WeakPtr<T>& weak) : control_block(weak.control_block) {
+    ShrdPtrAtomic(const WeakPtrAtomic<T>& weak) : control_block(weak.control_block) {
         if (control_block) {
             (control_block->ref_count->fetch_add(1, std::memory_order_relaxed));
         }
@@ -79,7 +79,7 @@ public:
     // Освобождение ресурса
     void release() {
         if (control_block) {
-            if (control_block->ref_count->fetch_sub(1, std::memory_order_relaxed) == 0) { // == 1
+            if (control_block->ref_count->fetch_sub(1, std::memory_order_relaxed) == 1) { // == 1
                 control_block->deleteObject();  // Удаляем сам объект
                 if (control_block->weak_count->load() == 0) {
                     delete control_block;  // Удаляем и контрольный блок, если слабых ссылок больше нет
@@ -125,59 +125,8 @@ public:
     }
 
     //Доступ к weak_ptr (дружба с WeakPtr не нужна)
-  friend class WeakPtr<T>;
+  friend class WeakPtrAtomic<T>;
 };
 
 
-
-// #include <iostream>
-// #include <atomic>
-//
-// template<typename T>
-// class SharedPtr {
-// private:
-//     T* ptr;                      // Указатель на управляемый объект
-//     std::atomic<int>* count;      // Атомарный счётчик ссылок
-//
-// public:
-//     // Конструктор
-//     explicit SharedPtr(T* p = nullptr) : ptr(p), count(new std::atomic<int>(1)) {}
-//
-//     // Конструктор копирования
-//     SharedPtr(const SharedPtr<T>& other) {
-//         ptr = other.ptr;
-//         count = other.count;
-//         count->fetch_add(1, std::memory_order_relaxed);  // Атомарное увеличение счётчика
-//     }
-//
-//     // Оператор присваивания
-//     SharedPtr<T>& operator=(const SharedPtr<T>& other) {
-//         if (this != &other) {
-//             // Уменьшаем текущий счётчик
-//             if (count->fetch_sub(1, std::memory_order_relaxed) == 1) {
-//                 delete ptr;
-//                 delete count;
-//             }
-//             // Копируем данные из другого умного указателя
-//             ptr = other.ptr;
-//             count = other.count;
-//             count->fetch_add(1, std::memory_order_relaxed);
-//         }
-//         return *this;
-//     }
-//
-//     // Деструктор
-//     ~SharedPtr() {
-//         if (count->fetch_sub(1, std::memory_order_relaxed) == 1) {  // Атомарное уменьшение
-//             delete ptr;      // Если счётчик стал равен 0, освобождаем память
-//             delete count;
-//         }
-//     }
-//
-//     T& operator*() { return *ptr; }
-//     T* operator->() { return ptr; }
-//
-//     // Возвращаем количество ссылок (для отладки)
-//     int use_count() const { return count->load(); }
-// };
 

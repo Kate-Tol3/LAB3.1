@@ -166,19 +166,33 @@ CMakeFiles/3_1LAB.dir/ShrdPtrTest.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/3_1LAB.dir/ShrdPtrTest.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtrTest.cpp -o CMakeFiles\3_1LAB.dir\ShrdPtrTest.cpp.s
 
-CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.obj: CMakeFiles/3_1LAB.dir/flags.make
-CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.obj: ShrdPtrAtomic.cpp
-CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.obj: CMakeFiles/3_1LAB.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.obj -MF CMakeFiles\3_1LAB.dir\ShrdPtrAtomic.cpp.obj.d -o CMakeFiles\3_1LAB.dir\ShrdPtrAtomic.cpp.obj -c D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtrAtomic.cpp
+CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj: CMakeFiles/3_1LAB.dir/flags.make
+CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj: ShrdPtrAtomicTest.cpp
+CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj: CMakeFiles/3_1LAB.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj -MF CMakeFiles\3_1LAB.dir\ShrdPtrAtomicTest.cpp.obj.d -o CMakeFiles\3_1LAB.dir\ShrdPtrAtomicTest.cpp.obj -c D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtrAtomicTest.cpp
 
-CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtrAtomic.cpp > CMakeFiles\3_1LAB.dir\ShrdPtrAtomic.cpp.i
+CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtrAtomicTest.cpp > CMakeFiles\3_1LAB.dir\ShrdPtrAtomicTest.cpp.i
 
-CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtrAtomic.cpp -o CMakeFiles\3_1LAB.dir\ShrdPtrAtomic.cpp.s
+CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtrAtomicTest.cpp -o CMakeFiles\3_1LAB.dir\ShrdPtrAtomicTest.cpp.s
+
+CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj: CMakeFiles/3_1LAB.dir/flags.make
+CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj: WeakPtrAtomicTest.cpp
+CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj: CMakeFiles/3_1LAB.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj -MF CMakeFiles\3_1LAB.dir\WeakPtrAtomicTest.cpp.obj.d -o CMakeFiles\3_1LAB.dir\WeakPtrAtomicTest.cpp.obj -c D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\WeakPtrAtomicTest.cpp
+
+CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\WeakPtrAtomicTest.cpp > CMakeFiles\3_1LAB.dir\WeakPtrAtomicTest.cpp.i
+
+CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\WeakPtrAtomicTest.cpp -o CMakeFiles\3_1LAB.dir\WeakPtrAtomicTest.cpp.s
 
 # Object files for target 3_1LAB
 3_1LAB_OBJECTS = \
@@ -189,7 +203,8 @@ CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.s: cmake_force
 "CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj" \
 "CMakeFiles/3_1LAB.dir/Test.cpp.obj" \
 "CMakeFiles/3_1LAB.dir/ShrdPtrTest.cpp.obj" \
-"CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.obj"
+"CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj" \
+"CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj"
 
 # External object files for target 3_1LAB
 3_1LAB_EXTERNAL_OBJECTS =
@@ -201,12 +216,13 @@ CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.s: cmake_force
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/Test.cpp.obj
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/ShrdPtrTest.cpp.obj
-3_1LAB.exe: CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.obj
+3_1LAB.exe: CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj
+3_1LAB.exe: CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/build.make
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/linkLibs.rsp
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/objects1.rsp
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable 3_1LAB.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable 3_1LAB.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\3_1LAB.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

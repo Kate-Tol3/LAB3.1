@@ -175,6 +175,7 @@ void WeakPtrTest::test() {
     testOperators();
     testRelease();
     testSwap();
+    testExpired();
     testCopyAssignment();
     testMoveAssignment();
     testIsNull();

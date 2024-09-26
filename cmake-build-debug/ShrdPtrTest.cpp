@@ -1,7 +1,4 @@
 #include "ShrdPtrTest.h"
-#include <iostream>
-#include <thread>
-#include <vector>
 
 class TestAccessClass{
 public:
@@ -144,67 +141,5 @@ void ShrdPtrTest::test() {
     testUnique();
 }
 
-
-
-
-
-
-void ShrdPtrTest::testThreading() {
-    ShrdPtrAtomic<int> sp(new int(100));
-
-    auto thread_func = [&sp]() {
-        // В каждом потоке копируем указатель
-        ShrdPtrAtomic<int> temp = sp;
-        assert(*temp == 100);
-    };
-
-    // Создаем несколько потоков
-    std::vector<std::thread> threads;
-    for (int i = 0; i < 10; ++i) {
-        threads.push_back(std::thread(thread_func));
-    }
-
-    // Ждём завершения потоков
-    for (auto& t : threads) {
-        t.join();
-    }
-
-    // После завершения всех потоков счётчик ссылок должен быть 1
-    assert(sp.useCount() == 1);
-
-    std::cout << "TestSharedPtrThreading passed." << std::endl;
-}
-
-void ShrdPtrTest::testAssignmentTreading() {
-    ShrdPtrAtomic<int> sp1(new int(200));
-
-    auto thread_func = [&sp1]() {
-        ShrdPtrAtomic<int> sp2;
-        sp2 = sp1;
-        assert(*sp2 == 200);
-    };
-
-    // Создаем несколько потоков
-    std::vector<std::thread> threads;
-    for (int i = 0; i < 10; ++i) {
-        threads.push_back(std::thread(thread_func));
-    }
-
-    // Ждём завершения потоков
-    for (auto& t : threads) {
-        t.join();
-    }
-
-    // После завершения всех потоков счётчик ссылок должен быть 1
-    assert(sp1.useCount() == 1);
-
-    std::cout << "TestSharedPtrAssignmentInThreads passed." << std::endl;
-}
-
-void ShrdPtrTest::testAtomic() {
-    testThreading();
-    testAssignmentTreading();
-    std::cout << "All multithreading tests passed!" << std::endl;
-}
 
 

@@ -189,7 +189,7 @@ public:
 
     // Проверка, доступен ли объект
     bool expired() const {
-        return !control_block || control_block->ref_count == 0;
+        return !control_block || control_block->weak_count == 0; // ref_count ??
     }
 
     // Преобразование в ShrdPtr

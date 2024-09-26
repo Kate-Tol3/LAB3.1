@@ -1,11 +1,14 @@
 #pragma once
+#include <atomic>
 #include <cassert>
 #include <iostream>
-#include <memory>
-#include "ShrdPtr.h"
-#include "WeakPtr.h"
+#include <thread>
+#include <vector>
+#include "ShrdPtrAtomic.h"
+#include "WeakPtrAtomic.h"
 
-class ShrdPtrTest {
+
+class ShrdPtrAtomicTest {
 public:
     void testConstructors();
     void testOperators();
@@ -17,6 +20,8 @@ public:
     void testUseCount();
     void testSwap();
     void testUnique();
+    void testAssignmentTreading();
+    void testThreading();
     void test();
 };
 

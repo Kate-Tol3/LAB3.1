@@ -10,10 +10,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/Docs/Documents/GitHub/LAB3.1/LoadTest.cpp" "CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj.d"
   "D:/Docs/Documents/GitHub/LAB3.1/ShrdPtr1.cpp" "CMakeFiles/3_1LAB.dir/ShrdPtr1.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/ShrdPtr1.cpp.obj.d"
-  "D:/Docs/Documents/GitHub/LAB3.1/cmake-build-debug/ShrdPtrAtomic.cpp" "CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.obj.d"
+  "D:/Docs/Documents/GitHub/LAB3.1/cmake-build-debug/ShrdPtrAtomicTest.cpp" "CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj.d"
   "D:/Docs/Documents/GitHub/LAB3.1/cmake-build-debug/ShrdPtrTest.cpp" "CMakeFiles/3_1LAB.dir/ShrdPtrTest.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/ShrdPtrTest.cpp.obj.d"
   "D:/Docs/Documents/GitHub/LAB3.1/cmake-build-debug/Test.cpp" "CMakeFiles/3_1LAB.dir/Test.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/Test.cpp.obj.d"
   "D:/Docs/Documents/GitHub/LAB3.1/cmake-build-debug/UnqPtrTest.cpp" "CMakeFiles/3_1LAB.dir/UnqPtrTest.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/UnqPtrTest.cpp.obj.d"
+  "D:/Docs/Documents/GitHub/LAB3.1/cmake-build-debug/WeakPtrAtomicTest.cpp" "CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj.d"
   "D:/Docs/Documents/GitHub/LAB3.1/cmake-build-debug/WeakPtrTest.cpp" "CMakeFiles/3_1LAB.dir/WeakPtrTest.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/WeakPtrTest.cpp.obj.d"
   "D:/Docs/Documents/GitHub/LAB3.1/cmake-build-debug/main.cpp" "CMakeFiles/3_1LAB.dir/main.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/main.cpp.obj.d"
   )
