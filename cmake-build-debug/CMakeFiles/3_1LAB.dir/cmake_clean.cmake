@@ -6,6 +6,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj.d"
   "CMakeFiles/3_1LAB.dir/ShrdPtr1.cpp.obj"
   "CMakeFiles/3_1LAB.dir/ShrdPtr1.cpp.obj.d"
+  "CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.obj"
+  "CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.obj.d"
   "CMakeFiles/3_1LAB.dir/ShrdPtrTest.cpp.obj"
   "CMakeFiles/3_1LAB.dir/ShrdPtrTest.cpp.obj.d"
   "CMakeFiles/3_1LAB.dir/Test.cpp.obj"

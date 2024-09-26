@@ -4,6 +4,7 @@
 #include <memory>
 #include "ShrdPtr.h"
 #include "WeakPtr.h"
+#include "ShrdPtrAtomic.h"
 
 class ShrdPtrTest {
 public:
@@ -18,5 +19,8 @@ public:
     void testSwap();
     void testUnique();
     void test();
+    void testAtomic();
+    void testAssignmentTreading();
+    void testThreading();
 };
 

@@ -157,12 +157,13 @@ void WeakPtrTest::testLock() {
     WeakPtr<int> p2(p1);
     ShrdPtr<int> p3;
     ShrdPtr<int> p4;
-
     p3 = p2.lock();
     assert(p3.get() == p1.get());
-    assert(p3.useCount() == 1);
+    assert(p3.useCount() == 2);
 
+    p1.release();
     p2.release();
+    p3.release();
     assert(p2.expired());
     p4 = p2.lock();
     assert(p4.isNull());

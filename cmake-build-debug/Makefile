@@ -176,6 +176,30 @@ ShrdPtr1.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/ShrdPtr1.cpp.s
 .PHONY : ShrdPtr1.cpp.s
 
+ShrdPtrAtomic.obj: ShrdPtrAtomic.cpp.obj
+.PHONY : ShrdPtrAtomic.obj
+
+# target to build an object file
+ShrdPtrAtomic.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.obj
+.PHONY : ShrdPtrAtomic.cpp.obj
+
+ShrdPtrAtomic.i: ShrdPtrAtomic.cpp.i
+.PHONY : ShrdPtrAtomic.i
+
+# target to preprocess a source file
+ShrdPtrAtomic.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.i
+.PHONY : ShrdPtrAtomic.cpp.i
+
+ShrdPtrAtomic.s: ShrdPtrAtomic.cpp.s
+.PHONY : ShrdPtrAtomic.s
+
+# target to generate assembly for a file
+ShrdPtrAtomic.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/ShrdPtrAtomic.cpp.s
+.PHONY : ShrdPtrAtomic.cpp.s
+
 ShrdPtrTest.obj: ShrdPtrTest.cpp.obj
 .PHONY : ShrdPtrTest.obj
 
@@ -311,6 +335,9 @@ help:
 	@echo ... ShrdPtr1.obj
 	@echo ... ShrdPtr1.i
 	@echo ... ShrdPtr1.s
+	@echo ... ShrdPtrAtomic.obj
+	@echo ... ShrdPtrAtomic.i
+	@echo ... ShrdPtrAtomic.s
 	@echo ... ShrdPtrTest.obj
 	@echo ... ShrdPtrTest.i
 	@echo ... ShrdPtrTest.s

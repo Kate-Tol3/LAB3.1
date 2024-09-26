@@ -19,4 +19,7 @@ add_executable(3_1LAB cmake-build-debug/main.cpp
         cmake-build-debug/Test.h
         cmake-build-debug/ShrdPtrTest.cpp
         cmake-build-debug/ShrdPtrTest.h
+        forUselessStuff.h
+        cmake-build-debug/ShrdPtrAtomic.cpp
+        cmake-build-debug/ShrdPtrAtomic.h
 )

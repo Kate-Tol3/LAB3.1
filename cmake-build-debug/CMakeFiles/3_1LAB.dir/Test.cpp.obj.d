@@ -179,6 +179,8 @@ CMakeFiles/3_1LAB.dir/Test.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/execution_defs.h \
  D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtr.h \
  D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\WeakPtr.h \
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtrAtomic.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/atomic \
  D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\UnqPtrTest.h \
  D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\UnqPtr.h \
  D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\WeakPtrTest.h

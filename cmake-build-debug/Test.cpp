@@ -3,7 +3,7 @@
 void Test::testAll() {
     testUnqPtr();
     testShrdPtr();
-    // testWeakPtr();
+    testWeakPtr();
 
 }
 
@@ -15,6 +15,7 @@ void Test::testUnqPtr() {
 void Test::testShrdPtr() {
     ShrdPtrTest shrd_ptr;
     shrd_ptr.test();
+    shrd_ptr.testAtomic();
 }
 
 void Test::testWeakPtr() {

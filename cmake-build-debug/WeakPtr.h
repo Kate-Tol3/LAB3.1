@@ -127,7 +127,11 @@ private:
 public:
 
     // Конструктор с выделением нового объекта
-    explicit WeakPtr(T* p = nullptr) : control_block(p ? new ControlBlock<T>(p) : nullptr) {}
+    explicit WeakPtr(T* p = nullptr) : control_block(p ? new ControlBlock<T>(p) : nullptr) {
+        if (control_block) {
+            ++(control_block->weak_count);
+        }
+    }
 
     // Конструктор из ShrdPtr
     WeakPtr(const ShrdPtr<T>& shrd_ptr) : control_block(shrd_ptr.control_block) {
