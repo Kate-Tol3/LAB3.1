@@ -4,17 +4,17 @@
 template <typename T>
 struct ControlBlockAtomic {
     T* s_ptr;           // Указатель на управляемый объект
-    std::atomic<int>* ref_count;      // Счётчик сильных ссылок (ShrdPtrAtomic)
-    std::atomic<int>* weak_count;     // Счётчик слабых ссылок (WeakPtr)
+    std::atomic<unsigned long>* ref_count;      // Счётчик сильных ссылок (ShrdPtrAtomic)
+    std::atomic<unsigned long>* weak_count;     // Счётчик слабых ссылок (WeakPtr)
 
     // Конструктор для инициализации контрольного блока
-    ControlBlockAtomic(T* ptr = nullptr) : s_ptr(ptr), ref_count(new std::atomic<int>(1)), weak_count(new std::atomic<int>(0)) {}
+    explicit ControlBlockAtomic(T* ptr = nullptr) : s_ptr(ptr), ref_count(new std::atomic<unsigned long>(1)), weak_count(new std::atomic<unsigned long>(0)) {}
 
     // Уничтожение объекта, но не самого контрольного блока
     void deleteObject() {
         delete s_ptr;
-        delete ref_count;
-        delete weak_count;
+        // delete ref_count;
+        // delete weak_count;
         s_ptr = nullptr;
     }
 };
@@ -34,7 +34,7 @@ public:
 
     // Копирующий конструктор
     ShrdPtrAtomic(const ShrdPtrAtomic& other) : control_block(other.control_block) {
-       (control_block->ref_count->fetch_add(1, std::memory_order_relaxed));
+       (control_block->ref_count->fetch_add(1, std::memory_order_acq_rel));
     }
 
     // Перемещающий конструктор
@@ -44,7 +44,7 @@ public:
 
     ShrdPtrAtomic(const WeakPtrAtomic<T>& weak) : control_block(weak.control_block) {
         if (control_block) {
-            (control_block->ref_count->fetch_add(1, std::memory_order_relaxed));
+            (control_block->ref_count->fetch_add(1, std::memory_order_acq_rel));
         }
     }
 
@@ -60,7 +60,7 @@ public:
             release();
             control_block = other.control_block;
             if (control_block) {
-                control_block->ref_count->fetch_add(1, std::memory_order_relaxed);
+                control_block->ref_count->fetch_add(1, std::memory_order_acq_rel);
             }
         }
         return *this;
@@ -79,7 +79,7 @@ public:
     // Освобождение ресурса
     void release() {
         if (control_block) {
-            if (control_block->ref_count->fetch_sub(1, std::memory_order_relaxed) == 1) { // == 1
+            if (control_block->ref_count->fetch_sub(1, std::memory_order_acq_rel) == 1) {
                 control_block->deleteObject();  // Удаляем сам объект
                 if (control_block->weak_count->load() == 0) {
                     delete control_block;  // Удаляем и контрольный блок, если слабых ссылок больше нет
@@ -95,7 +95,7 @@ public:
     T* get() const { return control_block ? control_block->s_ptr : nullptr; }
 
     // Проверка количества сильных ссылок
-    int useCount() const { return control_block ? control_block->ref_count->load() : 0; }
+    unsigned long useCount() const { return control_block ? control_block->ref_count->load() : static_cast<unsigned long>(0); }
 
     // Проверка, является ли указатель нулевым
     bool isNull() const { return control_block == nullptr || control_block->s_ptr == nullptr; }

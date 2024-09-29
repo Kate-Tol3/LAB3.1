@@ -12,8 +12,8 @@ add_executable(3_1LAB cmake-build-debug/main.cpp
         cmake-build-debug/WeakPtrTest.h
         cmake-build-debug/UnqPtrTest.cpp
         cmake-build-debug/UnqPtrTest.h
-        LoadTest.cpp
-        LoadTest.h
+        LoadTest1.cpp
+        LoadTest1.h
         cmake-build-debug/ShrdPtr.h
         cmake-build-debug/Test.cpp
         cmake-build-debug/Test.h
@@ -26,4 +26,8 @@ add_executable(3_1LAB cmake-build-debug/main.cpp
         cmake-build-debug/WeakPtrAtomicTest.cpp
         cmake-build-debug/WeakPtrAtomicTest.h
         cmake-build-debug/WeakPtrAtomic.h
+        cmake-build-debug/LoadTest.cpp
+        cmake-build-debug/LoadTest.h
+        cmake-build-debug/GunplotGraphs.cpp
+        cmake-build-debug/GunplotGraphs.h
 )

@@ -124,19 +124,19 @@ CMakeFiles/3_1LAB.dir/UnqPtrTest.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/3_1LAB.dir/UnqPtrTest.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\UnqPtrTest.cpp -o CMakeFiles\3_1LAB.dir\UnqPtrTest.cpp.s
 
-CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj: CMakeFiles/3_1LAB.dir/flags.make
-CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj: D:/Docs/Documents/GitHub/LAB3.1/LoadTest.cpp
-CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj: CMakeFiles/3_1LAB.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj -MF CMakeFiles\3_1LAB.dir\LoadTest.cpp.obj.d -o CMakeFiles\3_1LAB.dir\LoadTest.cpp.obj -c D:\Docs\Documents\GitHub\LAB3.1\LoadTest.cpp
+CMakeFiles/3_1LAB.dir/LoadTest1.cpp.obj: CMakeFiles/3_1LAB.dir/flags.make
+CMakeFiles/3_1LAB.dir/LoadTest1.cpp.obj: D:/Docs/Documents/GitHub/LAB3.1/LoadTest1.cpp
+CMakeFiles/3_1LAB.dir/LoadTest1.cpp.obj: CMakeFiles/3_1LAB.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/3_1LAB.dir/LoadTest1.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/3_1LAB.dir/LoadTest1.cpp.obj -MF CMakeFiles\3_1LAB.dir\LoadTest1.cpp.obj.d -o CMakeFiles\3_1LAB.dir\LoadTest1.cpp.obj -c D:\Docs\Documents\GitHub\LAB3.1\LoadTest1.cpp
 
-CMakeFiles/3_1LAB.dir/LoadTest.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/3_1LAB.dir/LoadTest.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Docs\Documents\GitHub\LAB3.1\LoadTest.cpp > CMakeFiles\3_1LAB.dir\LoadTest.cpp.i
+CMakeFiles/3_1LAB.dir/LoadTest1.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/3_1LAB.dir/LoadTest1.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Docs\Documents\GitHub\LAB3.1\LoadTest1.cpp > CMakeFiles\3_1LAB.dir\LoadTest1.cpp.i
 
-CMakeFiles/3_1LAB.dir/LoadTest.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/3_1LAB.dir/LoadTest.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Docs\Documents\GitHub\LAB3.1\LoadTest.cpp -o CMakeFiles\3_1LAB.dir\LoadTest.cpp.s
+CMakeFiles/3_1LAB.dir/LoadTest1.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/3_1LAB.dir/LoadTest1.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Docs\Documents\GitHub\LAB3.1\LoadTest1.cpp -o CMakeFiles\3_1LAB.dir\LoadTest1.cpp.s
 
 CMakeFiles/3_1LAB.dir/Test.cpp.obj: CMakeFiles/3_1LAB.dir/flags.make
 CMakeFiles/3_1LAB.dir/Test.cpp.obj: Test.cpp
@@ -194,17 +194,47 @@ CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\WeakPtrAtomicTest.cpp -o CMakeFiles\3_1LAB.dir\WeakPtrAtomicTest.cpp.s
 
+CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj: CMakeFiles/3_1LAB.dir/flags.make
+CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj: LoadTest.cpp
+CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj: CMakeFiles/3_1LAB.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj -MF CMakeFiles\3_1LAB.dir\LoadTest.cpp.obj.d -o CMakeFiles\3_1LAB.dir\LoadTest.cpp.obj -c D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\LoadTest.cpp
+
+CMakeFiles/3_1LAB.dir/LoadTest.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/3_1LAB.dir/LoadTest.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\LoadTest.cpp > CMakeFiles\3_1LAB.dir\LoadTest.cpp.i
+
+CMakeFiles/3_1LAB.dir/LoadTest.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/3_1LAB.dir/LoadTest.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\LoadTest.cpp -o CMakeFiles\3_1LAB.dir\LoadTest.cpp.s
+
+CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj: CMakeFiles/3_1LAB.dir/flags.make
+CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj: GunplotGraphs.cpp
+CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj: CMakeFiles/3_1LAB.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj -MF CMakeFiles\3_1LAB.dir\GunplotGraphs.cpp.obj.d -o CMakeFiles\3_1LAB.dir\GunplotGraphs.cpp.obj -c D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\GunplotGraphs.cpp
+
+CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\GunplotGraphs.cpp > CMakeFiles\3_1LAB.dir\GunplotGraphs.cpp.i
+
+CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\GunplotGraphs.cpp -o CMakeFiles\3_1LAB.dir\GunplotGraphs.cpp.s
+
 # Object files for target 3_1LAB
 3_1LAB_OBJECTS = \
 "CMakeFiles/3_1LAB.dir/main.cpp.obj" \
 "CMakeFiles/3_1LAB.dir/ShrdPtr1.cpp.obj" \
 "CMakeFiles/3_1LAB.dir/WeakPtrTest.cpp.obj" \
 "CMakeFiles/3_1LAB.dir/UnqPtrTest.cpp.obj" \
-"CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj" \
+"CMakeFiles/3_1LAB.dir/LoadTest1.cpp.obj" \
 "CMakeFiles/3_1LAB.dir/Test.cpp.obj" \
 "CMakeFiles/3_1LAB.dir/ShrdPtrTest.cpp.obj" \
 "CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj" \
-"CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj"
+"CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj" \
+"CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj" \
+"CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj"
 
 # External object files for target 3_1LAB
 3_1LAB_EXTERNAL_OBJECTS =
@@ -213,16 +243,18 @@ CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.s: cmake_force
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/ShrdPtr1.cpp.obj
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/WeakPtrTest.cpp.obj
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/UnqPtrTest.cpp.obj
-3_1LAB.exe: CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj
+3_1LAB.exe: CMakeFiles/3_1LAB.dir/LoadTest1.cpp.obj
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/Test.cpp.obj
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/ShrdPtrTest.cpp.obj
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj
+3_1LAB.exe: CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj
+3_1LAB.exe: CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/build.make
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/linkLibs.rsp
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/objects1.rsp
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable 3_1LAB.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable 3_1LAB.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\3_1LAB.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

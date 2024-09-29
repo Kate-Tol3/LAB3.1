@@ -8,7 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "D:/Docs/Documents/GitHub/LAB3.1/LoadTest.cpp" "CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj.d"
+  "D:/Docs/Documents/GitHub/LAB3.1/cmake-build-debug/GunplotGraphs.cpp" "CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj.d"
+  "D:/Docs/Documents/GitHub/LAB3.1/cmake-build-debug/LoadTest.cpp" "CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj.d"
+  "D:/Docs/Documents/GitHub/LAB3.1/LoadTest1.cpp" "CMakeFiles/3_1LAB.dir/LoadTest1.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/LoadTest1.cpp.obj.d"
   "D:/Docs/Documents/GitHub/LAB3.1/ShrdPtr1.cpp" "CMakeFiles/3_1LAB.dir/ShrdPtr1.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/ShrdPtr1.cpp.obj.d"
   "D:/Docs/Documents/GitHub/LAB3.1/cmake-build-debug/ShrdPtrAtomicTest.cpp" "CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj.d"
   "D:/Docs/Documents/GitHub/LAB3.1/cmake-build-debug/ShrdPtrTest.cpp" "CMakeFiles/3_1LAB.dir/ShrdPtrTest.cpp.obj" "gcc" "CMakeFiles/3_1LAB.dir/ShrdPtrTest.cpp.obj.d"

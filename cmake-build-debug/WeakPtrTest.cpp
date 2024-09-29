@@ -183,4 +183,5 @@ void WeakPtrTest::test() {
     testGet();
     testUnique();
     testLock();
+    std::cout << "All WeakPtr tests passed!" << std::endl;
 }

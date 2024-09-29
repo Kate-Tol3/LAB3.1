@@ -94,4 +94,5 @@ void UnqPtrTest::test() {
     testRelease();
     testReset();
     testSwap();
+    std::cout << "All UnqPtr tests passed!" << std::endl;
 }

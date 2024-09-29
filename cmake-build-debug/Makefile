@@ -128,6 +128,30 @@ depend:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/build
 .PHONY : 3_1LAB/fast
 
+GunplotGraphs.obj: GunplotGraphs.cpp.obj
+.PHONY : GunplotGraphs.obj
+
+# target to build an object file
+GunplotGraphs.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj
+.PHONY : GunplotGraphs.cpp.obj
+
+GunplotGraphs.i: GunplotGraphs.cpp.i
+.PHONY : GunplotGraphs.i
+
+# target to preprocess a source file
+GunplotGraphs.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.i
+.PHONY : GunplotGraphs.cpp.i
+
+GunplotGraphs.s: GunplotGraphs.cpp.s
+.PHONY : GunplotGraphs.s
+
+# target to generate assembly for a file
+GunplotGraphs.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.s
+.PHONY : GunplotGraphs.cpp.s
+
 LoadTest.obj: LoadTest.cpp.obj
 .PHONY : LoadTest.obj
 
@@ -151,6 +175,30 @@ LoadTest.s: LoadTest.cpp.s
 LoadTest.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/LoadTest.cpp.s
 .PHONY : LoadTest.cpp.s
+
+LoadTest1.obj: LoadTest1.cpp.obj
+.PHONY : LoadTest1.obj
+
+# target to build an object file
+LoadTest1.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/LoadTest1.cpp.obj
+.PHONY : LoadTest1.cpp.obj
+
+LoadTest1.i: LoadTest1.cpp.i
+.PHONY : LoadTest1.i
+
+# target to preprocess a source file
+LoadTest1.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/LoadTest1.cpp.i
+.PHONY : LoadTest1.cpp.i
+
+LoadTest1.s: LoadTest1.cpp.s
+.PHONY : LoadTest1.s
+
+# target to generate assembly for a file
+LoadTest1.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/LoadTest1.cpp.s
+.PHONY : LoadTest1.cpp.s
 
 ShrdPtr1.obj: ShrdPtr1.cpp.obj
 .PHONY : ShrdPtr1.obj
@@ -353,9 +401,15 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... 3_1LAB
+	@echo ... GunplotGraphs.obj
+	@echo ... GunplotGraphs.i
+	@echo ... GunplotGraphs.s
 	@echo ... LoadTest.obj
 	@echo ... LoadTest.i
 	@echo ... LoadTest.s
+	@echo ... LoadTest1.obj
+	@echo ... LoadTest1.i
+	@echo ... LoadTest1.s
 	@echo ... ShrdPtr1.obj
 	@echo ... ShrdPtr1.i
 	@echo ... ShrdPtr1.s

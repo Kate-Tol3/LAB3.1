@@ -190,7 +190,6 @@ void WeakPtrAtomicTest::testThreading() {
         t.join();
     }
 
-    std::cout << "TestWeakPtrThreading passed." << std::endl;
 }
 
 // Функция для тестирования уничтожения объекта, на который указывает WeakPtr
@@ -208,11 +207,12 @@ void WeakPtrAtomicTest::testExpiration() {
     }
 
     // Теперь объект уничтожен, так как SharedPtr вышел из области видимости
+
     assert(wp.expired());                 // WeakPtr должен быть истёкшим
     ShrdPtrAtomic<int> sp_from_wp = wp.lock();
     assert(!sp_from_wp.get());                  // Невозможно получить SharedPtr
 
-    std::cout << "TestWeakPtrExpiration passed." << std::endl;
+
 }
 
 // Функция для многопоточного присваивания WeakPtr
@@ -243,27 +243,25 @@ void WeakPtrAtomicTest::testAssignmentInThreads() {
     // После завершения всех потоков SharedPtr должен остаться валидным
     assert(sp.useCount() == 1);  // Счётчик ссылок на объект не должен измениться
     assert(!wp1.expired());       // WeakPtr по-прежнему указывает на существующий объект
-
-    std::cout << "TestWeakPtrAssignmentInThreads passed." << std::endl;
 }
 
 void WeakPtrAtomicTest::test() {
-    // testConstructors();
+    testConstructors();
     testOperators();
     testRelease();
     testSwap();
     testCopyAssignment();
     testMoveAssignment();
-    //testIsNull();
+    testIsNull();
     testUseCount();
     testGet();
     testUnique();
     testLock();
     testThreading();
-    // testExpiration();
-    //testAssignmentInThreads();
+    testExpiration();
+    testAssignmentInThreads();
 
-    std::cout << "All WeakPtr multithreading tests passed!" << std::endl;
+    std::cout << "All WeakPtrAtomic tests passed!" << std::endl;
 }
 
 

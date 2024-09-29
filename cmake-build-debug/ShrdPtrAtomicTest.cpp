@@ -152,8 +152,6 @@ void ShrdPtrAtomicTest::testThreading() {
 
     // После завершения всех потоков счётчик ссылок должен быть 1
     assert(sp.useCount() == 1);
-
-    std::cout << "TestSharedPtrThreading passed." << std::endl;
 }
 
 void ShrdPtrAtomicTest::testAssignmentTreading() {
@@ -178,8 +176,6 @@ void ShrdPtrAtomicTest::testAssignmentTreading() {
 
     // После завершения всех потоков счётчик ссылок должен быть 1
     assert(sp1.useCount() == 1);
-
-    std::cout << "TestSharedPtrAssignmentInThreads passed." << std::endl;
 }
 
 void ShrdPtrAtomicTest::test() {
@@ -196,5 +192,5 @@ void ShrdPtrAtomicTest::test() {
     testIsNull();
     testUseCount();
     testRelease();
-    std::cout << "All multithreading tests passed!" << std::endl;
+    std::cout << "All ShrdPtrAtomic tests passed!" << std::endl;
 }

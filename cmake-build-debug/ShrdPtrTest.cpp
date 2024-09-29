@@ -139,6 +139,7 @@ void ShrdPtrTest::test() {
     testMoveOperator();
     testSwap();
     testUnique();
+    std::cout << "All ShrdPtr tests passed!" << std::endl;
 }
 
 
