@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include "gnuplot-iostream.h"
+#include <gnuplot-iostream/gnuplot-iostream.h>
 
 
 
