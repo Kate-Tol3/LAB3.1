@@ -1,7 +1,6 @@
 #include "LinkedListTest.h"
 
 #include <cassert>
-#include <stdexcept>
 #include "LinkedList.h"
 #include "Exception.h"
 
@@ -197,4 +196,6 @@ void LinkedListTest::test() {
     testGetSubList();
     testConcat();
     testOperatorEqual();
+
+    std::cout << "All LinkedList tests passed!" << std::endl;
 }

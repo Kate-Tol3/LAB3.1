@@ -4,6 +4,7 @@
 #include "WeakPtrTest.h"
 #include "ShrdPtrAtomicTest.h"
 #include "WeakPtrAtomicTest.h"
+#include "MutableSequenceTest.h"
 
 class Test {
 public:
@@ -12,6 +13,8 @@ public:
     void testWeakPtr();
     void testShrdPtrAtomic();
     void testWeakPtrAtomic();
+    void testLinkedList();
+    void testMutableSequence();
     void testAll();
 };
 

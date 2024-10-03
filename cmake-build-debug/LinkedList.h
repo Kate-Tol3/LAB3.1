@@ -16,8 +16,11 @@ public:
 
 public:
     // Constructor
-    explicit Node(const T& n_val = T(), WeakPtrAtomic<Node<T>> n_prev = WeakPtrAtomic<Node<T>>(), ShrdPtrAtomic<Node<T>> n_next = nullptr)
+    // explicit Node(const T& n_val = T(), WeakPtrAtomic<Node<T>> n_prev = WeakPtrAtomic<Node<T>>(), ShrdPtrAtomic<Node<T>> n_next = nullptr)
+    //     : value(n_val), prev(n_prev), next(n_next) {}
+    explicit Node(const T& n_val = T(), WeakPtrAtomic<Node<T>> n_prev = WeakPtrAtomic<Node<T>>(nullptr), ShrdPtrAtomic<Node<T>> n_next = ShrdPtrAtomic<Node<T>>(nullptr))// WeakPtrAtomic<Node<T>> n_prev = WeakPtrAtomic<Node<T>>() == nullptr
         : value(n_val), prev(n_prev), next(n_next) {}
+    //explicit Node(): value(T()), prev(nullptr), next(nullptr) {};
 };
 
 template <typename T>
@@ -117,7 +120,8 @@ public:
     }
 
     void append(const T& item) {
-        auto el = ShrdPtrAtomic<Node<T>>(new Node<T>(item, WeakPtrAtomic<Node<T>>(), ShrdPtrAtomic<Node<T>> ()));///
+       // auto el = ShrdPtrAtomic<Node<T>>(new Node<T>(item, WeakPtrAtomic<Node<T>>(), nullptr));//!!!
+        auto el = ShrdPtrAtomic<Node<T>>(new Node<T>(item, WeakPtrAtomic<Node<T>>(), ShrdPtrAtomic<Node<T>>()));
         if (!head.get()) {
             head = tail = el;
         } else {
@@ -173,31 +177,25 @@ public:
         return new_list;
     }
 
-//    LinkedList<T>* concat(LinkedList<T> *list) {
-//        auto *new_list = new LinkedList<T>(*this);
-//        Node<T> *el1 = new_list->head;
-//        Node<T> *el2 = list->head;
-//        while (el1->next != nullptr) el1 = el1->next;
-//
-//        while (el1->next!=nullptr) {
-//            el1->next = new Node<T>(el2->value);
-//            el1->next->prev = el1;
-//            el1 = el1->next;
-//            el2 = el2->next;
-//            ++new_list->length;
-//        }
-//        delete el1;
-//        delete el2;
-//        return new_list;
-
-
     void print() const {
         ShrdPtrAtomic<Node<T>> temp = head;
-        while (temp) {
+        while (temp.get()) {
             std::cout << temp->value << " ";
             temp = temp->next;
         }
         std::cout << std::endl;
+    }
+
+    void clear() {
+        // Проверяем, пуст ли уже список
+        if (this->getLength() == 0) return;
+
+        // Устанавливаем указатели на голову и хвост в nullptr
+        head = nullptr; // Предполагается, что head - это ShrdPtrAtomic<Node<T>>
+        tail = nullptr; // Предполагается, что tail - это ShrdPtrAtomic<Node<T>>
+
+        // Обнуляем длину списка
+        length = 0;
     }
 
     bool operator==(const LinkedList<T>& other) const {

@@ -204,4 +204,11 @@ CMakeFiles/3_1LAB.dir/Test.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/vector.tcc \
  D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtrAtomic.h \
  D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\WeakPtrAtomic.h \
- D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\WeakPtrAtomicTest.h
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\WeakPtrAtomicTest.h \
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\MutableSequenceTest.h \
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\Exception.h \
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\MutableSequence.h \
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\Sequence.h \
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\MutableListSequence.h \
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\LinkedList.h \
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\LinkedListTest.h

@@ -53,23 +53,9 @@ void WeakPtrTest::testRelease() {
 }
 
 void WeakPtrTest::testSwap() {
-    // int a = 15, b = 500;
-    // WeakPtr<int> p1(new int(a));
-    // WeakPtr<int> p2(new int(b));
-    // WeakPtr<int> p3(p2);
-    // assert(*p1.get() == a);
-    // assert(*p2.get() == b);
-    // assert(*p3.get() == a);
-    // assert((p1.useCount() == 1) && (p2.useCount() == 2) && (p3.useCount() == 2));
-    // p1.swap(p2);
-    // assert(*p1.get() == b);
-    // assert(*p2.get() == a);
-    // assert(*p3.get() == a);
-    // assert((p1.useCount() == 2) && (p2.useCount() == 1) && (p3.useCount() == 2));
-
     int a = 15, b = 500;
-    WeakPtr<int> p1(new int(a));//кошечка
-    WeakPtr<int> p2(new int(b));//собачка
+    WeakPtr<int> p1(new int(a));
+    WeakPtr<int> p2(new int(b));
     WeakPtr<int> p3(p2);
     WeakPtr<int> p4(p3);
     WeakPtr<int> p5(p1);

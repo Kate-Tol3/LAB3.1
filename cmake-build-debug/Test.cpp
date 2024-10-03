@@ -1,5 +1,6 @@
 #include "Test.h"
-
+#include "LinkedListTest.h"
+#include "MutableListSequence.h"
 
 
 void Test::testAll() {
@@ -8,6 +9,8 @@ void Test::testAll() {
     testWeakPtr();
     testShrdPtrAtomic();
     testWeakPtrAtomic();
+    testLinkedList();
+  //  testMutableSequence();
 }
 
 void Test::testUnqPtr() {
@@ -33,4 +36,14 @@ void Test::testShrdPtrAtomic() {
 void Test::testWeakPtrAtomic() {
     WeakPtrAtomicTest wk_ptr_atom;
     wk_ptr_atom.test();
+}
+
+void Test::testLinkedList() {
+    LinkedListTest ll_t;
+    ll_t.test();
+}
+
+void Test::testMutableSequence() {
+    MutableSequenceTest<MutableListSequence> mls;
+    mls.test();
 }

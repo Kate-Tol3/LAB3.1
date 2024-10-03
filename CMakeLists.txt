@@ -28,6 +28,15 @@ add_executable(3_1LAB cmake-build-debug/main.cpp
         cmake-build-debug/WeakPtrAtomic.h
         cmake-build-debug/LoadTest.cpp
         cmake-build-debug/LoadTest.h
-        cmake-build-debug/GunplotGraphs.cpp
-        cmake-build-debug/GunplotGraphs.h
+        LinkedList1.h
+        cmake-build-debug/LinkedListTest.cpp
+        cmake-build-debug/LinkedListTest.h
+        cmake-build-debug/Exception.h
+        cmake-build-debug/LinkedList.h
+        cmake-build-debug/Sequence.h
+        ImmutableListSequence.h
+        cmake-build-debug/MutableListSequence.h
+        ImmutableSequence.h
+        cmake-build-debug/MutableSequence.h
+        cmake-build-debug/MutableSequenceTest.h
 )

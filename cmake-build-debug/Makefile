@@ -128,29 +128,29 @@ depend:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/build
 .PHONY : 3_1LAB/fast
 
-GunplotGraphs.obj: GunplotGraphs.cpp.obj
-.PHONY : GunplotGraphs.obj
+LinkedListTest.obj: LinkedListTest.cpp.obj
+.PHONY : LinkedListTest.obj
 
 # target to build an object file
-GunplotGraphs.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj
-.PHONY : GunplotGraphs.cpp.obj
+LinkedListTest.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.obj
+.PHONY : LinkedListTest.cpp.obj
 
-GunplotGraphs.i: GunplotGraphs.cpp.i
-.PHONY : GunplotGraphs.i
+LinkedListTest.i: LinkedListTest.cpp.i
+.PHONY : LinkedListTest.i
 
 # target to preprocess a source file
-GunplotGraphs.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.i
-.PHONY : GunplotGraphs.cpp.i
+LinkedListTest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.i
+.PHONY : LinkedListTest.cpp.i
 
-GunplotGraphs.s: GunplotGraphs.cpp.s
-.PHONY : GunplotGraphs.s
+LinkedListTest.s: LinkedListTest.cpp.s
+.PHONY : LinkedListTest.s
 
 # target to generate assembly for a file
-GunplotGraphs.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.s
-.PHONY : GunplotGraphs.cpp.s
+LinkedListTest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.s
+.PHONY : LinkedListTest.cpp.s
 
 LoadTest.obj: LoadTest.cpp.obj
 .PHONY : LoadTest.obj
@@ -401,9 +401,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... 3_1LAB
-	@echo ... GunplotGraphs.obj
-	@echo ... GunplotGraphs.i
-	@echo ... GunplotGraphs.s
+	@echo ... LinkedListTest.obj
+	@echo ... LinkedListTest.i
+	@echo ... LinkedListTest.s
 	@echo ... LoadTest.obj
 	@echo ... LoadTest.i
 	@echo ... LoadTest.s

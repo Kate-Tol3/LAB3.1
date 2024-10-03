@@ -58,23 +58,10 @@ void WeakPtrAtomicTest::testRelease() {
 }
 
 void WeakPtrAtomicTest::testSwap() {
-    // int a = 15, b = 500;
-    // WeakPtrAtomic<int> p1(new int(a));
-    // WeakPtrAtomic<int> p2(new int(b));
-    // WeakPtrAtomic<int> p3(p2);
-    // assert(*p1.get() == a);
-    // assert(*p2.get() == b);
-    // assert(*p3.get() == a);
-    // assert((p1.useCount() == 1) && (p2.useCount() == 2) && (p3.useCount() == 2));
-    // p1.swap(p2);
-    // assert(*p1.get() == b);
-    // assert(*p2.get() == a);
-    // assert(*p3.get() == a);
-    // assert((p1.useCount() == 2) && (p2.useCount() == 1) && (p3.useCount() == 2));
 
     int a = 15, b = 500;
-    WeakPtrAtomic<int> p1(new int(a));//кошечка
-    WeakPtrAtomic<int> p2(new int(b));//собачка
+    WeakPtrAtomic<int> p1(new int(a));
+    WeakPtrAtomic<int> p2(new int(b));
     WeakPtrAtomic<int> p3(p2);
     WeakPtrAtomic<int> p4(p3);
     WeakPtrAtomic<int> p5(p1);
@@ -168,8 +155,8 @@ void WeakPtrAtomicTest::testLock() {
 
 // Функция для проверки валидности WeakPtr в нескольких потоках
 void WeakPtrAtomicTest::testThreading() {
-    ShrdPtrAtomic<int> sp(new int(100));  // Создаем SharedPtr
-    WeakPtrAtomic<int> wp = sp;             // Создаем WeakPtr на тот же объект
+    ShrdPtrAtomic<int> sp(new int(100));
+    WeakPtrAtomic<int> wp = sp;
 
     auto thread_func = [&wp]() {
         // Каждый поток пытается создать SharedPtr из WeakPtr
@@ -179,7 +166,6 @@ void WeakPtrAtomicTest::testThreading() {
         }
     };
 
-    // Создаем несколько потоков
     std::vector<std::thread> threads;
     for (int i = 0; i < 10; ++i) {
         threads.push_back(std::thread(thread_func));
@@ -194,24 +180,23 @@ void WeakPtrAtomicTest::testThreading() {
 
 // Функция для тестирования уничтожения объекта, на который указывает WeakPtr
 void WeakPtrAtomicTest::testExpiration() {
-    WeakPtrAtomic<int> wp;  // Пустой WeakPtr
+    WeakPtrAtomic<int> wp;
 
     {
-        ShrdPtrAtomic<int> sp(new int(200));  // Создаем SharedPtr
-        wp = sp;                          // Создаем WeakPtr
-        assert(!wp.expired());            // Объект еще существует
+        ShrdPtrAtomic<int> sp(new int(200));
+        wp = sp;
+        assert(!wp.expired());
 
         ShrdPtrAtomic<int> sp_from_wp = wp.lock();
         assert(sp_from_wp.get());               // Указатель должен быть валидным
         assert(*sp_from_wp == 200);
     }
 
-    // Теперь объект уничтожен, так как SharedPtr вышел из области видимости
+    // объект уничтожен, SharedPtr вышел из области видимости
 
-    assert(wp.expired());                 // WeakPtr должен быть истёкшим
+    assert(wp.expired());
     ShrdPtrAtomic<int> sp_from_wp = wp.lock();
-    assert(!sp_from_wp.get());                  // Невозможно получить SharedPtr
-
+    assert(!sp_from_wp.get());
 
 }
 
@@ -222,27 +207,24 @@ void WeakPtrAtomicTest::testAssignmentInThreads() {
 
     auto thread_func = [&wp1]() {
         WeakPtrAtomic<int> wp2;
-        wp2 = wp1;  // Присваивание WeakPtr в нескольких потоках
+        wp2 = wp1;
         ShrdPtrAtomic<int> sp_from_wp = wp2.lock();
         if (sp_from_wp.get()) {
-            assert(*sp_from_wp == 300);  // Проверяем значение, если указатель валидный
+            assert(*sp_from_wp == 300);
         }
     };
 
-    // Запускаем несколько потоков
     std::vector<std::thread> threads;
     for (int i = 0; i < 10; ++i) {
         threads.push_back(std::thread(thread_func));
     }
 
-    // Ждём завершения потоков
     for (auto& t : threads) {
         t.join();
     }
 
-    // После завершения всех потоков SharedPtr должен остаться валидным
-    assert(sp.useCount() == 1);  // Счётчик ссылок на объект не должен измениться
-    assert(!wp1.expired());       // WeakPtr по-прежнему указывает на существующий объект
+    assert(sp.useCount() == 1);
+    assert(!wp1.expired());
 }
 
 void WeakPtrAtomicTest::test() {

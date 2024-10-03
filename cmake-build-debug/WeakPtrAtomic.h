@@ -11,7 +11,7 @@ public:
     // Конструктор с выделением нового объекта
     explicit WeakPtrAtomic(T* p = nullptr) : control_block(p ? new ControlBlockAtomic<T>(p) : nullptr) {
         if (control_block) {
-            control_block->weak_count->fetch_add(1, std::memory_order_relaxed);
+            control_block->weak_count->fetch_add(1, std::memory_order_acq_rel);
         }
 
     }
@@ -19,13 +19,16 @@ public:
     // Конструктор из ShrdPtrAtomic
     WeakPtrAtomic(const ShrdPtrAtomic<T>& shrd_ptr) : control_block(shrd_ptr.control_block) {
         if (control_block) {
-            control_block->weak_count->fetch_add(1, std::memory_order_relaxed);
+            control_block->weak_count->fetch_add(1, std::memory_order_acq_rel);
         }
     }
 
     // Копирующий конструктор
     WeakPtrAtomic(const WeakPtrAtomic& other) : control_block(other.control_block) {
-        control_block->weak_count->fetch_add(1, std::memory_order_relaxed);
+        if (control_block) {
+            control_block->weak_count->fetch_add(1, std::memory_order_acq_rel);
+        }
+
     }
 
     // Перемещающий конструктор

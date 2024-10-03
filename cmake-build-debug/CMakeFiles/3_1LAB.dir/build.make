@@ -208,19 +208,19 @@ CMakeFiles/3_1LAB.dir/LoadTest.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/3_1LAB.dir/LoadTest.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\LoadTest.cpp -o CMakeFiles\3_1LAB.dir\LoadTest.cpp.s
 
-CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj: CMakeFiles/3_1LAB.dir/flags.make
-CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj: GunplotGraphs.cpp
-CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj: CMakeFiles/3_1LAB.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj -MF CMakeFiles\3_1LAB.dir\GunplotGraphs.cpp.obj.d -o CMakeFiles\3_1LAB.dir\GunplotGraphs.cpp.obj -c D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\GunplotGraphs.cpp
+CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.obj: CMakeFiles/3_1LAB.dir/flags.make
+CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.obj: LinkedListTest.cpp
+CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.obj: CMakeFiles/3_1LAB.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.obj -MF CMakeFiles\3_1LAB.dir\LinkedListTest.cpp.obj.d -o CMakeFiles\3_1LAB.dir\LinkedListTest.cpp.obj -c D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\LinkedListTest.cpp
 
-CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\GunplotGraphs.cpp > CMakeFiles\3_1LAB.dir\GunplotGraphs.cpp.i
+CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\LinkedListTest.cpp > CMakeFiles\3_1LAB.dir\LinkedListTest.cpp.i
 
-CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\GunplotGraphs.cpp -o CMakeFiles\3_1LAB.dir\GunplotGraphs.cpp.s
+CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\LinkedListTest.cpp -o CMakeFiles\3_1LAB.dir\LinkedListTest.cpp.s
 
 # Object files for target 3_1LAB
 3_1LAB_OBJECTS = \
@@ -234,7 +234,7 @@ CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.s: cmake_force
 "CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj" \
 "CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj" \
 "CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj" \
-"CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj"
+"CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.obj"
 
 # External object files for target 3_1LAB
 3_1LAB_EXTERNAL_OBJECTS =
@@ -249,7 +249,7 @@ CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.s: cmake_force
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj
-3_1LAB.exe: CMakeFiles/3_1LAB.dir/GunplotGraphs.cpp.obj
+3_1LAB.exe: CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.obj
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/build.make
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/linkLibs.rsp
 3_1LAB.exe: CMakeFiles/3_1LAB.dir/objects1.rsp

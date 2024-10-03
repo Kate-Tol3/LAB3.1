@@ -16,6 +16,8 @@ struct ControlBlockAtomic {
         // delete ref_count;
         // delete weak_count;
         s_ptr = nullptr;
+
+
     }
 };
 
@@ -34,7 +36,9 @@ public:
 
     // Копирующий конструктор
     ShrdPtrAtomic(const ShrdPtrAtomic& other) : control_block(other.control_block) {
-       (control_block->ref_count->fetch_add(1, std::memory_order_acq_rel));
+        if (control_block) {
+            (control_block->ref_count->fetch_add(1, std::memory_order_acq_rel));
+        }
     }
 
     // Перемещающий конструктор
@@ -93,6 +97,24 @@ public:
     T& operator*() const { return *control_block->s_ptr;}
     T* operator->() const { return control_block->s_ptr; }
     T* get() const { return control_block ? control_block->s_ptr : nullptr; }
+
+    // bool operator==(const ShrdPtrAtomic& other) const {
+    //     if (control_block != other.control_block) {
+    //         if (this->control_block->ref_count->load() == other.control_block->ref_count->load()
+    //             && this->control_block->weak_count->load() == other.control_block->weak_count->load()
+    //             && this->control_block->s_ptr == other.control_block->s_ptr) return true;
+    //         return false;
+    //     }
+    //     return true;
+    // }
+    //
+    // bool operator!=(const ShrdPtrAtomic& other) const {
+    //     return !(this == other);
+    // }
+    //
+    // bool operator!() const {
+    //     return !(get()==nullptr);
+    // }
 
     // Проверка количества сильных ссылок
     unsigned long useCount() const { return control_block ? control_block->ref_count->load() : static_cast<unsigned long>(0); }

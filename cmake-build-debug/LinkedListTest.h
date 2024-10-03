@@ -9,29 +9,29 @@
 
 class LinkedListTest {
 public:
-    static void testConstructors();
+    void testConstructors();
 
-    static void testGet();
+    void testGet();
 
-    static void testGetSize();
+    void testGetSize();
 
-    static void testGetFirst();
+    void testGetFirst();
 
-    static void testGetLast();
+    void testGetLast();
 
-    static void testAppend();
+    void testAppend();
 
-    static void testPrepend();
+    void testPrepend();
 
-    static void testInsertAt();
+    void testInsertAt();
 
-    static void testGetSubList();
+    void testGetSubList();
 
-    static void testConcat();
+    void testConcat();
 
-    static void testOperatorEqual();
+    void testOperatorEqual();
 
-    static void test();
+    void test();
 };
 
 
