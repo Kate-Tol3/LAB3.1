@@ -92,12 +92,6 @@ void show_results() {
         std::cout << n << ", " << time_shrd_atomic << ", " << time_shrd_std << ", "
                   << time_unq_atomic << ", " << time_unq_std << ", "
                   << time_weak_atomic << ", " << time_weak_std << std::endl;
-
-
-
-        // std::cout << std::format("{}: {} -- {} -- {} -- {} -- {} -- {} -- {}\n", n,
-        //     time_shrd_atomic, time_shrd_std,time_unq_atomic, time_unq_std,  time_weak_atomic, time_weak_std, time_unq_std);
-        //     std::cout << std::format("Hello {}!\n", "world");
     }
     std::cout << "All load tests passed!" << std::endl;
 
