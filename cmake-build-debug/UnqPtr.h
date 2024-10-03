@@ -1,4 +1,4 @@
-#pragma once
+gi#pragma once
 
 template <typename T>
 class UnqPtr {
