@@ -8,7 +8,7 @@
 template <class T>
 class MutableListSequence: public MutableSequence<T> {
 private:
-    ShrdPtrAtomic<LinkedList<T>> seq_list;
+    ShrdPtr<LinkedList<T>> seq_list;
 
 public:
     // Constructors
@@ -20,15 +20,15 @@ public:
     MutableListSequence(const MutableListSequence<T>& other): seq_list(new LinkedList<T>(*other.seq_list)) {};
 
     // Methods
-    T& getFirst() const override {
+    const T& getFirst() const override {
         return seq_list->getFirst();
     }
 
-    T& getLast() const override {
+    const T& getLast() const override {
         return seq_list->getLast();
     }
 
-    T& get(int index) const override {
+    const T& get(int index) const override {
         return seq_list->get(index);
     }
 
@@ -36,28 +36,14 @@ public:
         return seq_list->getLength();
     }
 
-    ShrdPtrAtomic<Sequence<T>> getSubSequence(int startIndex, int endIndex) override {
-        // // Проверка на корректность индексов
-        // if (startIndex < 0 || endIndex >= seq_list->getLength() || startIndex > endIndex) {
-        //     throw IndexOutOfRange();  // Исключение, если индексы некорректны
-        // }
-        //
-        // ShrdPtrAtomic<LinkedList<T>> sublist = ShrdPtrAtomic<LinkedList<T>>(seq_list->getSubList(startIndex, endIndex));
-        // this->seq_list = sublist;
-        //
-        // return ShrdPtrAtomic<Sequence<T>>(sublist);
+    ShrdPtr<Sequence<T>> getSubSequence(int startIndex, int endIndex) override {
 
-        // ShrdPtrAtomic<LinkedList<T>> sub_list = ShrdPtrAtomic<LinkedList<T>>(this->seq_list->getSubList(startIndex, endIndex));
-        // this->seq_list = sub_list;
-        // return ShrdPtrAtomic<Sequence<T>>(sub_list);
-        //
-        // ShrdPtrAtomic<LinkedList<T>> sub_list = this->seq_list->getSubList(startIndex, endIndex);
-        //
-        // // Modify the current object to the new subsequence
-        // this->seq_list = sub_list;  // Update current list
-        //
-        // // Return the new subsequence as ShrdPtrAtomic<Sequence<T>>
-        // return ShrdPtrAtomic<Sequence<T>>(sub_list.get());
+        // Получаем подсписок с помощью метода getSubList класса LinkedList
+        ShrdPtr<LinkedList<T>> sub_list = ShrdPtr<LinkedList<T>>(this->seq_list->getSubList(startIndex, endIndex));
+
+        // Возвращаем подсписок как MutableListSequence
+        return ShrdPtr<Sequence<T>>(new MutableListSequence<T>(*sub_list));
+
     }
 
     void append(const T& item) override {
@@ -76,31 +62,15 @@ public:
         seq_list->set(index, item);
     }
 
-    ShrdPtrAtomic<Sequence<T>> concat(const Sequence<T>& list) override {
+    ShrdPtr<Sequence<T>> concat(const Sequence<T>& other) override {
+        const auto* otherMutableSeq = dynamic_cast<const MutableListSequence<T>*>(&other);
 
-        // MutableListSequence<T>* temp_seq = dynamic_cast<const MutableListSequence<T>*>(&list);
-        //
-        // ShrdPtrAtomic<LinkedList<T>> new_list = ShrdPtrAtomic<LinkedList<T>>(this->seq_list->concat(temp_seq->seq_list.get()));
-        //
-        // this->seq_list = new_list;
-        //
-        // return ShrdPtrAtomic<Sequence<T>>(new_list);
-        //
-        // const MutableListSequence<T>* otherList = dynamic_cast<const MutableListSequence<T>*>(&list);
-        // if (!otherList) {
-        //     throw std::invalid_argument("Invalid sequence type for concatenation.");
-        // }
-        //
-        // // Use the concat method from the LinkedList class
-        // ShrdPtrAtomic<LinkedList<T>> new_list = this->seq_list->concat(otherList->seq_list.get());
-        //
-        // // Modify the current object to the new list
-        // this->seq_list = new_list;  // Update current list
-        //
-        // // Return new list as ShrdPtrAtomic<Sequence<T>>
-        // return ShrdPtrAtomic<Sequence<T>>(new_list.get());
+        // Используем метод concat класса LinkedList для создания нового списка
+        ShrdPtr<LinkedList<T>> new_list = ShrdPtr<LinkedList<T>>(this->seq_list->concat(otherMutableSeq->seq_list.get()));
+
+        // Возвращаем новый список как MutableListSequence
+        return ShrdPtr<Sequence<T>>(new MutableListSequence<T>(*new_list));
     }
-
 
     T& operator[](int index) const override {
         return seq_list->get(index);
@@ -133,9 +103,6 @@ public:
         }
         return false;
     }
-
-
-
 
     void print() const override {
         seq_list->print();

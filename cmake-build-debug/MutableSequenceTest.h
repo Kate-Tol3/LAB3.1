@@ -169,8 +169,7 @@ public:
         int startIndex = 2;
         int endIndex = 4;
         mut_seq.getSubSequence(startIndex, endIndex);
-        ShrdPtrAtomic<MutableListSequence<double>> result(&mut_seq);
-        result.get()->print();
+        ShrdPtr<MutableListSequence<double>> result(&mut_seq);
         for (int i = startIndex; i <= endIndex; ++i) {
             std::cout << result->get(i - startIndex) << " " << elems[i] << std::endl;
             assert(result->get(i - startIndex) == elems[i]);
@@ -195,7 +194,7 @@ public:
         double elems3[9] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0};
         MutableSequence<double> mut_seq2(elems2, 3);
         MutableSequence<double> mut_seq1(elems1, 6);
-        ShrdPtrAtomic<Sequence<double>> result(mut_seq1.concat(mut_seq2));
+        ShrdPtr<Sequence<double>> result(mut_seq1.concat(mut_seq2));
         assert(result->getLength() == 9);
         for (int i =0; i < 9; i++){
             assert(result->get(i) == elems3[i]);

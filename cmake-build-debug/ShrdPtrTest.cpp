@@ -22,7 +22,8 @@ void ShrdPtrTest::testConstructors() {
     ShrdPtr<int> p4(std::move(p2));
     assert(p2.isNull() && *p4.get() == a);//move
 
-    WeakPtr<int> w_p (new int (a));//from weak
+    ShrdPtr<int> p6(new int (a));
+    WeakPtr<int> w_p(p6);//from weak
     ShrdPtr<int> p5 (w_p);
     assert(p5.get() == w_p.get());
 
@@ -96,8 +97,8 @@ void ShrdPtrTest::testMoveOperator() {
 
 void ShrdPtrTest::testSwap() {
     int a = 15, b = 500;
-    ShrdPtr<int> p1(new int(a));//кошечка
-    ShrdPtr<int> p2(new int(b));//собачка
+    ShrdPtr<int> p1(new int(a));
+    ShrdPtr<int> p2(new int(b));
     ShrdPtr<int> p3(p2);
     ShrdPtr<int> p4(p3);
     ShrdPtr<int> p5(p1);

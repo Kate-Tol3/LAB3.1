@@ -160,7 +160,6 @@ void LinkedListTest::testGetSubList() {
     } catch (IndexOutOfRange& ex) {}
     catch (EmptyListException& ex) {}
 
-    // no need for manual delete due to smart pointers
 }
 
 void LinkedListTest::testConcat() {
@@ -174,7 +173,6 @@ void LinkedListTest::testConcat() {
         assert(result->get(i) == elems3[i]);
     }
 
-    // no need for manual delete due to smart pointers
 }
 
 void LinkedListTest::testOperatorEqual() {

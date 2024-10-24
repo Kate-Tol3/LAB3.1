@@ -155,12 +155,5 @@ CMakeFiles/3_1LAB.dir/LinkedListTest.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/istream.tcc \
  D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\Exception.h \
- D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtrAtomic.h \
- C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/atomic \
- C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/atomic_base.h \
- C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
- C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
- C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/atomic_lockfree_defines.h \
- C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/atomic_wait.h \
- C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_mutex.h \
- D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\WeakPtrAtomic.h
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtr.h \
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\WeakPtr.h

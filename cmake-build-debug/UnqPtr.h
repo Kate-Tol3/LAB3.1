@@ -1,4 +1,4 @@
-gi#pragma once
+#pragma once
 
 template <typename T>
 class UnqPtr {
@@ -34,13 +34,18 @@ public:
     }
 
     // Override raw pointer operators
-    T& operator*() const { return *u_ptr; }
-    T* operator->() const { return u_ptr; }
+    T& operator*() { return *u_ptr; }
+    T* operator->() { return u_ptr; }
 
-    bool isNull() const { return u_ptr == nullptr; }
+    const T& operator*() const { return *u_ptr; }
+    const T* operator->() const { return u_ptr; }
+
+    const bool isNull() const { return u_ptr == nullptr; }
+    bool isNull() {return u_ptr == nullptr; }
 
     // Get the raw pointer
-    T* get() const { return u_ptr; }
+    const T* get() const { return u_ptr; }
+    T* get() {return u_ptr;}
 
     // Release the ownership of the managed object
     T* release() {

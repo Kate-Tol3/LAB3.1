@@ -208,7 +208,6 @@ CMakeFiles/3_1LAB.dir/LoadTest.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/enable_special_members.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/span \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/variant \
- D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtrAtomic.h \
- C:/Program\ Files/JetBrains/CLion\ 2024.2.0.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/atomic \
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\ShrdPtr.h \
  D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\UnqPtr.h \
- D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\WeakPtrAtomic.h
+ D:\Docs\Documents\GitHub\LAB3.1\cmake-build-debug\WeakPtr.h

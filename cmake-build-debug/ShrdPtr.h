@@ -31,7 +31,9 @@ public:
 
     // Копирующий конструктор
     ShrdPtr(const ShrdPtr& other) : control_block(other.control_block) {
-       ++(control_block->ref_count);
+        if (control_block) {
+            ++(control_block->ref_count);
+        }
     }
 
     // Перемещающий конструктор
@@ -85,15 +87,23 @@ public:
     }
 
     // Доступ к объекту
-    T& operator*() const { return *control_block->s_ptr;}
-    T* operator->() const { return control_block->s_ptr; }
-    T* get() const { return control_block ? control_block->s_ptr : nullptr; }
+    const T& operator*() const { return *control_block->s_ptr;}
+    const T* operator->() const { return control_block->s_ptr; }
+
+    T& operator*() { return *control_block->s_ptr;}
+    T* operator->() { return control_block->s_ptr; }
+
+
+    const T* get() const { return control_block ? control_block->s_ptr : nullptr; }
+    T* get() { return control_block ? control_block->s_ptr : nullptr; }
 
     // Проверка количества сильных ссылок
-    int useCount() const { return control_block ? control_block->ref_count : 0; }
+    const int useCount() const { return control_block ? control_block->ref_count : 0; }
+    int useCount() { return control_block ? control_block->ref_count : 0; }
 
     // Проверка, является ли указатель нулевым
-    bool isNull() const { return control_block == nullptr || control_block->s_ptr == nullptr; }
+    const bool isNull() const { return control_block == nullptr || control_block->s_ptr == nullptr; }
+    bool isNull() { return control_block == nullptr || control_block->s_ptr == nullptr; }
 
     void swap(ShrdPtr& other) noexcept {
         // T* temp_ptr = control_block->s_ptr;
@@ -115,7 +125,11 @@ public:
     }
 
     // Проверка на единственность
-    bool unique() const {
+    bool unique() {
+        return control_block && control_block->ref_count == 1;
+    }
+
+    const bool unique() const {
         return control_block && control_block->ref_count == 1;
     }
 

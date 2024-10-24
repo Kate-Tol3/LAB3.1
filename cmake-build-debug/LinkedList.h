@@ -4,36 +4,38 @@
 #include <iostream>
 
 #include "Exception.h"
-#include "ShrdPtrAtomic.h"  // Assuming ShrdPtrAtomic is similar to std::shared_ptr
-#include "WeakPtrAtomic.h"  // Assuming WeakPtrAtomic is similar to std::weak_ptr
+#include "ShrdPtr.h"
+#include "WeakPtr.h"
 
 template <typename T>
 class Node {
 public:
     T value;
-    WeakPtrAtomic<Node<T>> prev;  // Using WeakPtrAtomic for the backward reference
-    ShrdPtrAtomic<Node<T>> next;  // Using ShrdPtrAtomic for the forward reference
+    WeakPtr<Node<T>> prev;  // Using WeakPtr for the backward reference
+    ShrdPtr<Node<T>> next;  // Using ShrdPtr for the forward reference
 
 public:
     // Constructor
-    // explicit Node(const T& n_val = T(), WeakPtrAtomic<Node<T>> n_prev = WeakPtrAtomic<Node<T>>(), ShrdPtrAtomic<Node<T>> n_next = nullptr)
+    // explicit Node(const T& n_val = T(), WeakPtr<Node<T>> n_prev = WeakPtr<Node<T>>(), ShrdPtr<Node<T>> n_next = nullptr)
     //     : value(n_val), prev(n_prev), next(n_next) {}
-    explicit Node(const T& n_val = T(), WeakPtrAtomic<Node<T>> n_prev = WeakPtrAtomic<Node<T>>(nullptr), ShrdPtrAtomic<Node<T>> n_next = ShrdPtrAtomic<Node<T>>(nullptr))// WeakPtrAtomic<Node<T>> n_prev = WeakPtrAtomic<Node<T>>() == nullptr
+    explicit Node(const T& n_val = T(), WeakPtr<Node<T>> n_prev = WeakPtr<Node<T>>(), ShrdPtr<Node<T>> n_next = ShrdPtr<Node<T>>(nullptr))// WeakPtr<Node<T>> n_prev = WeakPtr<Node<T>>() == nullptr
         : value(n_val), prev(n_prev), next(n_next) {}
-    //explicit Node(): value(T()), prev(nullptr), next(nullptr) {};
+    explicit Node(): value(T()), prev(), next(nullptr) {};
+
+
 };
 
 template <typename T>
 class LinkedList {
 private:
     int length;
-    ShrdPtrAtomic<Node<T>> head;
-    ShrdPtrAtomic<Node<T>> tail;
+    ShrdPtr<Node<T>> head;
+    WeakPtr<Node<T>> tail;
 
 private:
-    ShrdPtrAtomic<Node<T>> getNode(const int index) const {
+    ShrdPtr<Node<T>> getNode(const int index) const {
         if (index < 0 || index >= length || !head.get()) throw IndexOutOfRange();
-        ShrdPtrAtomic<Node<T>> temp = head;
+        ShrdPtr<Node<T>> temp = head;
         for (int pos = 0; pos < index; ++pos) temp = temp->next;
         return temp;
     }
@@ -48,22 +50,22 @@ private:
 
 public:
     // Constructors
-    LinkedList() : length(0), head(nullptr), tail(nullptr) {}
+    LinkedList() : length(0), head(nullptr), tail() {}
 
-    LinkedList(T* items, const int count) : length(0), head(nullptr), tail(nullptr) {
+    LinkedList(T* items, const int count) : length(0), head(nullptr), tail() {
         for (int i = 0; i < count; ++i) {
             append(items[i]);
         }
         length = count;
     }
 
-    explicit LinkedList(const int size) : length(0), head(nullptr), tail(nullptr) {
+    explicit LinkedList(const int size) : length(0), head(nullptr), tail() {
         if (size < 0) throw IndexOutOfRange();
         if (size > 0) {
-            head = ShrdPtrAtomic<Node<T>>(new Node<T>);
-            tail = head;
+            head = ShrdPtr<Node<T>>(new Node<T>);
+            WeakPtr<Node<T>> tail(head);
             for (int i = 1; i < size; ++i) {
-                tail->next = ShrdPtrAtomic<Node<T>>(new Node<T>);
+                tail->next = ShrdPtr<Node<T>>(new Node<T>);
                 tail->next->prev = tail;  // Use weak_ptr for backward reference
                 tail = tail->next;
             }
@@ -71,31 +73,33 @@ public:
         length = size;
     }
 
-    LinkedList(const LinkedList<T>& other) : length(0), head(nullptr), tail(nullptr) {
-        ShrdPtrAtomic<Node<T>> temp = other.head;
+    LinkedList(const LinkedList<T>& other) : length(0), head(nullptr), tail() {
+        ShrdPtr<Node<T>> temp = other.head;
         while (temp.get() != nullptr) {
             append(temp->value);
             temp = temp->next;
         }
         length = other.length;
     }
-
-    // Destructor (smart pointers automatically manage memory)
+    
     ~LinkedList() = default;
 
     // Methods
-    T& get(int index) const {
+    T& get(const int index) const{
         assertIndexCorrect(index);
         assertListNotEmpty();
-        return getNode(index)->value;
+        ShrdPtr<Node<T>> temp = head;
+        for (int pos = 0; pos < index; ++pos) temp = temp->next;
+        return temp->value;
+        // return getNode(index)->value;
     }
 
-    T& getFirst() const {
+    T& getFirst() const{
         assertListNotEmpty();
         return head->value;
     }
 
-    T& getLast() const {
+    T& getLast() const{
         assertListNotEmpty();
         return tail->value;
     }
@@ -107,7 +111,7 @@ public:
         if (startIndex > endIndex) throw IndexOutOfRange();
 
         auto* sublist = new LinkedList<T>();
-        ShrdPtrAtomic<Node<T>> temp = getNode(startIndex);
+        ShrdPtr<Node<T>> temp = getNode(startIndex);
         for (int i = startIndex; i <= endIndex; i++) {
             sublist->append(temp->value);
             temp = temp->next;
@@ -120,20 +124,21 @@ public:
     }
 
     void append(const T& item) {
-       // auto el = ShrdPtrAtomic<Node<T>>(new Node<T>(item, WeakPtrAtomic<Node<T>>(), nullptr));//!!!
-        auto el = ShrdPtrAtomic<Node<T>>(new Node<T>(item, WeakPtrAtomic<Node<T>>(), ShrdPtrAtomic<Node<T>>()));
+       // auto el = ShrdPtr<Node<T>>(new Node<T>(item, WeakPtr<Node<T>>(), nullptr));//!!!
+       // auto el = ShrdPtr<Node<T>>(new Node<T>(item, WeakPtr<Node<T>>(), ShrdPtr<Node<T>>(nullptr)));
+        auto el = ShrdPtr<Node<T>>(new Node<T>(item));
         if (!head.get()) {
             head = tail = el;
         } else {
             tail->next = el;
-            el->prev = tail;  // Link the new node with the current tail
+            el->prev = tail;
             tail = el;
         }
         length++;
     }
 
     void prepend(const T& item) {
-        auto el = ShrdPtrAtomic<Node<T>>(new Node<T>(item, WeakPtrAtomic<Node<T>>(), head));
+        auto el = ShrdPtr<Node<T>>(new Node<T>(item, WeakPtr<Node<T>>(), head));//WeakPtr<Node<T>>() ???
         if (head.get()) {
             head->prev = el;
         } else {
@@ -156,10 +161,10 @@ public:
         } else if (index == length) {
             append(item);
         } else {
-            ShrdPtrAtomic<Node<T>> curr = getNode(index);
-            auto new_node = ShrdPtrAtomic<Node<T>>(new Node<T>(item, curr->prev, curr));
+            ShrdPtr<Node<T>> curr = getNode(index);
+            auto new_node = ShrdPtr<Node<T>>(new Node<T>(item, curr->prev, curr));
             auto prev_node = curr->prev.lock();
-            if (prev_node.get()) {  // Lock the weak_ptr to get a strong pointer
+            if (prev_node.get()) {
                 prev_node->next = new_node;
             }
             curr->prev = new_node;
@@ -167,9 +172,9 @@ public:
         }
     }
 
-    LinkedList<T>* concat(LinkedList<T>* list) {
+    LinkedList<T>* concat(const LinkedList<T>* list) {
         auto* new_list = new LinkedList<T>(*this);
-        ShrdPtrAtomic<Node<T>> el2 = list->head;
+        ShrdPtr<Node<T>> el2 = list->head;
         while (el2.get()) {
             new_list->append(el2->value);
             el2 = el2->next;
@@ -178,7 +183,7 @@ public:
     }
 
     void print() const {
-        ShrdPtrAtomic<Node<T>> temp = head;
+        ShrdPtr<Node<T>> temp = head;
         while (temp.get()) {
             std::cout << temp->value << " ";
             temp = temp->next;
@@ -187,14 +192,9 @@ public:
     }
 
     void clear() {
-        // Проверяем, пуст ли уже список
         if (this->getLength() == 0) return;
-
-        // Устанавливаем указатели на голову и хвост в nullptr
-        head = nullptr; // Предполагается, что head - это ShrdPtrAtomic<Node<T>>
-        tail = nullptr; // Предполагается, что tail - это ShrdPtrAtomic<Node<T>>
-
-        // Обнуляем длину списка
+        head = nullptr;
+        tail = nullptr;
         length = 0;
     }
 

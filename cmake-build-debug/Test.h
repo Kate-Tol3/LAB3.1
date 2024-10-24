@@ -2,8 +2,8 @@
 #include "ShrdPtrTest.h"
 #include "UnqPtrTest.h"
 #include "WeakPtrTest.h"
-#include "ShrdPtrAtomicTest.h"
-#include "WeakPtrAtomicTest.h"
+#include "Atomic Pointers/ShrdPtrAtomicTest.h"
+#include "Atomic Pointers/WeakPtrAtomicTest.h"
 #include "MutableSequenceTest.h"
 
 class Test {

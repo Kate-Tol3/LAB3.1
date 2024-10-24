@@ -10,11 +10,12 @@ private:
 public:
 
     // Конструктор с выделением нового объекта
-    explicit WeakPtr(T* p = nullptr) : control_block(p ? new ControlBlock<T>(p) : nullptr) {
-        if (control_block) {
-            ++(control_block->weak_count);
-        }
-    }
+    // explicit WeakPtr(T* p = nullptr) : control_block(p ? new ControlBlock<T>(p) : nullptr) {
+    //     if (control_block) {
+    //         ++(control_block->weak_count);
+    //     }
+    // }
+    WeakPtr() : control_block(){}
 
     // Конструктор из ShrdPtr
     WeakPtr(const ShrdPtr<T>& shrd_ptr) : control_block(shrd_ptr.control_block) {
@@ -25,7 +26,10 @@ public:
 
     // Копирующий конструктор
     WeakPtr(const WeakPtr& other) : control_block(other.control_block) {
-        ++(control_block->weak_count);
+        if (control_block) {
+            ++(control_block->weak_count);
+        }
+
     }
 
     // Перемещающий конструктор
@@ -71,12 +75,23 @@ public:
     }
 
     // Проверка, доступен ли объект
-    bool expired() const {
+    const bool expired() const {
+        return !control_block || control_block->weak_count == 0; // ref_count ??
+    }
+
+    bool expired() {
         return !control_block || control_block->weak_count == 0; // ref_count ??
     }
 
     // Преобразование в ShrdPtr
-    ShrdPtr<T> lock() const {
+    ShrdPtr<T> lock() {
+        if (!expired()) {
+            return ShrdPtr<T>(*this);  // Создаём ShrdPtr, если объект ещё существует
+        }
+        return ShrdPtr<T>(nullptr);  // Возвращаем пустой ShrdPtr, если объект уже удалён
+    }
+
+    const ShrdPtr<T> lock() const {
         if (!expired()) {
             return ShrdPtr<T>(*this);  // Создаём ShrdPtr, если объект ещё существует
         }
@@ -89,19 +104,28 @@ public:
         other.control_block->s_ptr = temp_ptr;
     }
 
-    int useCount() const { return control_block ? control_block->weak_count : 0; }
+    const int useCount() const { return control_block ? control_block->weak_count : 0; }
+    int useCount()  { return control_block ? control_block->weak_count : 0; }
 
     // Проверка, является ли указатель нулевым
-    bool isNull() const { return control_block == nullptr || control_block->s_ptr == nullptr; }
+    const bool isNull() const { return !control_block  || control_block->s_ptr == nullptr; }
+    bool isNull() { return !control_block  || control_block->s_ptr == nullptr; }
 
 
     // // Доступ к объекту
-    T& operator*() const { return *control_block->s_ptr;}
-    T* operator->() const { return control_block->s_ptr; }
-    T* get() const { return control_block ? control_block->s_ptr : nullptr; }
+    const T& operator*() const { return *control_block->s_ptr;}
+    const T* operator->() const { return control_block->s_ptr; }
+    const T* get() const { return control_block ? control_block->s_ptr : nullptr; }
+
+    T& operator*() { return *control_block->s_ptr;}
+    T* operator->() { return control_block->s_ptr; }
+    T* get() { return control_block ? control_block->s_ptr : nullptr; }
 
     // Проверка на единственность
-    bool unique() const {
+    const bool unique() const {
+        return control_block && control_block->weak_count == 1;
+    }
+    bool unique() {
         return control_block && control_block->weak_count == 1;
     }
 

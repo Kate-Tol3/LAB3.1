@@ -3,9 +3,9 @@
 #include <memory>
 #include <vector>
 #include <chrono>
-#include "ShrdPtrAtomic.h"
+#include "ShrdPtr.h"
 #include "UnqPtr.h"
-#include "WeakPtrAtomic.h"
+#include "WeakPtr.h"
 
 class LoadTest {
 public:
@@ -41,15 +41,15 @@ void test_std_weak(int n) {
 }
 
 
-void test_shared_atomic(int n) {
-    std::vector<ShrdPtrAtomic<int>> vec;
+void test_shared(int n) {
+    std::vector<ShrdPtr<int>> vec;
     for (int i = 0; i < n; ++i) {
-        vec.push_back(ShrdPtrAtomic<int>(new int(i)));
+        vec.push_back(ShrdPtr<int>(new int(i)));
     }
-   // std::cout << "Test for ShrdPtrAtomic with " << n << " objects completed." << std::endl;
+   // std::cout << "Test for ShrdPtr with " << n << " objects completed." << std::endl;
 }
 
-void test_unique_atomic(int n) {
+void test_unique(int n) {
     std::vector<UnqPtr<int>> vec;
     for (int i = 0; i < n; ++i) {
         vec.push_back(UnqPtr<int>(new int(i)));
@@ -57,13 +57,13 @@ void test_unique_atomic(int n) {
     //std::cout << "Test for UnqPtr with " << n << " objects completed." << std::endl;
 }
 
-void test_weak_atomic(int n) {
-    std::vector<WeakPtrAtomic<int>> vec;
+void test_weak(int n) {
+    std::vector<WeakPtr<int>> vec;
     for (int i = 0; i < n; ++i) {
-        ShrdPtrAtomic<int> sptr(new int(i));
-        vec.push_back(WeakPtrAtomic<int>(sptr));
+        ShrdPtr<int> sptr(new int(i));
+        vec.push_back(WeakPtr<int>(sptr));
     }
-   // std::cout << "Test for WeakPtrAtomic with " << n << " objects completed." << std::endl;
+   // std::cout << "Test for WeakPtr with " << n << " objects completed." << std::endl;
 }
 
 void show_results() {
@@ -71,17 +71,17 @@ void show_results() {
     std::vector<int> sizes = {10, 100, 1000, 10000, 100000, 1000000};
 
     // Заголовки таблицы
-    std::cout << "Size, ShrPtrAtomic, std::shared_ptr, UnqPtr, std::unique_ptr, WeakPtrAtomic, std::weak_ptr" << std::endl;
+    std::cout << "Size, ShrPtr, std::shared_ptr, UnqPtr, std::unique_ptr, WeakPtr, std::weak_ptr" << std::endl;
 
     for (int n : sizes) {
-        long long time_shrd_atomic = 0, time_shrd_std = 0;
-        long long time_unq_atomic = 0, time_unq_std = 0;
-        long long time_weak_atomic = 0, time_weak_std = 0;
+        long long time_shrd = 0, time_shrd_std = 0;
+        long long time_unq = 0, time_unq_std = 0;
+        long long time_weak = 0, time_weak_std = 0;
 
         // Тесты для кастомных указателей
-        MEASURE_TIME(test_shared_atomic(n), time_shrd_atomic);
-        MEASURE_TIME(test_unique_atomic(n), time_unq_atomic);
-        MEASURE_TIME(test_weak_atomic(n), time_weak_atomic);
+        MEASURE_TIME(test_shared(n), time_shrd);
+        MEASURE_TIME(test_unique(n), time_unq);
+        MEASURE_TIME(test_weak(n), time_weak);
 
         // Тесты для стандартных указателей
         MEASURE_TIME(test_std_shared(n), time_shrd_std);
@@ -89,9 +89,9 @@ void show_results() {
         MEASURE_TIME(test_std_weak(n), time_weak_std);
 
         // Вывод результатов
-        std::cout << n << ", " << time_shrd_atomic << ", " << time_shrd_std << ", "
-                  << time_unq_atomic << ", " << time_unq_std << ", "
-                  << time_weak_atomic << ", " << time_weak_std << std::endl;
+        std::cout << n << ", " << time_shrd << ", " << time_shrd_std << ", "
+                  << time_unq << ", " << time_unq_std << ", "
+                  << time_weak << ", " << time_weak_std << std::endl;
     }
     std::cout << "All load tests passed!" << std::endl;
 

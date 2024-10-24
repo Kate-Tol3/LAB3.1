@@ -128,6 +128,54 @@ depend:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/build
 .PHONY : 3_1LAB/fast
 
+Atomic_Pointers/ShrdPtrAtomicTest.obj: Atomic_Pointers/ShrdPtrAtomicTest.cpp.obj
+.PHONY : Atomic_Pointers/ShrdPtrAtomicTest.obj
+
+# target to build an object file
+Atomic_Pointers/ShrdPtrAtomicTest.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/Atomic_Pointers/ShrdPtrAtomicTest.cpp.obj
+.PHONY : Atomic_Pointers/ShrdPtrAtomicTest.cpp.obj
+
+Atomic_Pointers/ShrdPtrAtomicTest.i: Atomic_Pointers/ShrdPtrAtomicTest.cpp.i
+.PHONY : Atomic_Pointers/ShrdPtrAtomicTest.i
+
+# target to preprocess a source file
+Atomic_Pointers/ShrdPtrAtomicTest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/Atomic_Pointers/ShrdPtrAtomicTest.cpp.i
+.PHONY : Atomic_Pointers/ShrdPtrAtomicTest.cpp.i
+
+Atomic_Pointers/ShrdPtrAtomicTest.s: Atomic_Pointers/ShrdPtrAtomicTest.cpp.s
+.PHONY : Atomic_Pointers/ShrdPtrAtomicTest.s
+
+# target to generate assembly for a file
+Atomic_Pointers/ShrdPtrAtomicTest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/Atomic_Pointers/ShrdPtrAtomicTest.cpp.s
+.PHONY : Atomic_Pointers/ShrdPtrAtomicTest.cpp.s
+
+Atomic_Pointers/WeakPtrAtomicTest.obj: Atomic_Pointers/WeakPtrAtomicTest.cpp.obj
+.PHONY : Atomic_Pointers/WeakPtrAtomicTest.obj
+
+# target to build an object file
+Atomic_Pointers/WeakPtrAtomicTest.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/Atomic_Pointers/WeakPtrAtomicTest.cpp.obj
+.PHONY : Atomic_Pointers/WeakPtrAtomicTest.cpp.obj
+
+Atomic_Pointers/WeakPtrAtomicTest.i: Atomic_Pointers/WeakPtrAtomicTest.cpp.i
+.PHONY : Atomic_Pointers/WeakPtrAtomicTest.i
+
+# target to preprocess a source file
+Atomic_Pointers/WeakPtrAtomicTest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/Atomic_Pointers/WeakPtrAtomicTest.cpp.i
+.PHONY : Atomic_Pointers/WeakPtrAtomicTest.cpp.i
+
+Atomic_Pointers/WeakPtrAtomicTest.s: Atomic_Pointers/WeakPtrAtomicTest.cpp.s
+.PHONY : Atomic_Pointers/WeakPtrAtomicTest.s
+
+# target to generate assembly for a file
+Atomic_Pointers/WeakPtrAtomicTest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/Atomic_Pointers/WeakPtrAtomicTest.cpp.s
+.PHONY : Atomic_Pointers/WeakPtrAtomicTest.cpp.s
+
 LinkedListTest.obj: LinkedListTest.cpp.obj
 .PHONY : LinkedListTest.obj
 
@@ -175,78 +223,6 @@ LoadTest.s: LoadTest.cpp.s
 LoadTest.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/LoadTest.cpp.s
 .PHONY : LoadTest.cpp.s
-
-LoadTest1.obj: LoadTest1.cpp.obj
-.PHONY : LoadTest1.obj
-
-# target to build an object file
-LoadTest1.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/LoadTest1.cpp.obj
-.PHONY : LoadTest1.cpp.obj
-
-LoadTest1.i: LoadTest1.cpp.i
-.PHONY : LoadTest1.i
-
-# target to preprocess a source file
-LoadTest1.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/LoadTest1.cpp.i
-.PHONY : LoadTest1.cpp.i
-
-LoadTest1.s: LoadTest1.cpp.s
-.PHONY : LoadTest1.s
-
-# target to generate assembly for a file
-LoadTest1.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/LoadTest1.cpp.s
-.PHONY : LoadTest1.cpp.s
-
-ShrdPtr1.obj: ShrdPtr1.cpp.obj
-.PHONY : ShrdPtr1.obj
-
-# target to build an object file
-ShrdPtr1.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/ShrdPtr1.cpp.obj
-.PHONY : ShrdPtr1.cpp.obj
-
-ShrdPtr1.i: ShrdPtr1.cpp.i
-.PHONY : ShrdPtr1.i
-
-# target to preprocess a source file
-ShrdPtr1.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/ShrdPtr1.cpp.i
-.PHONY : ShrdPtr1.cpp.i
-
-ShrdPtr1.s: ShrdPtr1.cpp.s
-.PHONY : ShrdPtr1.s
-
-# target to generate assembly for a file
-ShrdPtr1.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/ShrdPtr1.cpp.s
-.PHONY : ShrdPtr1.cpp.s
-
-ShrdPtrAtomicTest.obj: ShrdPtrAtomicTest.cpp.obj
-.PHONY : ShrdPtrAtomicTest.obj
-
-# target to build an object file
-ShrdPtrAtomicTest.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.obj
-.PHONY : ShrdPtrAtomicTest.cpp.obj
-
-ShrdPtrAtomicTest.i: ShrdPtrAtomicTest.cpp.i
-.PHONY : ShrdPtrAtomicTest.i
-
-# target to preprocess a source file
-ShrdPtrAtomicTest.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.i
-.PHONY : ShrdPtrAtomicTest.cpp.i
-
-ShrdPtrAtomicTest.s: ShrdPtrAtomicTest.cpp.s
-.PHONY : ShrdPtrAtomicTest.s
-
-# target to generate assembly for a file
-ShrdPtrAtomicTest.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/ShrdPtrAtomicTest.cpp.s
-.PHONY : ShrdPtrAtomicTest.cpp.s
 
 ShrdPtrTest.obj: ShrdPtrTest.cpp.obj
 .PHONY : ShrdPtrTest.obj
@@ -320,30 +296,6 @@ UnqPtrTest.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/UnqPtrTest.cpp.s
 .PHONY : UnqPtrTest.cpp.s
 
-WeakPtrAtomicTest.obj: WeakPtrAtomicTest.cpp.obj
-.PHONY : WeakPtrAtomicTest.obj
-
-# target to build an object file
-WeakPtrAtomicTest.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.obj
-.PHONY : WeakPtrAtomicTest.cpp.obj
-
-WeakPtrAtomicTest.i: WeakPtrAtomicTest.cpp.i
-.PHONY : WeakPtrAtomicTest.i
-
-# target to preprocess a source file
-WeakPtrAtomicTest.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.i
-.PHONY : WeakPtrAtomicTest.cpp.i
-
-WeakPtrAtomicTest.s: WeakPtrAtomicTest.cpp.s
-.PHONY : WeakPtrAtomicTest.s
-
-# target to generate assembly for a file
-WeakPtrAtomicTest.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\3_1LAB.dir\build.make CMakeFiles/3_1LAB.dir/WeakPtrAtomicTest.cpp.s
-.PHONY : WeakPtrAtomicTest.cpp.s
-
 WeakPtrTest.obj: WeakPtrTest.cpp.obj
 .PHONY : WeakPtrTest.obj
 
@@ -401,21 +353,18 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... 3_1LAB
+	@echo ... Atomic_Pointers/ShrdPtrAtomicTest.obj
+	@echo ... Atomic_Pointers/ShrdPtrAtomicTest.i
+	@echo ... Atomic_Pointers/ShrdPtrAtomicTest.s
+	@echo ... Atomic_Pointers/WeakPtrAtomicTest.obj
+	@echo ... Atomic_Pointers/WeakPtrAtomicTest.i
+	@echo ... Atomic_Pointers/WeakPtrAtomicTest.s
 	@echo ... LinkedListTest.obj
 	@echo ... LinkedListTest.i
 	@echo ... LinkedListTest.s
 	@echo ... LoadTest.obj
 	@echo ... LoadTest.i
 	@echo ... LoadTest.s
-	@echo ... LoadTest1.obj
-	@echo ... LoadTest1.i
-	@echo ... LoadTest1.s
-	@echo ... ShrdPtr1.obj
-	@echo ... ShrdPtr1.i
-	@echo ... ShrdPtr1.s
-	@echo ... ShrdPtrAtomicTest.obj
-	@echo ... ShrdPtrAtomicTest.i
-	@echo ... ShrdPtrAtomicTest.s
 	@echo ... ShrdPtrTest.obj
 	@echo ... ShrdPtrTest.i
 	@echo ... ShrdPtrTest.s
@@ -425,9 +374,6 @@ help:
 	@echo ... UnqPtrTest.obj
 	@echo ... UnqPtrTest.i
 	@echo ... UnqPtrTest.s
-	@echo ... WeakPtrAtomicTest.obj
-	@echo ... WeakPtrAtomicTest.i
-	@echo ... WeakPtrAtomicTest.s
 	@echo ... WeakPtrTest.obj
 	@echo ... WeakPtrTest.i
 	@echo ... WeakPtrTest.s

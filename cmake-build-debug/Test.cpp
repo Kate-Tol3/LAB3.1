@@ -10,7 +10,7 @@ void Test::testAll() {
     testShrdPtrAtomic();
     testWeakPtrAtomic();
     testLinkedList();
-  //  testMutableSequence();
+    testMutableSequence();
 }
 
 void Test::testUnqPtr() {
