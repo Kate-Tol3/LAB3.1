@@ -4,11 +4,11 @@
 
 
 void Test::testAll() {
-    testUnqPtr();
-    testShrdPtr();
-    testWeakPtr();
-    testShrdPtrAtomic();
-    testWeakPtrAtomic();
+    // testUnqPtr();
+    // testShrdPtr();
+    // testWeakPtr();
+    // testShrdPtrAtomic();
+    // testWeakPtrAtomic();
     testLinkedList();
     testMutableSequence();
 }

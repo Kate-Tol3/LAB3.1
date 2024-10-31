@@ -20,7 +20,7 @@ public:
     //     : value(n_val), prev(n_prev), next(n_next) {}
     explicit Node(const T& n_val = T(), WeakPtr<Node<T>> n_prev = WeakPtr<Node<T>>(), ShrdPtr<Node<T>> n_next = ShrdPtr<Node<T>>(nullptr))// WeakPtr<Node<T>> n_prev = WeakPtr<Node<T>>() == nullptr
         : value(n_val), prev(n_prev), next(n_next) {}
-    explicit Node(): value(T()), prev(), next(nullptr) {};
+     // explicit Node(): value(T()), prev(), next(nullptr) {};
 
 
 };
@@ -79,13 +79,14 @@ public:
             append(temp->value);
             temp = temp->next;
         }
+
         length = other.length;
     }
     
     ~LinkedList() = default;
 
     // Methods
-    T& get(const int index) const{
+    const T& get(const int index) const{
         assertIndexCorrect(index);
         assertListNotEmpty();
         ShrdPtr<Node<T>> temp = head;
@@ -94,12 +95,31 @@ public:
         // return getNode(index)->value;
     }
 
-    T& getFirst() const{
+    T& get(const int index){
+        assertIndexCorrect(index);
+        assertListNotEmpty();
+        ShrdPtr<Node<T>> temp = head;
+        for (int pos = 0; pos < index; ++pos) temp = temp->next;
+        return temp->value;
+        // return getNode(index)->value;
+    }
+
+    T& getFirst() {
         assertListNotEmpty();
         return head->value;
     }
 
-    T& getLast() const{
+    const T& getFirst() const{
+        assertListNotEmpty();
+        return head->value;
+    }
+
+    const T& getLast() const{
+        assertListNotEmpty();
+        return tail->value;
+    }
+
+    T& getLast(){
         assertListNotEmpty();
         return tail->value;
     }
@@ -124,11 +144,9 @@ public:
     }
 
     void append(const T& item) {
-       // auto el = ShrdPtr<Node<T>>(new Node<T>(item, WeakPtr<Node<T>>(), nullptr));//!!!
-       // auto el = ShrdPtr<Node<T>>(new Node<T>(item, WeakPtr<Node<T>>(), ShrdPtr<Node<T>>(nullptr)));
         auto el = ShrdPtr<Node<T>>(new Node<T>(item));
         if (!head.get()) {
-            head = tail = el;
+            head = tail = el; // !
         } else {
             tail->next = el;
             el->prev = tail;

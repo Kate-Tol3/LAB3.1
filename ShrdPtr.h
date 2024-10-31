@@ -59,6 +59,7 @@ public:
             control_block = other.control_block;
             if (control_block) {
                 ++(control_block->ref_count);
+
             }
         }
         return *this;
@@ -77,6 +78,7 @@ public:
     // Освобождение ресурса
     void release() {
         if (control_block) {
+            std::cout << control_block->ref_count << std::endl;
             if (--control_block->ref_count == 0) {
                 control_block->deleteObject();  // Удаляем сам объект
                 if (control_block->weak_count == 0) {
@@ -125,10 +127,6 @@ public:
     }
 
     // Проверка на единственность
-    bool unique() {
-        return control_block && control_block->ref_count == 1;
-    }
-
     const bool unique() const {
         return control_block && control_block->ref_count == 1;
     }

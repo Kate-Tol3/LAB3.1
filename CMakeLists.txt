@@ -3,32 +3,33 @@ project(3_1LAB)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(3_1LAB cmake-build-debug/main.cpp
-        cmake-build-debug/UnqPtr.h
-        cmake-build-debug/WeakPtr.h
-        cmake-build-debug/WeakPtrTest.cpp
-        cmake-build-debug/WeakPtrTest.h
-        cmake-build-debug/UnqPtrTest.cpp
-        cmake-build-debug/UnqPtrTest.h
-        cmake-build-debug/ShrdPtr.h
-        cmake-build-debug/Test.cpp
-        cmake-build-debug/Test.h
-        cmake-build-debug/ShrdPtrTest.cpp
-        cmake-build-debug/ShrdPtrTest.h
-        "cmake-build-debug/Atomic Pointers/ShrdPtrAtomic.h"
-        "cmake-build-debug/Atomic Pointers/ShrdPtrAtomicTest.cpp"
-        "cmake-build-debug/Atomic Pointers/ShrdPtrAtomicTest.h"
-        "cmake-build-debug/Atomic Pointers/WeakPtrAtomicTest.cpp"
-        "cmake-build-debug/Atomic Pointers/WeakPtrAtomicTest.h"
-        "cmake-build-debug/Atomic Pointers/WeakPtrAtomic.h"
-        cmake-build-debug/LoadTest.cpp
-        cmake-build-debug/LoadTest.h
-        cmake-build-debug/LinkedListTest.cpp
-        cmake-build-debug/LinkedListTest.h
-        cmake-build-debug/Exception.h
-        cmake-build-debug/LinkedList.h
-        cmake-build-debug/Sequence.h
-        cmake-build-debug/MutableListSequence.h
-        cmake-build-debug/MutableSequence.h
-        cmake-build-debug/MutableSequenceTest.h
+add_executable(3_1LAB main.cpp
+        UnqPtr.h
+        WeakPtr.h
+        WeakPtrTest.cpp
+        WeakPtrTest.h
+        UnqPtrTest.cpp
+        UnqPtrTest.h
+        ShrdPtr.h
+        Test.cpp
+        Test.h
+        ShrdPtrTest.cpp
+        ShrdPtrTest.h
+        "Atomic Pointers/ShrdPtrAtomic.h"
+        "Atomic Pointers/ShrdPtrAtomicTest.cpp"
+        "Atomic Pointers/ShrdPtrAtomicTest.h"
+        "Atomic Pointers/WeakPtrAtomicTest.cpp"
+        "Atomic Pointers/WeakPtrAtomicTest.h"
+        "Atomic Pointers/WeakPtrAtomic.h"
+        LoadTest.cpp
+        LoadTest.h
+        LinkedListTest.cpp
+        LinkedListTest.h
+        Exception.h
+        LinkedList.h
+        Sequence.h
+        MutableListSequence.h
+        MutableSequence.h
+        MutableSequenceTest.h
+
 )

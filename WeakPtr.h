@@ -117,7 +117,7 @@ public:
     const T* operator->() const { return control_block->s_ptr; }
     const T* get() const { return control_block ? control_block->s_ptr : nullptr; }
 
-    T& operator*() { return *control_block->s_ptr;}
+    T& operator*() { return *control_block->s_ptr;} // expired?, ptr == nullptr
     T* operator->() { return control_block->s_ptr; }
     T* get() { return control_block ? control_block->s_ptr : nullptr; }
 

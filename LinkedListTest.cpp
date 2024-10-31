@@ -22,7 +22,7 @@ void LinkedListTest::testConstructors() {
     LinkedList<int> list3(list2);
     assert(list3.getLength() == list2.getLength());
     for (int i = 0; i < list3.getLength(); i++) {
-        assert(list3.get(i) == list3.get(i));
+        assert(list2.get(i) == list3.get(i));
     }
 }
 

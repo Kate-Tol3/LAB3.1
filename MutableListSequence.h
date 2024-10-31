@@ -72,7 +72,11 @@ public:
         return ShrdPtr<Sequence<T>>(new MutableListSequence<T>(*new_list));
     }
 
-    T& operator[](int index) const override {
+    const T& operator[](int index) const override {
+        return seq_list->get(index);
+    }
+
+    T& operator[](int index) {
         return seq_list->get(index);
     }
 

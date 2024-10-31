@@ -20,7 +20,7 @@ public:
     virtual ShrdPtr<Sequence<T>> concat(const Sequence <T>&) = 0;
     virtual ShrdPtr<Sequence<T>> getSubSequence(int startIndex, int endIndex) = 0;
     virtual void print() const = 0;
-    virtual T& operator[](int index) const = 0;
+    virtual const T& operator[](int index) const = 0;
 
 };
 
