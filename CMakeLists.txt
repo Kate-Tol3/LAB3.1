@@ -31,5 +31,6 @@ add_executable(3_1LAB main.cpp
         MutableListSequence.h
         MutableSequence.h
         MutableSequenceTest.h
+        DynamicArray.h
 
 )

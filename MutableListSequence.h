@@ -1,116 +1,124 @@
-#ifndef LAB2_MUTABLELISTSEQUENCE_H
-#define LAB2_MUTABLELISTSEQUENCE_H
+#pragma once
 
-#include "LinkedList.h"
+#include <stdexcept>
 #include "MutableSequence.h"
-#include "Exception.h"
+#include "Sequence.h"
+#include "LinkedList.h"
+#include "ShrdPtr.h"
 
-template <class T>
+template <typename T>
 class MutableListSequence: public MutableSequence<T> {
 private:
-    ShrdPtr<LinkedList<T>> seq_list;
+    ShrdPtr<LinkedList<T>> list;
 
 public:
-    // Constructors
-    MutableListSequence(): seq_list(new LinkedList<T>()) {};
-    MutableListSequence(T* items, int count): seq_list(new LinkedList<T>(items, count)) {};
-    explicit MutableListSequence(const int count): seq_list(new LinkedList<T>(count)) {};
-    explicit MutableListSequence(const LinkedList<T>& list): seq_list(new LinkedList<T>(list)) {};
-    
-    MutableListSequence(const MutableListSequence<T>& other): seq_list(new LinkedList<T>(*other.seq_list)) {};
+    MutableListSequence(const T* items, int size): list(new LinkedList<T>(items, size)) {}
+    MutableListSequence(): list(new LinkedList<T>()) {}
+    MutableListSequence(int size): list(new LinkedList<T>(size)) {}
+    MutableListSequence(const MutableListSequence<T>& other): list(new LinkedList<T>(*other.list)) {}
+    MutableListSequence(const Sequence<T>& other): list(new LinkedList<T>(other)) {}
+    MutableListSequence(const LinkedList<T>& other): list(new LinkedList<T>(other)) {}
 
-    // Methods
+    ~MutableListSequence() override {}
+
+    T& operator [] (int index) {
+        return (*list)[index];
+    }
+
+    const T& operator [] (int index) const override {
+        return (*list)[index];
+    }
+
+    MutableListSequence<T>& operator=(const MutableListSequence<T>& other) {
+        *list = *other.list;
+        return *this;
+    }
+
     const T& getFirst() const override {
-        return seq_list->getFirst();
+        return list->getFirst();
     }
 
     const T& getLast() const override {
-        return seq_list->getLast();
+        return list->getLast();
     }
 
     const T& get(int index) const override {
-        return seq_list->get(index);
+        return (*list)[index];
+    }
+
+    T& getFirst() {
+        return list->getFirst();
+    }
+
+    T& getLast(){
+        return list->getLast();
+    }
+
+    T& get(int index) {
+        return list->get(index);
+    }
+
+    void set(int index, const T& value) override {
+        return list->set(index, value);
     }
 
     int getLength() const override {
-        return seq_list->getLength();
-    }
-
-    ShrdPtr<Sequence<T>> getSubSequence(int startIndex, int endIndex) override {
-
-        // Получаем подсписок с помощью метода getSubList класса LinkedList
-        ShrdPtr<LinkedList<T>> sub_list = ShrdPtr<LinkedList<T>>(this->seq_list->getSubList(startIndex, endIndex));
-
-        // Возвращаем подсписок как MutableListSequence
-        return ShrdPtr<Sequence<T>>(new MutableListSequence<T>(*sub_list));
-
+        return list->getLength();
     }
 
     void append(const T& item) override {
-        seq_list->append(item);
+        list->append(item);
     }
 
     void prepend(const T& item) override {
-        seq_list->prepend(item);
+        list->prepend(item);
     }
 
     void insertAt(const T& item, int index) override {
-        seq_list->insertAt(item, index);
+        list->insertAt(item, index);
     }
 
-    void set(int index, const T& item) override {
-        seq_list->set(index, item);
+    // MutableListSequence<T>* getSubsequence(int startIndex, int endIndex) const override {
+    //     if (startIndex > endIndex || startIndex < 0 || endIndex >= this->getLength()) throw IndexOutOfRange();
+    //     return new MutableListSequence<T>(*this->list->getSubsequence(startIndex, endIndex));
+    // }
+
+    MutableListSequence<T>* getSubsequence(int startIndex, int endIndex) const override {
+        if (startIndex > endIndex || startIndex < 0 || endIndex >= this->getLength()) throw IndexOutOfRange();
+        auto* subsequence = this->list->getSubsequence(startIndex, endIndex);
+        return new MutableListSequence<T>(*subsequence);
+    }
+    //
+    // MutableListSequence<T>* getSubSequence(int startIndex, int endIndex) const override {
+    //
+    //     // Получаем подсписок с помощью метода getSubList класса LinkedList
+    //     ShrdPtr<LinkedList<T>> sub_list = ShrdPtr<LinkedList<T>>(this->seq_list->getSubsequence(startIndex, endIndex));
+    //
+    //     // Возвращаем подсписок как MutableListSequence
+    //     return new MutableListSequence<T>(*sub_list);
+    //
+    // }
+
+    MutableListSequence<T>* concat(const Sequence<T>& other) const override {
+        LinkedList<T> bufList(other);
+        return new MutableListSequence<T>(*list->concat(&bufList));
     }
 
-    ShrdPtr<Sequence<T>> concat(const Sequence<T>& other) override {
-        const auto* otherMutableSeq = dynamic_cast<const MutableListSequence<T>*>(&other);
-
-        // Используем метод concat класса LinkedList для создания нового списка
-        ShrdPtr<LinkedList<T>> new_list = ShrdPtr<LinkedList<T>>(this->seq_list->concat(otherMutableSeq->seq_list.get()));
-
-        // Возвращаем новый список как MutableListSequence
-        return ShrdPtr<Sequence<T>>(new MutableListSequence<T>(*new_list));
-    }
-
-    const T& operator[](int index) const override {
-        return seq_list->get(index);
-    }
-
-    T& operator[](int index) {
-        return seq_list->get(index);
-    }
-
-    bool operator==(const MutableSequence<T>& other) const override {
-      //  return (*seq_list == *dynamic_cast<const MutableListSequence<T>&>(other).seq_list); // приводит объект other ( типа MutableSequence<T>) к  типу MutableListSequence<T>.
-        if (this == &other) return true;
-        if (this->getLength() == other.getLength()){
-            for (int i = 0; i < this->getLength(); ++i) {
-                if ((*this)[i] != (other)[i]) {
-                    return false;
+    bool operator==(const MutableSequence<T>& other) const override{
+            if (this == &other) return true;
+            if (this->getLength() == other.getLength()){
+                for (int i = 0; i < this->getLength(); ++i) {
+                    if ((*this)[i] != (other)[i]) {
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
-        }
-        return false;
-
+            return false;
     }
 
-    bool operator==(const MutableListSequence<T>& other) const {
-        if (this == &other) return true;
-        if (this->getLength() == other.getLength()){
-            for (int i = 0; i < this->getLength(); ++i) {
-                if ((*this)[i] != (other)[i]) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
+    void print() const override{
+        this->list->print();
     }
 
-    void print() const override {
-        seq_list->print();
-    }
 };
-
-#endif // LAB2_MUTABLELISTSEQUENCE_H
