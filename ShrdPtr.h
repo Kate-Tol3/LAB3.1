@@ -78,7 +78,6 @@ public:
     // Освобождение ресурса
     void release() {
         if (control_block) {
-            std::cout << control_block->ref_count << std::endl;
             if (--control_block->ref_count == 0) {
                 control_block->deleteObject();  // Удаляем сам объект
                 if (control_block->weak_count == 0) {

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <stdexcept>
 #include "Sequence.h"
-#include "LinkedList.h" pu
+#include "LinkedList.h"
 
 template <typename T>
 class DynamicArray {
@@ -11,11 +11,11 @@ protected:
     int size;
     T* array = nullptr;
 public:
-    DynamicArray(const T* arrayToCopy, int size): size(size) {
+    DynamicArray(const T* other_array, int size): size(size) {
         if (size < 0) throw IndexOutOfRange();
         array = new T[size];
         for (int i = 0; i < size; ++i) {
-            array[i] = arrayToCopy[i];
+            array[i] = other_array[i];
         }
     }
 
@@ -111,7 +111,7 @@ public:
         size = size + 1;
     }
 
-    void insertAt(int index, const T& item) {
+    void insertAt(const T& item, int index) {
         if (index < 0 || index > size) throw IndexOutOfRange();
         T* helpArray = new T[size + 1];
         int i = 0;
@@ -125,6 +125,13 @@ public:
         delete[] array;
         array = helpArray;
         size = size + 1;
+    }
+
+    void print() const {
+        for (int i = 0; i < size; i++){
+            if (i != size - 1) std::cout << this->get(i) << " ";
+            else std::cout << this->get(i);
+        }
     }
 
     friend std::ostream& operator << (std::ostream& os, const DynamicArray<T>& value) {
