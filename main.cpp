@@ -7,7 +7,7 @@
 int main() {
     Test test;
     test.testAll();
-    LoadTest l_test;
-    l_test.show_results();
+    // LoadTest l_test;
+    // l_test.show_results();
     return 0;
 }

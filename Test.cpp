@@ -1,6 +1,7 @@
 #include "Test.h"
 #include "LinkedListTest.h"
 #include "MutableListSequence.h"
+#include "MutableArraySequence.h"
 
 
 void Test::testAll() {
@@ -44,6 +45,11 @@ void Test::testLinkedList() {
 }
 
 void Test::testMutableSequence() {
+    std::cout << "\ntesting MutableListSequence..." << std::endl;
     MutableSequenceTest<MutableListSequence> mls;
     mls.test();
+
+    std::cout << "testing MutableArraySequence..." << std::endl;
+    MutableSequenceTest<MutableArraySequence> mas;
+    mas.test();
 }

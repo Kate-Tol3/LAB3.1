@@ -59,6 +59,7 @@ public:
             control_block = other.control_block;
             if (control_block) {
                 ++(control_block->ref_count);
+
             }
         }
         return *this;
@@ -93,6 +94,8 @@ public:
     T& operator*() { return *control_block->s_ptr;}
     T* operator->() { return control_block->s_ptr; }
 
+    //bool operator!() { return control_block->s_ptr == nullptr;}//???
+
 
     const T* get() const { return control_block ? control_block->s_ptr : nullptr; }
     T* get() { return control_block ? control_block->s_ptr : nullptr; }
@@ -106,33 +109,19 @@ public:
     bool isNull() { return control_block == nullptr || control_block->s_ptr == nullptr; }
 
     void swap(ShrdPtr& other) noexcept {
-        // T* temp_ptr = control_block->s_ptr;
-        // int temp_count = control_block->ref_count; ///
-        // control_block->s_ptr = other.control_block->s_ptr;
-        // control_block->ref_count = other.control_block->ref_count;
-        // other.control_block->s_ptr = temp_ptr;
-        // other.control_block->ref_count = temp_count;
-
         T* temp_ptr = control_block->s_ptr;
-//        int temp_w_count = control_block->weak_count;
-//        int temp_r_count = control_block->ref_count;
         control_block->s_ptr = other.control_block->s_ptr;
-        // control_block->weak_count = other.control_block->weak_count;
-        // control_block->ref_count = other.control_block->ref_count;
         other.control_block->s_ptr = temp_ptr;
-        // other.control_block->weak_count = temp_w_count;
-        // other.control_block->ref_count = temp_r_count;
+
     }
 
     // Проверка на единственность
-    bool unique() {
-        return control_block && control_block->ref_count == 1;
-    }
-
     const bool unique() const {
         return control_block && control_block->ref_count == 1;
     }
 
     //Доступ к weak_ptr (дружба с WeakPtr не нужна)
-  friend class WeakPtr<T>;
+    friend class WeakPtr<T>;
+
 };
+

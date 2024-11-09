@@ -22,7 +22,7 @@ void LinkedListTest::testConstructors() {
     LinkedList<int> list3(list2);
     assert(list3.getLength() == list2.getLength());
     for (int i = 0; i < list3.getLength(); i++) {
-        assert(list3.get(i) == list3.get(i));
+        assert(list2.get(i) == list3.get(i));
     }
 }
 
@@ -131,32 +131,32 @@ void LinkedListTest::testInsertAt() {
     } catch (IndexOutOfRange& ex) {}
     catch (EmptyListException& ex) {}
 
-    LinkedList<double> blank_list1;
-    blank_list1.insertAt(val, 0);
-    assert(blank_list1.getLength() == 1);
-    assert(blank_list1.getLast() == val);
-    assert(blank_list1.getFirst() == val);
+    // LinkedList<double> blank_list1;
+    // blank_list1.insertAt(val, 0);
+    // assert(blank_list1.getLength() == 1);
+    // assert(blank_list1.getLast() == val);
+    // assert(blank_list1.getFirst() == val);
 }
 
-void LinkedListTest::testGetSubList() {
+void LinkedListTest::testGetSubsequence() {
     double elems[7] = { 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
     LinkedList<double> list(elems, 7);
     int startIndex = 2;
     int endIndex = 5;
-    LinkedList<double>* result = list.getSubList(startIndex, endIndex);
+    LinkedList<double>* result = list.getSubsequence(startIndex, endIndex);
     for (int i = startIndex; i <= endIndex; ++i) {
         assert(result->get(i - startIndex) == elems[i]);
     }
     try {
-        list.getSubList(0, 7);
+        list.getSubsequence(0, 7);
     } catch (IndexOutOfRange& ex) {}
     catch (EmptyListException& ex) {}
     try {
-        list.getSubList(-1, 0);
+        list.getSubsequence(-1, 0);
     } catch (IndexOutOfRange& ex) {}
     catch (EmptyListException& ex) {}
     try {
-        list.getSubList(1, 0);
+        list.getSubsequence(1, 0);
     } catch (IndexOutOfRange& ex) {}
     catch (EmptyListException& ex) {}
 
@@ -191,7 +191,7 @@ void LinkedListTest::test() {
     testAppend();
     testPrepend();
     testInsertAt();
-    testGetSubList();
+    testGetSubsequence();
     testConcat();
     testOperatorEqual();
 

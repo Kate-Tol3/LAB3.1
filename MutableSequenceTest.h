@@ -62,26 +62,28 @@ public:
 
     void testGetFirst() {
         int length = 7;
-        double elems[6] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0};
-        MutableSequence<double> mut_seq(elems, 6);
-        assert(mut_seq.getFirst() == elems[0]);
+        int m[7] = {0, 1, 2, 3, 4, 5, 6};
+        MutableSequence<int> mut_seq(m, length);
+        assert(mut_seq.getFirst() == m[0]);
         try {
-            MutableSequence<double> mut_seq_;
-            mut_seq_.getFirst();
-            // ;
-        } catch (IndexOutOfRange &ex) {}
+            MutableSequence<int> mut_seq_except;
+            mut_seq_except.getFirst();
+            assert(false);
+        } catch (IndexOutOfRange&) {}
+        catch (EmptyListException&) {}
     }
 
     void testGetLast() {
-
-        double elems[6] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0};
-        MutableSequence<double> mut_seq(elems, 6);
-        assert(mut_seq.getLast() == elems[5]);
+        int length = 7;
+        int m[7] = {0, 1, 2, 3, 4, 5, 6};
+        MutableSequence<int> mut_seq(m, length);
+        assert(mut_seq.getLast() == m[6]);
         try {
-            MutableSequence<int> mut_seq_;
-            mut_seq_.getLast();
-            // ;
-        } catch (IndexOutOfRange &ex) {}
+            MutableSequence<int> mut_seq_except;
+            mut_seq_except.getLast();
+            assert(false);
+        } catch (IndexOutOfRange&) {}
+        catch (EmptyListException&) {}
     }
 
     void testGetLength() {
@@ -164,28 +166,27 @@ public:
     }
 
     void testGetSubsequence() {
-        double elems[6] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0};
-        MutableSequence<double> mut_seq(elems, 6);
+        int length = 7;
+        int m[7] = {0, 1, 2, 3, 4, 5, 6};
+        MutableSequence<int> mut_seq(m, length);
         int startIndex = 2;
-        int endIndex = 4;
-        mut_seq.getSubSequence(startIndex, endIndex);
-        ShrdPtr<MutableListSequence<double>> result(&mut_seq);
+        int endIndex = 5;
+        MutableSequence<int>* result = mut_seq.getSubsequence(startIndex, endIndex);
         for (int i = startIndex; i <= endIndex; ++i) {
-            std::cout << result->get(i - startIndex) << " " << elems[i] << std::endl;
-            assert(result->get(i - startIndex) == elems[i]);
+            assert(result->get(i - startIndex) == m[i]);
         }
         try {
-            mut_seq.getSubSequence(0, 6);
-            // ;
-        } catch (IndexOutOfRange &ex) {}
+            mut_seq.getSubsequence(0, length);
+            assert(false);
+        } catch (IndexOutOfRange&) {}
         try {
-            mut_seq.getSubSequence(-1, 0);
-            // ;
-        } catch (IndexOutOfRange &ex) {}
+            mut_seq.getSubsequence(-1, 0);
+            assert(false);
+        } catch (IndexOutOfRange&) {}
         try {
-            mut_seq.getSubSequence(1, 0);
-            // ;
-        } catch (IndexOutOfRange &ex) {}
+            mut_seq.getSubsequence(1, 0);
+            assert(false);
+        } catch (IndexOutOfRange&) {}
     }
 
     void testConcat() {

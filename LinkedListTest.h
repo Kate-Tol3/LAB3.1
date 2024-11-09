@@ -25,7 +25,7 @@ public:
 
     void testInsertAt();
 
-    void testGetSubList();
+    void testGetSubsequence();
 
     void testConcat();
 
