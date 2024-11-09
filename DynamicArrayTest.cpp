@@ -3,7 +3,6 @@
 #include <cassert>
 #include "DynamicArrayTest.h"
 
-
 void DynamicArrayTest::testConstructors(){
 
     double elems[6] = { 0.0, 1, 2.0, 3.0, 4.0, 5.0 };
