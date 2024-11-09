@@ -50,13 +50,10 @@ public:
         }
     }
 
-    // Деструктор
     ~SharedPtrAtomic() {
         release();
     }
 
-
-    // Копирующее присваивание
     SharedPtrAtomic& operator=(const SharedPtrAtomic& other) {
         if (this != &other) {
             release();
@@ -68,7 +65,6 @@ public:
         return *this;
     }
 
-    // Перемещающее присваивание
     SharedPtrAtomic& operator=(SharedPtrAtomic&& other) noexcept {
         if (this != &other) {
             release();
@@ -78,7 +74,6 @@ public:
         return *this;
     }
 
-    // Освобождение ресурса
     void release() {
         if (control_block) {
             if (control_block->ref_count->fetch_sub(1, std::memory_order_acq_rel) == 1) {
@@ -90,17 +85,13 @@ public:
         }
     }
 
-
-    // Доступ к объекту
     T& operator*() const { return *control_block->s_ptr;}
     T* operator->() const { return control_block->s_ptr; }
     T* get() const { return control_block ? control_block->s_ptr : nullptr; }
 
 
-    // Проверка количества сильных ссылок
     unsigned long useCount() const { return control_block ? control_block->ref_count->load() : static_cast<unsigned long>(0); }
 
-    // Проверка, является ли указатель нулевым
     bool isNull() const { return control_block == nullptr || control_block->s_ptr == nullptr; }
 
     void swap(SharedPtrAtomic& other) noexcept {
@@ -112,13 +103,11 @@ public:
 
     }
 
-    // Проверка на единственность
     bool unique() const {
         return control_block && control_block->ref_count->load() == 1;
     }
 
-    //Доступ к weak_ptr (дружба с WeakPtr не нужна)
-  friend class WeakPtrAtomic<T>;
+    friend class WeakPtrAtomic<T>;
 };
 
 

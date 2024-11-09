@@ -19,6 +19,8 @@ public:
         }
     }
 
+    DynamicArray() {}
+
     DynamicArray(int size): size(size) {
         if (size < 0) throw IndexOutOfRange();
         array = new T[size];

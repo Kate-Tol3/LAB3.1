@@ -180,8 +180,6 @@ void SharedPtrAtomicTest::testAssignmentTreading() {
     for (auto& t : threads) {
         t.join();
     }
-
-    // После завершения всех потоков счётчик ссылок должен быть 1
     assert(sp1.useCount() == 1);
 }
 

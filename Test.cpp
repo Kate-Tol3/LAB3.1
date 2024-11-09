@@ -1,5 +1,6 @@
 #include "Test.h"
 #include "LinkedListTest.h"
+#include "DynamicArrayTest.h"
 #include "MutableListSequence.h"
 #include "MutableArraySequence.h"
 #include "SharedPtrTest.h"
@@ -51,7 +52,8 @@ void Test::testLinkedList() {
 }
 
 void Test::testDynamicArray() {
-
+    DynamicArrayTest da;
+    da.test();
 }
 
 
