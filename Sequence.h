@@ -2,7 +2,7 @@
 #ifndef SEQUENCE_H
 #define SEQUENCE_H
 
-#include "ShrdPtr.h"
+#include "SharedPtr.h"
 
 template <class T>
 class Sequence {

@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 #include <chrono>
-#include "ShrdPtr.h"
+#include "SharedPtr.h"
 #include "UnqPtr.h"
 #include "WeakPtr.h"
 
@@ -42,11 +42,11 @@ void test_std_weak(int n) {
 
 
 void test_shared(int n) {
-    std::vector<ShrdPtr<int>> vec;
+    std::vector<SharedPtr<int>> vec;
     for (int i = 0; i < n; ++i) {
-        vec.push_back(ShrdPtr<int>(new int(i)));
+        vec.push_back(SharedPtr<int>(new int(i)));
     }
-   // std::cout << "Test for ShrdPtr with " << n << " objects completed." << std::endl;
+   // std::cout << "Test for SharedPtr with " << n << " objects completed." << std::endl;
 }
 
 void test_unique(int n) {
@@ -60,7 +60,7 @@ void test_unique(int n) {
 void test_weak(int n) {
     std::vector<WeakPtr<int>> vec;
     for (int i = 0; i < n; ++i) {
-        ShrdPtr<int> sptr(new int(i));
+        SharedPtr<int> sptr(new int(i));
         vec.push_back(WeakPtr<int>(sptr));
     }
    // std::cout << "Test for WeakPtr with " << n << " objects completed." << std::endl;
@@ -74,22 +74,22 @@ void show_results() {
     std::cout << "Size, ShrPtr, std::shared_ptr, UnqPtr, std::unique_ptr, WeakPtr, std::weak_ptr" << std::endl;
 
     for (int n : sizes) {
-        long long time_shrd = 0, time_shrd_std = 0;
+        long long time_Shared = 0, time_Shared_std = 0;
         long long time_unq = 0, time_unq_std = 0;
         long long time_weak = 0, time_weak_std = 0;
 
         // Тесты для кастомных указателей
-        MEASURE_TIME(test_shared(n), time_shrd);
+        MEASURE_TIME(test_shared(n), time_Shared);
         MEASURE_TIME(test_unique(n), time_unq);
         MEASURE_TIME(test_weak(n), time_weak);
 
         // Тесты для стандартных указателей
-        MEASURE_TIME(test_std_shared(n), time_shrd_std);
+        MEASURE_TIME(test_std_shared(n), time_Shared_std);
         MEASURE_TIME(test_std_unique(n), time_unq_std);
         MEASURE_TIME(test_std_weak(n), time_weak_std);
 
         // Вывод результатов
-        std::cout << n << ", " << time_shrd << ", " << time_shrd_std << ", "
+        std::cout << n << ", " << time_Shared << ", " << time_Shared_std << ", "
                   << time_unq << ", " << time_unq_std << ", "
                   << time_weak << ", " << time_weak_std << std::endl;
     }

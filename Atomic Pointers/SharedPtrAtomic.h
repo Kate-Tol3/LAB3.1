@@ -4,7 +4,7 @@
 template <typename T>
 struct ControlBlockAtomic {
     T* s_ptr;           // Указатель на управляемый объект
-    std::atomic<unsigned long>* ref_count;      // Счётчик сильных ссылок (ShrdPtrAtomic)
+    std::atomic<unsigned long>* ref_count;      // Счётчик сильных ссылок (SharedPtrAtomic)
     std::atomic<unsigned long>* weak_count;     // Счётчик слабых ссылок (WeakPtr)
 
     // Конструктор для инициализации контрольного блока
@@ -13,8 +13,6 @@ struct ControlBlockAtomic {
     // Уничтожение объекта, но не самого контрольного блока
     void deleteObject() {
         delete s_ptr;
-        // delete ref_count;
-        // delete weak_count;
         s_ptr = nullptr;
 
 
@@ -25,41 +23,41 @@ template <typename T>
 class WeakPtrAtomic;  // Объявляем заранее
 
 template <typename T>
-class ShrdPtrAtomic {
+class SharedPtrAtomic {
 private:
     ControlBlockAtomic<T>* control_block;  // Указатель на контрольный блок
 
 public:
 
     // Конструктор с выделением нового объекта
-    explicit ShrdPtrAtomic(T* p = nullptr) : control_block(p ? new ControlBlockAtomic<T>(p) : nullptr) {}
+    explicit SharedPtrAtomic(T* p = nullptr) : control_block(p ? new ControlBlockAtomic<T>(p) : nullptr) {}
 
     // Копирующий конструктор
-    ShrdPtrAtomic(const ShrdPtrAtomic& other) : control_block(other.control_block) {
+    SharedPtrAtomic(const SharedPtrAtomic& other) : control_block(other.control_block) {
         if (control_block) {
             (control_block->ref_count->fetch_add(1, std::memory_order_acq_rel));
         }
     }
 
     // Перемещающий конструктор
-    ShrdPtrAtomic(ShrdPtrAtomic&& other) noexcept : control_block(other.control_block) {
+    SharedPtrAtomic(SharedPtrAtomic&& other) noexcept : control_block(other.control_block) {
         other.control_block = nullptr;
     }
 
-    ShrdPtrAtomic(const WeakPtrAtomic<T>& weak) : control_block(weak.control_block) {
+    SharedPtrAtomic(const WeakPtrAtomic<T>& weak) : control_block(weak.control_block) {
         if (control_block) {
             (control_block->ref_count->fetch_add(1, std::memory_order_acq_rel));
         }
     }
 
     // Деструктор
-    ~ShrdPtrAtomic() {
+    ~SharedPtrAtomic() {
         release();
     }
 
 
     // Копирующее присваивание
-    ShrdPtrAtomic& operator=(const ShrdPtrAtomic& other) {
+    SharedPtrAtomic& operator=(const SharedPtrAtomic& other) {
         if (this != &other) {
             release();
             control_block = other.control_block;
@@ -71,7 +69,7 @@ public:
     }
 
     // Перемещающее присваивание
-    ShrdPtrAtomic& operator=(ShrdPtrAtomic&& other) noexcept {
+    SharedPtrAtomic& operator=(SharedPtrAtomic&& other) noexcept {
         if (this != &other) {
             release();
             control_block = other.control_block;
@@ -98,23 +96,6 @@ public:
     T* operator->() const { return control_block->s_ptr; }
     T* get() const { return control_block ? control_block->s_ptr : nullptr; }
 
-    // bool operator==(const ShrdPtrAtomic& other) const {
-    //     if (control_block != other.control_block) {
-    //         if (this->control_block->ref_count->load() == other.control_block->ref_count->load()
-    //             && this->control_block->weak_count->load() == other.control_block->weak_count->load()
-    //             && this->control_block->s_ptr == other.control_block->s_ptr) return true;
-    //         return false;
-    //     }
-    //     return true;
-    // }
-    //
-    // bool operator!=(const ShrdPtrAtomic& other) const {
-    //     return !(this == other);
-    // }
-    //
-    // bool operator!() const {
-    //     return !(get()==nullptr);
-    // }
 
     // Проверка количества сильных ссылок
     unsigned long useCount() const { return control_block ? control_block->ref_count->load() : static_cast<unsigned long>(0); }
@@ -122,23 +103,13 @@ public:
     // Проверка, является ли указатель нулевым
     bool isNull() const { return control_block == nullptr || control_block->s_ptr == nullptr; }
 
-    void swap(ShrdPtrAtomic& other) noexcept {
-        // T* temp_ptr = control_block->s_ptr;
-        // int temp_count = control_block->ref_count; ///
-        // control_block->s_ptr = other.control_block->s_ptr;
-        // control_block->ref_count = other.control_block->ref_count;
-        // other.control_block->s_ptr = temp_ptr;
-        // other.control_block->ref_count = temp_count;
+    void swap(SharedPtrAtomic& other) noexcept {
+
 
         T* temp_ptr = control_block->s_ptr;
-//        int temp_w_count = control_block->weak_count;
-//        int temp_r_count = control_block->ref_count;
         control_block->s_ptr = other.control_block->s_ptr;
-        // control_block->weak_count = other.control_block->weak_count;
-        // control_block->ref_count = other.control_block->ref_count;
         other.control_block->s_ptr = temp_ptr;
-        // other.control_block->weak_count = temp_w_count;
-        // other.control_block->ref_count = temp_r_count;
+
     }
 
     // Проверка на единственность

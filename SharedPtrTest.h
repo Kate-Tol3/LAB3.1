@@ -1,11 +1,6 @@
 #pragma once
-#include <cassert>
-#include <iostream>
-#include <memory>
-#include "ShrdPtr.h"
-#include "WeakPtr.h"
 
-class ShrdPtrTest {
+class SharedPtrTest {
 public:
     void testConstructors();
     void testOperators();

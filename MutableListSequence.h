@@ -1,15 +1,14 @@
 #pragma once
 
-#include <stdexcept>
 #include "MutableSequence.h"
 #include "Sequence.h"
 #include "LinkedList.h"
-#include "ShrdPtr.h"
+#include "SharedPtr.h"
 
 template <typename T>
 class MutableListSequence: public MutableSequence<T> {
 private:
-    ShrdPtr<LinkedList<T>> list;
+    SharedPtr<LinkedList<T>> list;
 
 public:
     MutableListSequence(const T* items, int size): list(new LinkedList<T>(items, size)) {}
@@ -78,44 +77,17 @@ public:
         list->insertAt(item, index);
     }
 
-    // MutableListSequence<T>* getSubsequence(int startIndex, int endIndex) const override {
-    //     if (startIndex > endIndex || startIndex < 0 || endIndex >= this->getLength()) throw IndexOutOfRange();
-    //     return new MutableListSequence<T>(*this->list->getSubsequence(startIndex, endIndex));
-    // }
-
     MutableListSequence<T>* getSubsequence(int startIndex, int endIndex) const override {
         if (startIndex > endIndex || startIndex < 0 || endIndex >= this->getLength()) throw IndexOutOfRange();
         auto* subsequence = this->list->getSubsequence(startIndex, endIndex);
         return new MutableListSequence<T>(*subsequence);
     }
-    //
-    // MutableListSequence<T>* getSubSequence(int startIndex, int endIndex) const override {
-    //
-    //     // Получаем подсписок с помощью метода getSubList класса LinkedList
-    //     ShrdPtr<LinkedList<T>> sub_list = ShrdPtr<LinkedList<T>>(this->seq_list->getSubsequence(startIndex, endIndex));
-    //
-    //     // Возвращаем подсписок как MutableListSequence
-    //     return new MutableListSequence<T>(*sub_list);
-    //
-    // }
 
     MutableListSequence<T>* concat(const Sequence<T>& other) const override {
         LinkedList<T> bufList(other);
         return new MutableListSequence<T>(*list->concat(&bufList));
     }
 
-    bool operator==(const MutableSequence<T>& other) const override{
-            if (this == &other) return true;
-            if (this->getLength() == other.getLength()){
-                for (int i = 0; i < this->getLength(); ++i) {
-                    if ((*this)[i] != (other)[i]) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            return false;
-    }
 
     void print() const override{
         this->list->print();

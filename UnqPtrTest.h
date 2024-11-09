@@ -1,8 +1,5 @@
 #pragma once
-#include <cassert>
-#include <iostream>
-#include <memory>
-#include "UnqPtr.h"
+
 
 class UnqPtrTest {
 public:

@@ -3,7 +3,7 @@
 template <typename T>
 struct ControlBlock {
     T* s_ptr;           // Указатель на управляемый объект
-    int ref_count;      // Счётчик сильных ссылок (ShrdPtr)
+    int ref_count;      // Счётчик сильных ссылок (SharedPtr)
     int weak_count;     // Счётчик слабых ссылок (WeakPtr)
 
     // Конструктор для инициализации контрольного блока
@@ -20,40 +20,40 @@ template <typename T>
 class WeakPtr;  // Объявляем заранее
 
 template <typename T>
-class ShrdPtr {
+class SharedPtr {
 private:
     ControlBlock<T>* control_block;  // Указатель на контрольный блок
 
 public:
 
     // Конструктор с выделением нового объекта
-    explicit ShrdPtr(T* p = nullptr) : control_block(p ? new ControlBlock<T>(p) : nullptr) {}
+    explicit SharedPtr(T* p = nullptr) : control_block(p ? new ControlBlock<T>(p) : nullptr) {}
 
     // Копирующий конструктор
-    ShrdPtr(const ShrdPtr& other) : control_block(other.control_block) {
+    SharedPtr(const SharedPtr& other) : control_block(other.control_block) {
         if (control_block) {
             ++(control_block->ref_count);
         }
     }
 
     // Перемещающий конструктор
-    ShrdPtr(ShrdPtr&& other) noexcept : control_block(other.control_block) {
+    SharedPtr(SharedPtr&& other) noexcept : control_block(other.control_block) {
         other.control_block = nullptr;
     }
 
-    ShrdPtr(const WeakPtr<T>& weak) : control_block(weak.control_block) {
+    SharedPtr(const WeakPtr<T>& weak) : control_block(weak.control_block) {
         if (control_block) {
             ++control_block->ref_count;
         }
     }
 
     // Деструктор
-    ~ShrdPtr() {
+    ~SharedPtr() {
         release();
     }
 
     // Копирующее присваивание
-    ShrdPtr& operator=(const ShrdPtr& other) {
+    SharedPtr& operator=(const SharedPtr& other) {
         if (this != &other) {
             release();
             control_block = other.control_block;
@@ -66,7 +66,7 @@ public:
     }
 
     // Перемещающее присваивание
-    ShrdPtr& operator=(ShrdPtr&& other) noexcept {
+    SharedPtr& operator=(SharedPtr&& other) noexcept {
         if (this != &other) {
             release();
             control_block = other.control_block;
@@ -94,8 +94,6 @@ public:
     T& operator*() { return *control_block->s_ptr;}
     T* operator->() { return control_block->s_ptr; }
 
-    //bool operator!() { return control_block->s_ptr == nullptr;}//???
-
 
     const T* get() const { return control_block ? control_block->s_ptr : nullptr; }
     T* get() { return control_block ? control_block->s_ptr : nullptr; }
@@ -108,7 +106,7 @@ public:
     const bool isNull() const { return control_block == nullptr || control_block->s_ptr == nullptr; }
     bool isNull() { return control_block == nullptr || control_block->s_ptr == nullptr; }
 
-    void swap(ShrdPtr& other) noexcept {
+    void swap(SharedPtr& other) noexcept {
         T* temp_ptr = control_block->s_ptr;
         control_block->s_ptr = other.control_block->s_ptr;
         other.control_block->s_ptr = temp_ptr;

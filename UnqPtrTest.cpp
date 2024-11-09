@@ -1,5 +1,8 @@
 #include "UnqPtrTest.h"
-
+#include <cassert>
+#include <iostream>
+#include <memory>
+#include "UnqPtr.h"
 
 class TestAccessClass{
 public:

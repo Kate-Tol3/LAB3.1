@@ -5,12 +5,12 @@
 #include "Sequence.h"
 #include "LinkedList.h"
 #include "DynamicArray.h"
-#include "ShrdPtr.h"
+#include "SharedPtr.h"
 
 template <typename T>
 class MutableArraySequence: public MutableSequence<T> {
 private:
-    ShrdPtr<DynamicArray<T>> array;
+    SharedPtr<DynamicArray<T>> array;
 public:
 
     MutableArraySequence(const T* array, int size): array(new DynamicArray<T>(array, size)) {}
@@ -102,18 +102,6 @@ public:
         return result;
     }
 
-    bool operator==(const MutableSequence<T>& other)const override {
-        if (this == &other) return true;
-        if (this->getLength() == other.getLength()){
-            for (int i = 0; i < this->getLength(); ++i) {
-                if ((*this)[i] != (other)[i]) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
 
     void print() const override{
         this->array->print();

@@ -131,11 +131,6 @@ void LinkedListTest::testInsertAt() {
     } catch (IndexOutOfRange& ex) {}
     catch (EmptyListException& ex) {}
 
-    // LinkedList<double> blank_list1;
-    // blank_list1.insertAt(val, 0);
-    // assert(blank_list1.getLength() == 1);
-    // assert(blank_list1.getLast() == val);
-    // assert(blank_list1.getFirst() == val);
 }
 
 void LinkedListTest::testGetSubsequence() {

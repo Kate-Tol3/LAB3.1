@@ -7,14 +7,12 @@ private:
 
 public:
 
-
     explicit UnqPtr(T* p = nullptr) : u_ptr(p) {}
 
     ~UnqPtr() {
         delete u_ptr;
     }
 
-    // Disable copy constructor and copy assignment
     UnqPtr(const UnqPtr&) = delete;
     UnqPtr& operator=(const UnqPtr&) = delete;
 
@@ -33,7 +31,7 @@ public:
         return *this;
     }
 
-    // Override raw pointer operators
+
     T& operator*() { return *u_ptr; }
     T* operator->() { return u_ptr; }
 
@@ -47,14 +45,13 @@ public:
     const T* get() const { return u_ptr; }
     T* get() {return u_ptr;}
 
-    // Release the ownership of the managed object
+
     T* release() {
         T* temp = u_ptr;
         u_ptr = nullptr;
         return temp;
     }
 
-    // Reset the pointer to a new resource
     void reset(T* other = nullptr) {
         delete u_ptr;
         u_ptr = other;

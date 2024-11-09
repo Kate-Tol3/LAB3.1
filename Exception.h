@@ -1,9 +1,5 @@
-
-#ifndef LAB2_EXCEPTIONS_H
-#define LAB2_EXCEPTIONS_H
-
+#pragma once
 #include <exception>
-#include <iostream>
 #include <string>
 
 class IndexOutOfRange: public std::exception {
@@ -33,4 +29,4 @@ public:
     }
 };
 
-#endif //LAB2_EXCEPTIONS_H
+

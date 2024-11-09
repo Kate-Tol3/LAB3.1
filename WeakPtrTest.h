@@ -1,9 +1,5 @@
 #pragma once
-#include <cassert>
-#include <iostream>
-#include <memory>
-#include "WeakPtr.h"
-#include "ShrdPtr.h"
+
 
 class WeakPtrTest {
 public:

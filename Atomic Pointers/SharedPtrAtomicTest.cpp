@@ -1,5 +1,12 @@
 
-#include "ShrdPtrAtomicTest.h"
+#include "SharedPtrAtomicTest.h"
+#include <atomic>
+#include <cassert>
+#include <iostream>
+#include <thread>
+#include <vector>
+#include "SharedPtrAtomic.h"
+#include "WeakPtrAtomic.h"
 
 class TestAccessClass{
 public:
@@ -8,62 +15,62 @@ public:
     }
 };
 
-void ShrdPtrAtomicTest::testConstructors() {
+void SharedPtrAtomicTest::testConstructors() {
     int a = 500;
-    ShrdPtrAtomic<int> p1;
+    SharedPtrAtomic<int> p1;
     assert(p1.get() == nullptr);//empty
 
-    ShrdPtrAtomic<int> p2(new int (a));
+    SharedPtrAtomic<int> p2(new int (a));
     assert(*p2.get() == a);//from ptr
 
-    ShrdPtrAtomic<int> p3(p2);
+    SharedPtrAtomic<int> p3(p2);
     assert(p3.get() == p2.get());;
     assert(*p3.get()==a && *p2.get() == a); // copy
 
-    ShrdPtrAtomic<int> p4(std::move(p2));
+    SharedPtrAtomic<int> p4(std::move(p2));
     assert(p2.isNull() && *p4.get() == a);//move
 
     WeakPtrAtomic<int> w_p (new int (a));//from weak
-    ShrdPtrAtomic<int> p5 (w_p);
+    SharedPtrAtomic<int> p5 (w_p);
     assert(p5.get() == w_p.get());
 
 }
 
-void ShrdPtrAtomicTest::testOperators() {
+void SharedPtrAtomicTest::testOperators() {
     //*
     int a = 5;
-    ShrdPtrAtomic<int> p1(new int(a));
+    SharedPtrAtomic<int> p1(new int(a));
     assert(*p1.get() == *p1);
     assert(*p1.get() == a);
 
     //->
-    ShrdPtrAtomic<TestAccessClass> p2(new TestAccessClass());
+    SharedPtrAtomic<TestAccessClass> p2(new TestAccessClass());
     assert(p2 -> check());
 
 }
 
-void ShrdPtrAtomicTest::testGet() {
+void SharedPtrAtomicTest::testGet() {
     int a = 5;
-    ShrdPtrAtomic<int> p1(new int(a));
+    SharedPtrAtomic<int> p1(new int(a));
     assert(*p1.get() == a);
 }
 
-void ShrdPtrAtomicTest::testIsNull() {
-    ShrdPtrAtomic<int> p1;
+void SharedPtrAtomicTest::testIsNull() {
+    SharedPtrAtomic<int> p1;
     assert(p1.isNull());
 }
 
-void ShrdPtrAtomicTest::testUseCount() {
+void SharedPtrAtomicTest::testUseCount() {
     int a = 5;
-    ShrdPtrAtomic<int> p1(new int(a));
+    SharedPtrAtomic<int> p1(new int(a));
     assert(p1.useCount() == 1);
-    ShrdPtrAtomic<int> p2(p1);
+    SharedPtrAtomic<int> p2(p1);
     assert(p1.useCount() == 2 && p2.useCount() == 2);
 }
 
-void ShrdPtrAtomicTest::testRelease() {
+void SharedPtrAtomicTest::testRelease() {
     int a = 5;
-    ShrdPtrAtomic<int> p1(new int(a));
+    SharedPtrAtomic<int> p1(new int(a));
     WeakPtrAtomic<int> p2(p1);
     assert(p1.useCount() == 1 && p2.useCount() == 1);
     p1.release();
@@ -73,10 +80,10 @@ void ShrdPtrAtomicTest::testRelease() {
     assert(p1.useCount() == 0 && p2.useCount() == 0);
 }
 
-void ShrdPtrAtomicTest::testCopyOperator() {
+void SharedPtrAtomicTest::testCopyOperator() {
     int a = 5;
-    ShrdPtrAtomic<int> p1(new int(a));
-    ShrdPtrAtomic<int> p2(new int());
+    SharedPtrAtomic<int> p1(new int(a));
+    SharedPtrAtomic<int> p2(new int());
     assert(p2.get() != p1.get());
     assert(p1.useCount() == 1 && p2.useCount() == 1);
     p2 = p1;
@@ -84,10 +91,10 @@ void ShrdPtrAtomicTest::testCopyOperator() {
     assert(p1.useCount() == p2.useCount() && p2.useCount() == 2);
 }
 
-void ShrdPtrAtomicTest::testMoveOperator() {
+void SharedPtrAtomicTest::testMoveOperator() {
     int a = 5;
-    ShrdPtrAtomic<int> p1(new int(a));
-    ShrdPtrAtomic<int> p2(new int());
+    SharedPtrAtomic<int> p1(new int(a));
+    SharedPtrAtomic<int> p2(new int());
     assert(p2.get() != p1.get());
     assert(p1.useCount() == 1 && p2.useCount() == 1);
     p2 = std::move(p1);
@@ -95,13 +102,13 @@ void ShrdPtrAtomicTest::testMoveOperator() {
     assert(p1.useCount() == 0 && p2.useCount() == 1);
 }
 
-void ShrdPtrAtomicTest::testSwap() {
+void SharedPtrAtomicTest::testSwap() {
     int a = 15, b = 500;
-    ShrdPtrAtomic<int> p1(new int(a));//кошечка
-    ShrdPtrAtomic<int> p2(new int(b));//собачка
-    ShrdPtrAtomic<int> p3(p2);
-    ShrdPtrAtomic<int> p4(p3);
-    ShrdPtrAtomic<int> p5(p1);
+    SharedPtrAtomic<int> p1(new int(a));
+    SharedPtrAtomic<int> p2(new int(b));
+    SharedPtrAtomic<int> p3(p2);
+    SharedPtrAtomic<int> p4(p3);
+    SharedPtrAtomic<int> p5(p1);
     assert(*p1.get() == a);
     assert(*p2.get() == b);
     assert(*p3.get() == b);
@@ -117,10 +124,10 @@ void ShrdPtrAtomicTest::testSwap() {
     assert((p1.useCount() == 2) && (p2.useCount() == 3) && (p3.useCount() == 3) && (p4.useCount() == 3) && (p5.useCount() == 2));
 }
 
-void ShrdPtrAtomicTest::testUnique() {
+void SharedPtrAtomicTest::testUnique() {
     int a = 15;
-    ShrdPtrAtomic<int> p1(new int(a));
-    ShrdPtrAtomic<int> p2(new int());
+    SharedPtrAtomic<int> p1(new int(a));
+    SharedPtrAtomic<int> p2(new int());
     assert(p1.unique());
     p2 = p1;
     assert(!p1.unique());
@@ -130,12 +137,12 @@ void ShrdPtrAtomicTest::testUnique() {
 }
 
 //тесты для Atomic
-void ShrdPtrAtomicTest::testThreading() {
-    ShrdPtrAtomic<int> sp(new int(100));
+void SharedPtrAtomicTest::testThreading() {
+    SharedPtrAtomic<int> sp(new int(100));
 
     auto thread_func = [&sp]() {
         // В каждом потоке копируем указатель
-        ShrdPtrAtomic<int> temp = sp;
+        SharedPtrAtomic<int> temp = sp;
         assert(*temp == 100);
     };
 
@@ -154,11 +161,11 @@ void ShrdPtrAtomicTest::testThreading() {
     assert(sp.useCount() == 1);
 }
 
-void ShrdPtrAtomicTest::testAssignmentTreading() {
-    ShrdPtrAtomic<int> sp1(new int(200));
+void SharedPtrAtomicTest::testAssignmentTreading() {
+    SharedPtrAtomic<int> sp1(new int(200));
 
     auto thread_func = [&sp1]() {
-        ShrdPtrAtomic<int> sp2;
+        SharedPtrAtomic<int> sp2;
         sp2 = sp1;
         assert(*sp2 == 200);
     };
@@ -178,7 +185,7 @@ void ShrdPtrAtomicTest::testAssignmentTreading() {
     assert(sp1.useCount() == 1);
 }
 
-void ShrdPtrAtomicTest::test() {
+void SharedPtrAtomicTest::test() {
     testThreading();
     testAssignmentTreading();
     testConstructors();
@@ -192,5 +199,5 @@ void ShrdPtrAtomicTest::test() {
     testIsNull();
     testUseCount();
     testRelease();
-    std::cout << "All ShrdPtrAtomic tests passed!" << std::endl;
+    std::cout << "All SharedPtrAtomic tests passed!" << std::endl;
 }

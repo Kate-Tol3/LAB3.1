@@ -2,13 +2,19 @@
 #include "LinkedListTest.h"
 #include "MutableListSequence.h"
 #include "MutableArraySequence.h"
+#include "SharedPtrTest.h"
+#include "UnqPtrTest.h"
+#include "WeakPtrTest.h"
+#include "Atomic Pointers/SharedPtrAtomicTest.h"
+#include "Atomic Pointers/WeakPtrAtomicTest.h"
+#include "MutableSequenceTest.h"
 
 
 void Test::testAll() {
     testUnqPtr();
-    testShrdPtr();
+    testSharedPtr();
     testWeakPtr();
-    testShrdPtrAtomic();
+    testSharedPtrAtomic();
     testWeakPtrAtomic();
     testLinkedList();
     testMutableSequence();
@@ -19,9 +25,9 @@ void Test::testUnqPtr() {
     u_ptr.test();
 }
 
-void Test::testShrdPtr() {
-    ShrdPtrTest shrd_ptr;
-    shrd_ptr.test();
+void Test::testSharedPtr() {
+    SharedPtrTest Shared_ptr;
+    Shared_ptr.test();
 }
 
 void Test::testWeakPtr() {
@@ -29,9 +35,9 @@ void Test::testWeakPtr() {
     weak_ptr.test();
 }
 
-void Test::testShrdPtrAtomic() {
-    ShrdPtrAtomicTest shrd_ptr_atom;
-    shrd_ptr_atom.test();
+void Test::testSharedPtrAtomic() {
+    SharedPtrAtomicTest Shared_ptr_atom;
+    Shared_ptr_atom.test();
 }
 
 void Test::testWeakPtrAtomic() {
@@ -43,6 +49,11 @@ void Test::testLinkedList() {
     LinkedListTest ll_t;
     ll_t.test();
 }
+
+void Test::testDynamicArray() {
+
+}
+
 
 void Test::testMutableSequence() {
     std::cout << "\ntesting MutableListSequence..." << std::endl;

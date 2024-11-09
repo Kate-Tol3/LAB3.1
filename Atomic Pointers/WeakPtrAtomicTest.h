@@ -1,13 +1,5 @@
 #pragma once
 
-
-#include <iostream>
-#include <thread>
-#include <vector>
-#include <cassert>
-#include "ShrdPtrAtomic.h"
-#include "WeakPtrAtomic.h"
-
 class WeakPtrAtomicTest {
 public:
     void testConstructors();

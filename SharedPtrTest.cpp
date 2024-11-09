@@ -1,4 +1,9 @@
-#include "ShrdPtrTest.h"
+#include "SharedPtrTest.h"
+#include <cassert>
+#include <iostream>
+#include <memory>
+#include "SharedPtr.h"
+#include "WeakPtr.h"
 
 class TestAccessClass{
 public:
@@ -7,63 +12,63 @@ public:
     }
 };
 
-void ShrdPtrTest::testConstructors() {
+void SharedPtrTest::testConstructors() {
     int a = 500;
-    ShrdPtr<int> p1;
+    SharedPtr<int> p1;
     assert(p1.get() == nullptr);//empty
 
-    ShrdPtr<int> p2(new int (a));
+    SharedPtr<int> p2(new int (a));
     assert(*p2.get() == a);//from ptr
 
-    ShrdPtr<int> p3(p2);
+    SharedPtr<int> p3(p2);
     assert(p3.get() == p2.get());;
     assert(*p3.get()==a && *p2.get() == a); // copy
 
-    ShrdPtr<int> p4(std::move(p2));
+    SharedPtr<int> p4(std::move(p2));
     assert(p2.isNull() && *p4.get() == a);//move
 
-    ShrdPtr<int> p6(new int (a));
+    SharedPtr<int> p6(new int (a));
     WeakPtr<int> w_p(p6);//from weak
-    ShrdPtr<int> p5 (w_p);
+    SharedPtr<int> p5 (w_p);
     assert(p5.get() == w_p.get());
 
 }
 
-void ShrdPtrTest::testOperators() {
+void SharedPtrTest::testOperators() {
     //*
     int a = 5;
-    ShrdPtr<int> p1(new int(a));
+    SharedPtr<int> p1(new int(a));
     assert(*p1.get() == *p1);
     assert(*p1.get() == a);
 
     //->
-    ShrdPtr<TestAccessClass> p2(new TestAccessClass());
+    SharedPtr<TestAccessClass> p2(new TestAccessClass());
     assert(p2 -> check());
 
 }
 
-void ShrdPtrTest::testGet() {
+void SharedPtrTest::testGet() {
     int a = 5;
-    ShrdPtr<int> p1(new int(a));
+    SharedPtr<int> p1(new int(a));
     assert(*p1.get() == a);
 }
 
-void ShrdPtrTest::testIsNull() {
-    ShrdPtr<int> p1;
+void SharedPtrTest::testIsNull() {
+    SharedPtr<int> p1;
     assert(p1.isNull());
 }
 
-void ShrdPtrTest::testUseCount() {
+void SharedPtrTest::testUseCount() {
     int a = 5;
-    ShrdPtr<int> p1(new int(a));
+    SharedPtr<int> p1(new int(a));
     assert(p1.useCount() == 1);
-    ShrdPtr<int> p2(p1);
+    SharedPtr<int> p2(p1);
     assert(p1.useCount() == 2 && p2.useCount() == 2);
 }
 
-void ShrdPtrTest::testRelease() {
+void SharedPtrTest::testRelease() {
     int a = 5;
-    ShrdPtr<int> p1(new int(a));
+    SharedPtr<int> p1(new int(a));
     WeakPtr<int> p2(p1);
     assert(p1.useCount() == 1 && p2.useCount() == 1);
     p1.release();
@@ -73,10 +78,10 @@ void ShrdPtrTest::testRelease() {
     assert(p1.useCount() == 0 && p2.useCount() == 0);
 }
 
-void ShrdPtrTest::testCopyOperator() {
+void SharedPtrTest::testCopyOperator() {
     int a = 5;
-    ShrdPtr<int> p1(new int(a));
-    ShrdPtr<int> p2(new int());
+    SharedPtr<int> p1(new int(a));
+    SharedPtr<int> p2(new int());
     assert(p2.get() != p1.get());
     assert(p1.useCount() == 1 && p2.useCount() == 1);
     p2 = p1;
@@ -84,10 +89,10 @@ void ShrdPtrTest::testCopyOperator() {
     assert(p1.useCount() == p2.useCount() && p2.useCount() == 2);
 }
 
-void ShrdPtrTest::testMoveOperator() {
+void SharedPtrTest::testMoveOperator() {
     int a = 5;
-    ShrdPtr<int> p1(new int(a));
-    ShrdPtr<int> p2(new int());
+    SharedPtr<int> p1(new int(a));
+    SharedPtr<int> p2(new int());
     assert(p2.get() != p1.get());
     assert(p1.useCount() == 1 && p2.useCount() == 1);
     p2 = std::move(p1);
@@ -95,13 +100,13 @@ void ShrdPtrTest::testMoveOperator() {
     assert(p1.useCount() == 0 && p2.useCount() == 1);
 }
 
-void ShrdPtrTest::testSwap() {
+void SharedPtrTest::testSwap() {
     int a = 15, b = 500;
-    ShrdPtr<int> p1(new int(a));
-    ShrdPtr<int> p2(new int(b));
-    ShrdPtr<int> p3(p2);
-    ShrdPtr<int> p4(p3);
-    ShrdPtr<int> p5(p1);
+    SharedPtr<int> p1(new int(a));
+    SharedPtr<int> p2(new int(b));
+    SharedPtr<int> p3(p2);
+    SharedPtr<int> p4(p3);
+    SharedPtr<int> p5(p1);
     assert(*p1.get() == a);
     assert(*p2.get() == b);
     assert(*p3.get() == b);
@@ -117,10 +122,10 @@ void ShrdPtrTest::testSwap() {
     assert((p1.useCount() == 2) && (p2.useCount() == 3) && (p3.useCount() == 3) && (p4.useCount() == 3) && (p5.useCount() == 2));
 }
 
-void ShrdPtrTest::testUnique() {
+void SharedPtrTest::testUnique() {
     int a = 15;
-    ShrdPtr<int> p1(new int(a));
-    ShrdPtr<int> p2(new int());
+    SharedPtr<int> p1(new int(a));
+    SharedPtr<int> p2(new int());
     assert(p1.unique());
     p2 = p1;
     assert(!p1.unique());
@@ -129,7 +134,7 @@ void ShrdPtrTest::testUnique() {
     assert(p1.unique());
 }
 
-void ShrdPtrTest::test() {
+void SharedPtrTest::test() {
     testConstructors();
     testOperators();
     testGet();
@@ -140,7 +145,7 @@ void ShrdPtrTest::test() {
     testMoveOperator();
     testSwap();
     testUnique();
-    std::cout << "All ShrdPtr tests passed!" << std::endl;
+    std::cout << "All SharedPtr tests passed!" << std::endl;
 }
 
 

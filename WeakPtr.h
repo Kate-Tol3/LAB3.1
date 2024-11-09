@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ShrdPtr.h"
+#include "SharedPtr.h"
 
 template <typename T>
 class WeakPtr {
@@ -9,16 +9,11 @@ private:
 
 public:
 
-    // Конструктор с выделением нового объекта
-    // explicit WeakPtr(T* p = nullptr) : control_block(p ? new ControlBlock<T>(p) : nullptr) {
-    //     if (control_block) {
-    //         ++(control_block->weak_count);
-    //     }
-    // }
+
     WeakPtr() : control_block(){}
 
-    // Конструктор из ShrdPtr
-    WeakPtr(const ShrdPtr<T>& shrd_ptr) : control_block(shrd_ptr.control_block) {
+    // Конструктор из SharedPtr
+    WeakPtr(const SharedPtr<T>& Shared_ptr) : control_block(Shared_ptr.control_block) {
         if (control_block) {
             ++(control_block->weak_count);
         }
@@ -76,26 +71,26 @@ public:
 
     // Проверка, доступен ли объект
     const bool expired() const {
-        return !control_block || control_block->weak_count == 0; // ref_count ??
+        return !control_block || control_block->weak_count == 0;
     }
 
     bool expired() {
-        return !control_block || control_block->weak_count == 0; // ref_count ??
+        return !control_block || control_block->weak_count == 0;
     }
 
-    // Преобразование в ShrdPtr
-    ShrdPtr<T> lock() {
+    // Преобразование в SharedPtr
+    SharedPtr<T> lock() {
         if (!expired()) {
-            return ShrdPtr<T>(*this);  // Создаём ShrdPtr, если объект ещё существует
+            return SharedPtr<T>(*this);
         }
-        return ShrdPtr<T>(nullptr);  // Возвращаем пустой ShrdPtr, если объект уже удалён
+        return SharedPtr<T>(nullptr);
     }
 
-    const ShrdPtr<T> lock() const {
+    const SharedPtr<T> lock() const {
         if (!expired()) {
-            return ShrdPtr<T>(*this);  // Создаём ShrdPtr, если объект ещё существует
+            return SharedPtr<T>(*this);
         }
-        return ShrdPtr<T>(nullptr);  // Возвращаем пустой ShrdPtr, если объект уже удалён
+        return SharedPtr<T>(nullptr);
     }
 
     void swap(WeakPtr& other) noexcept {
@@ -107,12 +102,9 @@ public:
     const int useCount() const { return control_block ? control_block->weak_count : 0; }
     int useCount()  { return control_block ? control_block->weak_count : 0; }
 
-    // Проверка, является ли указатель нулевым
     const bool isNull() const { return !control_block  || control_block->s_ptr == nullptr; }
     bool isNull() { return !control_block  || control_block->s_ptr == nullptr; }
 
-
-    // // Доступ к объекту
     const T& operator*() const { return *control_block->s_ptr;}
     const T* operator->() const { return control_block->s_ptr; }
     const T* get() const { return control_block ? control_block->s_ptr : nullptr; }
@@ -121,7 +113,6 @@ public:
     T* operator->() { return control_block->s_ptr; }
     T* get() { return control_block ? control_block->s_ptr : nullptr; }
 
-    // Проверка на единственность
     const bool unique() const {
         return control_block && control_block->weak_count == 1;
     }
@@ -129,6 +120,6 @@ public:
         return control_block && control_block->weak_count == 1;
     }
 
-    friend class ShrdPtr<T>;
+    friend class SharedPtr<T>;
 
 };

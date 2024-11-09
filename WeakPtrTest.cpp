@@ -1,5 +1,10 @@
 
 #include "WeakPtrTest.h"
+#include <cassert>
+#include <iostream>
+#include <memory>
+#include "WeakPtr.h"
+#include "SharedPtr.h"
 
 class TestAccessClass{
 public:
@@ -14,8 +19,8 @@ void WeakPtrTest::testConstructors() {
     assert(p1.get() == nullptr);//empty
 
 
-    ShrdPtr<int> shrd_p2(new int (a));
-    WeakPtr<int> p2(shrd_p2);
+    SharedPtr<int> Shared_p2(new int (a));
+    WeakPtr<int> p2(Shared_p2);
     assert(*p2.get() == a);//from ptr
 
     WeakPtr<int> p3(p2);
@@ -25,7 +30,7 @@ void WeakPtrTest::testConstructors() {
     WeakPtr<int> p4(std::move(p2));
     assert(p2.isNull() && *p4.get() == a);//move
 
-    ShrdPtr<int> s_p (new int (a));
+    SharedPtr<int> s_p (new int (a));
     WeakPtr<int> p5 (s_p);
     assert(p5.get() == s_p.get());
 }
@@ -33,20 +38,20 @@ void WeakPtrTest::testConstructors() {
 void WeakPtrTest::testOperators() {
     //*
     int a = 5;
-    ShrdPtr<int> shrd_p1(new int(a));
-    WeakPtr<int> p1(shrd_p1);
+    SharedPtr<int> Shared_p1(new int(a));
+    WeakPtr<int> p1(Shared_p1);
     assert(*p1.get() == *p1);
     assert(*p1.get() == a);
 
     //->
-    ShrdPtr<TestAccessClass> shrd_p2(new TestAccessClass());
-    WeakPtr<TestAccessClass> p2(shrd_p2);
+    SharedPtr<TestAccessClass> Shared_p2(new TestAccessClass());
+    WeakPtr<TestAccessClass> p2(Shared_p2);
     assert(p2 -> check());
 }
 
 void WeakPtrTest::testRelease() {
     int a = 5;
-    ShrdPtr<int> p1(new int(a));
+    SharedPtr<int> p1(new int(a));
     WeakPtr<int> p2(p1);
     assert(p1.useCount() == 1 && p2.useCount() == 1);
     p1.release();
@@ -58,10 +63,10 @@ void WeakPtrTest::testRelease() {
 
 void WeakPtrTest::testSwap() {
     int a = 15, b = 500;
-    ShrdPtr<int> shrd_p1(new int(a));
-    ShrdPtr<int> shrd_p2(new int(b));
-    WeakPtr<int> p1(shrd_p1);
-    WeakPtr<int> p2(shrd_p2);
+    SharedPtr<int> Shared_p1(new int(a));
+    SharedPtr<int> Shared_p2(new int(b));
+    WeakPtr<int> p1(Shared_p1);
+    WeakPtr<int> p2(Shared_p2);
     WeakPtr<int> p3(p2);
     WeakPtr<int> p4(p3);
     WeakPtr<int> p5(p1);
@@ -82,10 +87,10 @@ void WeakPtrTest::testSwap() {
 
 void WeakPtrTest::testCopyAssignment() {
     int a = 5;
-    ShrdPtr<int> shrd_p1(new int(a));
-    ShrdPtr<int> shrd_p2(new int());
-    WeakPtr<int> p1(shrd_p1);
-    WeakPtr<int> p2(shrd_p2);
+    SharedPtr<int> Shared_p1(new int(a));
+    SharedPtr<int> Shared_p2(new int());
+    WeakPtr<int> p1(Shared_p1);
+    WeakPtr<int> p2(Shared_p2);
     assert(p2.get() != p1.get());
     assert(p1.useCount() == 1 && p2.useCount() == 1);
     p2 = p1;
@@ -95,10 +100,10 @@ void WeakPtrTest::testCopyAssignment() {
 
 void WeakPtrTest::testMoveAssignment() {
     int a = 5;
-    ShrdPtr<int> shrd_p1(new int(a));
-    ShrdPtr<int> shrd_p2(new int());
-    WeakPtr<int> p1(shrd_p1);
-    WeakPtr<int> p2(shrd_p2);
+    SharedPtr<int> Shared_p1(new int(a));
+    SharedPtr<int> Shared_p2(new int());
+    WeakPtr<int> p1(Shared_p1);
+    WeakPtr<int> p2(Shared_p2);
     assert(p2.get() != p1.get());
     assert(p1.useCount() == 1 && p2.useCount() == 1);
     p2 = std::move(p1);
@@ -107,14 +112,14 @@ void WeakPtrTest::testMoveAssignment() {
 }
 
 void WeakPtrTest::testIsNull() {
-    ShrdPtr<int> shrd_p1;
-    WeakPtr<int> p1(shrd_p1);
+    SharedPtr<int> Shared_p1;
+    WeakPtr<int> p1(Shared_p1);
     assert(p1.isNull());
 }
 
 void WeakPtrTest::testUseCount() {
     int a = 5;
-    ShrdPtr<int> p1(new int(a));
+    SharedPtr<int> p1(new int(a));
     WeakPtr<int> p2(p1);
     assert(p2.useCount() == 1 && p1.useCount() == 1);
     WeakPtr<int> p3(p1);
@@ -123,17 +128,17 @@ void WeakPtrTest::testUseCount() {
 
 void WeakPtrTest::testGet() {
     int a = 5;
-    ShrdPtr<int> shrd_p1(new int(a));
-    WeakPtr<int> p1(shrd_p1);
+    SharedPtr<int> Shared_p1(new int(a));
+    WeakPtr<int> p1(Shared_p1);
     assert(*p1.get() == a);
 }
 
 void WeakPtrTest::testUnique() {
     int a = 15;
-    ShrdPtr<int> shrd_p1(new int(a));
-    ShrdPtr<int> shrd_p2(new int());
-    WeakPtr<int> p1(shrd_p1);
-    WeakPtr<int> p2(shrd_p2);
+    SharedPtr<int> Shared_p1(new int(a));
+    SharedPtr<int> Shared_p2(new int());
+    WeakPtr<int> p1(Shared_p1);
+    WeakPtr<int> p2(Shared_p2);
     assert(p1.unique());
     p2 = p1;
     assert(!p1.unique());
@@ -144,7 +149,7 @@ void WeakPtrTest::testUnique() {
 
 void WeakPtrTest::testExpired() {
     int a = 40;
-    ShrdPtr<int> p1(new int(a));
+    SharedPtr<int> p1(new int(a));
     WeakPtr<int> p2(p1);
     assert(!p2.expired());
     p2.release();
@@ -153,10 +158,10 @@ void WeakPtrTest::testExpired() {
 
 void WeakPtrTest::testLock() {
     int a = 100;
-    ShrdPtr<int> p1(new int(a));
+    SharedPtr<int> p1(new int(a));
     WeakPtr<int> p2(p1);
-    ShrdPtr<int> p3;
-    ShrdPtr<int> p4;
+    SharedPtr<int> p3;
+    SharedPtr<int> p4;
     p3 = p2.lock();
     assert(p3.get() == p1.get());
     assert(p3.useCount() == 2);

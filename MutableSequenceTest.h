@@ -195,7 +195,7 @@ public:
         double elems3[9] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0};
         MutableSequence<double> mut_seq2(elems2, 3);
         MutableSequence<double> mut_seq1(elems1, 6);
-        ShrdPtr<Sequence<double>> result(mut_seq1.concat(mut_seq2));
+        SharedPtr<Sequence<double>> result(mut_seq1.concat(mut_seq2));
         assert(result->getLength() == 9);
         for (int i =0; i < 9; i++){
             assert(result->get(i) == elems3[i]);
@@ -206,13 +206,6 @@ public:
         double elems[6] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0};
         MutableSequence<double> mut_seq2(elems, 6);
         assert(mut_seq2[2] == mut_seq2.get(2));
-    }
-
-    void testOperatorEqual() {
-        double elems[6] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0};
-        MutableSequence<double> mut_seq1(elems, 6);
-        MutableSequence<double> mut_seq2(elems, 6);
-        assert(mut_seq1 == mut_seq2);
     }
 
     void test() {
@@ -227,7 +220,6 @@ public:
         testGetFirst();
         testGetLast();
         testOperatorAccess();
-        testOperatorEqual();
 
         std:: cout << "All MutableSequence tests passsed!" <<  std:: endl;
     }

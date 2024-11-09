@@ -1,11 +1,5 @@
-//
-// Created by Kate on 30.09.2024.
-//
-
 #ifndef LINKEDLISTTEST_H
 #define LINKEDLISTTEST_H
-
-#include <cassert>
 
 class LinkedListTest {
 public:

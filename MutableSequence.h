@@ -16,7 +16,6 @@ public:
     virtual void prepend(const T& item) = 0;
     virtual void insertAt(const T& item, int index) = 0;
     virtual void set(int index,const T& item) = 0;
-    virtual bool operator==(const MutableSequence<T>& other) const = 0;
 
 };
 

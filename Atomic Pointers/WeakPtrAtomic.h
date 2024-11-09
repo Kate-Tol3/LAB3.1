@@ -1,5 +1,5 @@
 #pragma once
-#include "ShrdPtrAtomic.h"
+#include "SharedPtrAtomic.h"
 
 template <typename T>
 class WeakPtrAtomic {
@@ -16,8 +16,8 @@ public:
 
     }
 
-    // Конструктор из ShrdPtrAtomic
-    WeakPtrAtomic(const ShrdPtrAtomic<T>& shrd_ptr) : control_block(shrd_ptr.control_block) {
+    // Конструктор из SharedPtrAtomic
+    WeakPtrAtomic(const SharedPtrAtomic<T>& Shared_ptr) : control_block(Shared_ptr.control_block) {
         if (control_block) {
             control_block->weak_count->fetch_add(1, std::memory_order_acq_rel);
         }
@@ -81,12 +81,12 @@ public:
         return !control_block || control_block->ref_count->load() == 0;
     }
 
-    // Преобразование в ShrdPtrAtomic
-    ShrdPtrAtomic<T> lock() const {
+    // Преобразование в SharedPtrAtomic
+    SharedPtrAtomic<T> lock() const {
         if (!expired()) {
-            return ShrdPtrAtomic<T>(*this);  // Создаём ShrdPtrAtomic, если объект ещё существует
+            return SharedPtrAtomic<T>(*this);  // Создаём SharedPtrAtomic, если объект ещё существует
         }
-        return ShrdPtrAtomic<T>(nullptr);  // Возвращаем пустой ShrdPtrAtomic, если объект уже удалён
+        return SharedPtrAtomic<T>(nullptr);  // Возвращаем пустой SharedPtrAtomic, если объект уже удалён
     }
 
     void swap(WeakPtrAtomic& other) noexcept {
@@ -111,6 +111,6 @@ public:
         return control_block && control_block->weak_count->load() == 1;
     }
 
-    friend class ShrdPtrAtomic<T>;
+    friend class SharedPtrAtomic<T>;
 
 };
