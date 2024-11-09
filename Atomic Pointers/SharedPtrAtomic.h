@@ -3,14 +3,12 @@
 
 template <typename T>
 struct ControlBlockAtomic {
-    T* s_ptr;           // Указатель на управляемый объект
-    std::atomic<unsigned long>* ref_count;      // Счётчик сильных ссылок (SharedPtrAtomic)
-    std::atomic<unsigned long>* weak_count;     // Счётчик слабых ссылок (WeakPtr)
+    T* s_ptr;
+    std::atomic<unsigned long>* ref_count;      // Счётчик сильных ссылок
+    std::atomic<unsigned long>* weak_count;     // Счётчик слабых ссылок
 
-    // Конструктор для инициализации контрольного блока
     explicit ControlBlockAtomic(T* ptr = nullptr) : s_ptr(ptr), ref_count(new std::atomic<unsigned long>(1)), weak_count(new std::atomic<unsigned long>(0)) {}
 
-    // Уничтожение объекта, но не самого контрольного блока
     void deleteObject() {
         delete s_ptr;
         s_ptr = nullptr;
@@ -20,7 +18,7 @@ struct ControlBlockAtomic {
 };
 
 template <typename T>
-class WeakPtrAtomic;  // Объявляем заранее
+class WeakPtrAtomic;
 
 template <typename T>
 class SharedPtrAtomic {

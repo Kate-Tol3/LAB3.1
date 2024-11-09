@@ -17,16 +17,15 @@ struct ControlBlock {
 };
 
 template <typename T>
-class WeakPtr;  // Объявляем заранее
+class WeakPtr;
 
 template <typename T>
 class SharedPtr {
 private:
-    ControlBlock<T>* control_block;  // Указатель на контрольный блок
+    ControlBlock<T>* control_block;
 
 public:
 
-    // Конструктор с выделением нового объекта
     explicit SharedPtr(T* p = nullptr) : control_block(p ? new ControlBlock<T>(p) : nullptr) {}
 
     // Копирующий конструктор
@@ -98,11 +97,9 @@ public:
     const T* get() const { return control_block ? control_block->s_ptr : nullptr; }
     T* get() { return control_block ? control_block->s_ptr : nullptr; }
 
-    // Проверка количества сильных ссылок
     const int useCount() const { return control_block ? control_block->ref_count : 0; }
     int useCount() { return control_block ? control_block->ref_count : 0; }
 
-    // Проверка, является ли указатель нулевым
     const bool isNull() const { return control_block == nullptr || control_block->s_ptr == nullptr; }
     bool isNull() { return control_block == nullptr || control_block->s_ptr == nullptr; }
 
@@ -113,12 +110,10 @@ public:
 
     }
 
-    // Проверка на единственность
     const bool unique() const {
         return control_block && control_block->ref_count == 1;
     }
 
-    //Доступ к weak_ptr (дружба с WeakPtr не нужна)
     friend class WeakPtr<T>;
 
 };

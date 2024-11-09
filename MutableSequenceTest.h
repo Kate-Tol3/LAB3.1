@@ -33,7 +33,6 @@ public:
         }
         try {
             MutableSequence<double> mut_seq_(elems, -1);
-            // ;
         } catch (IndexOutOfRange &ex) {}
 
 
@@ -150,12 +149,10 @@ public:
         try {
             ins_ind = -1;
             mut_seq.insertAt(ins_ind, 10);
-            // ;
         } catch (IndexOutOfRange &ex) {}
         try {
             ins_ind = 6;
             mut_seq.insertAt(ins_ind, 10);
-            // ;
         } catch (IndexOutOfRange &ex) {}
 
         MutableSequence<double> mut_seq2;

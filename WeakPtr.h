@@ -5,7 +5,7 @@
 template <typename T>
 class WeakPtr {
 private:
-    ControlBlock<T>* control_block;  // Указатель на контрольный блок
+    ControlBlock<T>* control_block;
 
 public:
 

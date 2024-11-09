@@ -13,7 +13,6 @@ public:
         if (control_block) {
             control_block->weak_count->fetch_add(1, std::memory_order_acq_rel);
         }
-
     }
 
     // Конструктор из SharedPtrAtomic
@@ -64,7 +63,6 @@ public:
         return *this;
     }
 
-    // Освобождение ресурса
     void release() {
         if (control_block) {
             if (control_block->weak_count->fetch_sub(1, std::memory_order_acq_rel) == 1) {
@@ -76,12 +74,10 @@ public:
         }
     }
 
-    // Проверка, доступен ли объект
     bool expired() const {
         return !control_block || control_block->ref_count->load() == 0;
     }
 
-    // Преобразование в SharedPtrAtomic
     SharedPtrAtomic<T> lock() const {
         if (!expired()) {
             return SharedPtrAtomic<T>(*this);  // Создаём SharedPtrAtomic, если объект ещё существует
@@ -97,16 +93,12 @@ public:
 
     size_t useCount() const { return control_block ? control_block->weak_count->load() : static_cast<size_t>(0); }
 
-    // Проверка, является ли указатель нулевым
     bool isNull() const { return control_block == nullptr || control_block->s_ptr == nullptr; }
 
-
-    // // Доступ к объекту
     T& operator*() const { return *control_block->s_ptr;}
     T* operator->() const { return control_block->s_ptr; }
     T* get() const { return control_block ? control_block->s_ptr : nullptr; }
 
-    // Проверка на единственность
     bool unique() const {
         return control_block && control_block->weak_count->load() == 1;
     }

@@ -153,7 +153,6 @@ void WeakPtrAtomicTest::testLock() {
     assert(p4.useCount() == 0);
 }
 
-// Функция для проверки валидности WeakPtr в нескольких потоках
 void WeakPtrAtomicTest::testThreading() {
     SharedPtrAtomic<int> sp(new int(100));
     WeakPtrAtomic<int> wp = sp;
@@ -178,7 +177,6 @@ void WeakPtrAtomicTest::testThreading() {
 
 }
 
-// Функция для тестирования уничтожения объекта, на который указывает WeakPtr
 void WeakPtrAtomicTest::testExpiration() {
     WeakPtrAtomic<int> wp;
 
@@ -188,7 +186,7 @@ void WeakPtrAtomicTest::testExpiration() {
         assert(!wp.expired());
 
         SharedPtrAtomic<int> sp_from_wp = wp.lock();
-        assert(sp_from_wp.get());               // Указатель должен быть валидным
+        assert(sp_from_wp.get());
         assert(*sp_from_wp == 200);
     }
 
