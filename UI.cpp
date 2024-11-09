@@ -53,7 +53,7 @@ public:
             }
         } while (command != "finish");
         
-        std::cout << "The finish of program.\n";
+        std::cout << "The end of the program.\n";
     }
 };
 

@@ -3,101 +3,78 @@
 #include <memory>
 #include <vector>
 #include <chrono>
+#include <iomanip>
 #include "SharedPtr.h"
 #include "UnqPtr.h"
 #include "WeakPtr.h"
 
 class LoadTest {
 public:
-    // Макрос для измерения времени выполнения
-#define MEASURE_TIME(operation, result) {                               \
-    auto start = std::chrono::high_resolution_clock::now();             \
-    operation;                                                          \
-    auto end = std::chrono::high_resolution_clock::now();               \
-    result = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();  \
-}
-
-// Тесты для стандартных указателей
-void test_std_shared(int n) {
-    std::vector<std::shared_ptr<int>> vec;
-    for (int i = 0; i < n; ++i) {
-        vec.push_back(std::make_shared<int>(i));
+    // Функция для измерения времени выполнения
+    template <typename Func>
+    static long long measureTime(Func func) {
+        auto start = std::chrono::high_resolution_clock::now();
+        func();
+        auto end = std::chrono::high_resolution_clock::now();
+        return std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
     }
-}
 
-void test_std_unique(int n) {
-    std::vector<std::unique_ptr<int>> vec;
-    for (int i = 0; i < n; ++i) {
-        vec.push_back(std::unique_ptr<int>(new int(i)));
+    template <typename PtrType>
+    void testPointer(int n) {
+        std::vector<PtrType> vec;
+        for (int i = 0; i < n; ++i) {
+            vec.push_back(PtrType(new int(i)));
+        }
     }
-}
 
-void test_std_weak(int n) {
-    std::vector<std::weak_ptr<int>> vec;
-    for (int i = 0; i < n; ++i) {
-        std::shared_ptr<int> sptr = std::make_shared<int>(i);
-        vec.push_back(std::weak_ptr<int>(sptr));
+    void show_results() {
+        std::vector<int> sizes = {10, 100, 1000, 10000, 100000, 1000000};
+        const int width = 15;
+        const std::string separator = "+" + std::string(width * 7 + 8, '-') + "+";
+
+        // Заголовок таблицы
+        std::cout << separator << "\n";
+        std::cout << "| " << std::setw(width - 1) << "Size"
+                  << " | " << std::setw(width - 1) << "SharePtr"
+                  << " | " << std::setw(width - 1) << "std::shared_ptr"
+                  << " | " << std::setw(width - 1) << "UnqPtr"
+                  << " | " << std::setw(width - 1) << "std::unique_ptr"
+                  << " | " << std::setw(width - 1) << "WeakPtr"
+                  << " | " << std::setw(width - 1) << "std::weak_ptr" << " |\n";
+        std::cout << separator << "\n";
+
+
+        for (int n : sizes) {
+            long long time_Shared = measureTime([this, n]() { testPointer<SharedPtr<int>>(n); });
+            long long time_Shared_std = measureTime([this, n]() { testPointer<std::shared_ptr<int>>(n); });
+            long long time_unq = measureTime([this, n]() { testPointer<UnqPtr<int>>(n); });
+            long long time_unq_std = measureTime([this, n]() { testPointer<std::unique_ptr<int>>(n); });
+            long long time_weak = measureTime([this, n]() {
+                std::vector<WeakPtr<int>> vec;
+                for (int i = 0; i < n; ++i) {
+                    SharedPtr<int> sptr(new int(i));
+                    vec.push_back(WeakPtr<int>(sptr));
+                }
+            });
+            long long time_weak_std = measureTime([this, n]() {
+                std::vector<std::weak_ptr<int>> vec;
+                for (int i = 0; i < n; ++i) {
+                    std::shared_ptr<int> sptr = std::make_shared<int>(i);
+                    vec.push_back(std::weak_ptr<int>(sptr));
+                }
+            });
+
+
+            std::cout << "| " << std::setw(width - 1) << n
+                      << " | " << std::setw(width - 1) << time_Shared
+                      << " | " << std::setw(width - 1) << time_Shared_std
+                      << " | " << std::setw(width - 1) << time_unq
+                      << " | " << std::setw(width - 1) << time_unq_std
+                      << " | " << std::setw(width - 1) << time_weak
+                      << " | " << std::setw(width - 1) << time_weak_std << " |\n";
+        }
+
+        std::cout << separator << "\n";
+        std::cout << "All load tests completed!\n";
     }
-}
-
-
-void test_shared(int n) {
-    std::vector<SharedPtr<int>> vec;
-    for (int i = 0; i < n; ++i) {
-        vec.push_back(SharedPtr<int>(new int(i)));
-    }
-   // std::cout << "Test for SharedPtr with " << n << " objects completed." << std::endl;
-}
-
-void test_unique(int n) {
-    std::vector<UnqPtr<int>> vec;
-    for (int i = 0; i < n; ++i) {
-        vec.push_back(UnqPtr<int>(new int(i)));
-    }
-    //std::cout << "Test for UnqPtr with " << n << " objects completed." << std::endl;
-}
-
-void test_weak(int n) {
-    std::vector<WeakPtr<int>> vec;
-    for (int i = 0; i < n; ++i) {
-        SharedPtr<int> sptr(new int(i));
-        vec.push_back(WeakPtr<int>(sptr));
-    }
-   // std::cout << "Test for WeakPtr with " << n << " objects completed." << std::endl;
-}
-
-void show_results() {
-    // Количество объектов для тестов
-    std::vector<int> sizes = {10, 100, 1000, 10000, 100000, 1000000};
-
-    // Заголовки таблицы
-    std::cout << "Size, ShrPtr, std::shared_ptr, UnqPtr, std::unique_ptr, WeakPtr, std::weak_ptr" << std::endl;
-
-    for (int n : sizes) {
-        long long time_Shared = 0, time_Shared_std = 0;
-        long long time_unq = 0, time_unq_std = 0;
-        long long time_weak = 0, time_weak_std = 0;
-
-        // Тесты для кастомных указателей
-        MEASURE_TIME(test_shared(n), time_Shared);
-        MEASURE_TIME(test_unique(n), time_unq);
-        MEASURE_TIME(test_weak(n), time_weak);
-
-        // Тесты для стандартных указателей
-        MEASURE_TIME(test_std_shared(n), time_Shared_std);
-        MEASURE_TIME(test_std_unique(n), time_unq_std);
-        MEASURE_TIME(test_std_weak(n), time_weak_std);
-
-        // Вывод результатов
-        std::cout << n << ", " << time_Shared << ", " << time_Shared_std << ", "
-                  << time_unq << ", " << time_unq_std << ", "
-                  << time_weak << ", " << time_weak_std << std::endl;
-    }
-    std::cout << "All load tests passed!" << std::endl;
-
-}
 };
-
-
-
-
