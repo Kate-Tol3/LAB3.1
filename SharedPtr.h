@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdexcept>
+
 template <typename T>
 struct ControlBlock {
     T* s_ptr;           // Указатель на управляемый объект
@@ -87,11 +89,23 @@ public:
     }
 
     // Доступ к объекту
-    const T& operator*() const { return *control_block->s_ptr;}
-    const T* operator->() const { return control_block->s_ptr; }
+    const T& operator*() const {
+        if (expired()) throw std::out_of_range("The pointer have expired.\n");
+        return *control_block->s_ptr;
+    }
+    const T* operator->() const {
+        if (expired()) throw std::out_of_range("The pointer have expired.\n");
+        return control_block->s_ptr;
+    }
 
-    T& operator*() { return *control_block->s_ptr;}
-    T* operator->() { return control_block->s_ptr; }
+    T& operator*() {
+        if (expired()) throw std::out_of_range("The pointer have expired.\n");
+        return *control_block->s_ptr;
+    }
+    T* operator->() {
+        if (expired()) throw std::out_of_range("The pointer have expired.\n");
+        return control_block->s_ptr;
+    }
 
 
     const T* get() const { return control_block ? control_block->s_ptr : nullptr; }
@@ -108,6 +122,10 @@ public:
         control_block->s_ptr = other.control_block->s_ptr;
         other.control_block->s_ptr = temp_ptr;
 
+    }
+
+    const bool expired() const {
+        return !control_block || control_block->ref_count == 0;
     }
 
     const bool unique() const {

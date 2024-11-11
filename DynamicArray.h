@@ -4,12 +4,13 @@
 #include <stdexcept>
 #include "Sequence.h"
 #include "LinkedList.h"
+#include "UnqPtr.h"
 
 template <typename T>
 class DynamicArray {
 protected:
     int size;
-    T* array = nullptr;
+    T* array = nullptr;//T* array = nullptr;
 public:
     DynamicArray(const T* other_array, int size): size(size) {
         if (size < 0) throw IndexOutOfRange();

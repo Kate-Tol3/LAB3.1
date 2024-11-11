@@ -58,7 +58,9 @@ void WeakPtrTest::testRelease() {
     assert(p1.useCount() == 0 && p2.useCount() == 1);
     assert(p1.get() == nullptr);
     p2.release();
-    assert(p1.useCount() == 0 && p2.useCount() == 0);
+    assert(p1.expired());
+    assert(p2.expired());
+
 }
 
 void WeakPtrTest::testSwap() {

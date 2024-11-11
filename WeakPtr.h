@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SharedPtr.h"
+#include <stdexcept>
 
 template <typename T>
 class WeakPtr {
@@ -65,16 +66,13 @@ public:
         if (control_block) {
             if (--control_block->weak_count == 0 && control_block->ref_count == 0) {
                 delete control_block;  // Удаляем контрольный блок, если нет сильных и слабых ссылок
+                control_block = nullptr;
             }
         }
     }
 
     // Проверка, доступен ли объект
     const bool expired() const {
-        return !control_block || control_block->weak_count == 0;
-    }
-
-    bool expired() {
         return !control_block || control_block->weak_count == 0;
     }
 
@@ -105,13 +103,25 @@ public:
     const bool isNull() const { return !control_block  || control_block->s_ptr == nullptr; }
     bool isNull() { return !control_block  || control_block->s_ptr == nullptr; }
 
-    const T& operator*() const { return *control_block->s_ptr;}
-    const T* operator->() const { return control_block->s_ptr; }
-    const T* get() const { return control_block ? control_block->s_ptr : nullptr; }
+    const T& operator*() const {
+        if (expired()) throw std::out_of_range("The pointer have expired.\n");
+        return *control_block->s_ptr;
+    }
+    const T* operator->() const {
+        if (expired()) throw std::out_of_range("The pointer have expired.\n");
+        return control_block->s_ptr;
+    }
+    const T* get() const {return control_block ? control_block->s_ptr : nullptr;}
 
-    T& operator*() { return *control_block->s_ptr;} // expired?, ptr == nullptr
-    T* operator->() { return control_block->s_ptr; }
-    T* get() { return control_block ? control_block->s_ptr : nullptr; }
+    T& operator*() {
+        if (expired()) throw std::out_of_range("The pointer have expired.\n");
+        return *control_block->s_ptr;
+    }
+    T* operator->() {
+        if (expired()) throw std::out_of_range("The pointer have expired.\n");
+        return control_block->s_ptr;
+    }
+    T* get() { return control_block ? control_block->s_ptr : nullptr;}
 
     const bool unique() const {
         return control_block && control_block->weak_count == 1;

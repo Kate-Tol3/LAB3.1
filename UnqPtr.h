@@ -32,18 +32,34 @@ public:
     }
 
 
-    T& operator*() { return *u_ptr; }
-    T* operator->() { return u_ptr; }
+    T& operator*() {
+        if (this->get() == nullptr) throw std::out_of_range("The pointer have expired.\n");
+        return *u_ptr;
+    }
+    T* operator->() {
+        if (this->get() == nullptr) throw std::out_of_range("The pointer have expired.\n");
+        return u_ptr;
+    }
 
-    const T& operator*() const { return *u_ptr; }
-    const T* operator->() const { return u_ptr; }
+    const T& operator*() const {
+        if (this->get() == nullptr) throw std::out_of_range("The pointer have expired.\n");
+        return *u_ptr;
+    }
+    const T* operator->() const {
+        if (this->get() == nullptr) throw std::out_of_range("The pointer have expired.\n");
+        return u_ptr;
+    }
 
     const bool isNull() const { return u_ptr == nullptr; }
     bool isNull() {return u_ptr == nullptr; }
 
     // Get the raw pointer
-    const T* get() const { return u_ptr; }
-    T* get() {return u_ptr;}
+    const T* get() const {
+        return u_ptr;
+    }
+    T* get() {
+        return u_ptr;
+    }
 
 
     T* release() {
