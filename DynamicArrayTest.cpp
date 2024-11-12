@@ -14,7 +14,6 @@ void DynamicArrayTest::testConstructors(){
     }
     catch (IndexOutOfRange& ex) {}
 
-
     DynamicArray<double> arr3(elems, 6);
     assert(arr3.getSize() == 6);
     for (int i = 0; i < arr3.getSize(); i++) {
@@ -22,7 +21,6 @@ void DynamicArrayTest::testConstructors(){
     }
     try {
         DynamicArray<double> arr_(elems, -1);
-        // ;
     }
     catch (IndexOutOfRange& ex) {}
 

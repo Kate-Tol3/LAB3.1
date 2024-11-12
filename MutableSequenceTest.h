@@ -218,7 +218,7 @@ public:
         testGetLast();
         testOperatorAccess();
 
-        std:: cout << "All MutableSequence tests passsed!" <<  std:: endl;
+        std:: cout << "All MutableSequence tests passed!" <<  std:: endl;
     }
 };
 

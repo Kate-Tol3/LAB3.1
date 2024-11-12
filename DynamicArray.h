@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include <stdexcept>
+#include "Exception.h"
 #include "Sequence.h"
 #include "LinkedList.h"
 #include "UnqPtr.h"
@@ -10,26 +10,28 @@ template <typename T>
 class DynamicArray {
 protected:
     int size;
-    T* array = nullptr;//T* array = nullptr;
+    UnqPtr<T[]> array;
+
 public:
-    DynamicArray(const T* other_array, int size): size(size) {
+
+    DynamicArray(const T* other_array, int size): size(size){
         if (size < 0) throw IndexOutOfRange();
-        array = new T[size];
+        array = UnqPtr<T[]> (new T[size]);
         for (int i = 0; i < size; ++i) {
             array[i] = other_array[i];
         }
     }
 
-    DynamicArray() {}
+    DynamicArray(): size(0), array(nullptr) {}
 
     DynamicArray(int size): size(size) {
         if (size < 0) throw IndexOutOfRange();
-        array = new T[size];
+        array = UnqPtr<T[]> (new T[size]);
     }
 
     DynamicArray(const DynamicArray<T>& other): size(other.getSize()), array(new T[other.getSize()]) {
         for (int i = 0; i < size; ++i) {
-            set(i, other.get(i));
+            array[i] = other.get(i);
         }
     }
 
@@ -45,9 +47,8 @@ public:
         }
     }
 
-    ~DynamicArray() {
-        delete[] array;
-    }
+    ~DynamicArray() = default;
+
 
     T& operator[](int index) {
         if (index >= size || index < 0) throw IndexOutOfRange();
@@ -56,20 +57,20 @@ public:
 
     const T& operator[](int index) const {
         if (index >= size || index < 0) throw IndexOutOfRange();
-        return const_cast<T&>(array[index]);
+        return array[index];
     }
 
     DynamicArray<T>& operator=(const DynamicArray<T>& other) {
-        delete array;
-        array = new T[other.getSize()];
-        for (int i = 0; i < other.getSize(); ++i) {
+        if (this == &other) return *this;
+        array.reset(new T[other.getSize()]);
+        size = other.size;
+        for (int i = 0; i < size; ++i) {
             array[i] = other.get(i);
         }
-        size = other.size;
-        return *this; // возвращаем обновленный *this как rvalue;
+        return *this;
     }
 
-    T get(int index) const { // возвращает rvalue
+    T get(int index) const {
         if (index >= size || index < 0) throw IndexOutOfRange();
         return array[index];
     }
@@ -77,24 +78,21 @@ public:
     int getSize() const {
         return size;
     }
+
     void set(int index, const T& value) {
-        (*this)[index] = value;
+        if (index >= size || index < 0) throw IndexOutOfRange();
+        array[index] = value;
     }
 
     void resize(int newSize) {
         if (newSize < 0) throw IndexOutOfRange();
-        T* helpArray = new T[newSize];
-        int minSize = newSize < size ? newSize : size;
+        UnqPtr<T[]> newArray(new T[newSize]);
+        int minSize = (newSize < size) ? newSize : size;
         for (int i = 0; i < minSize; ++i) {
-            helpArray[i] = array[i];
+            newArray[i] = array[i];
         }
-        delete[] array;
-        array = helpArray;
+        array.swap(newArray); // Замена массива
         size = newSize;
-        if (size == 0) {
-            delete[] array;
-            array = nullptr;
-        }
     }
 
     void append(const T& item) {
@@ -103,45 +101,32 @@ public:
     }
 
     void prepend(const T& item) {
-        T* helpArray = new T[size + 1];
-        helpArray[0] = item;
+        UnqPtr<T[]> newArray(new T[size + 1]);
+        newArray[0] = item;
         for (int i = 0; i < size; ++i) {
-            helpArray[i + 1] = array[i];
+            newArray[i + 1] = array[i];
         }
-        delete[] array;
-        array = helpArray;
-        size = size + 1;
+        array.swap(newArray);
+        size += 1;
     }
 
     void insertAt(const T& item, int index) {
         if (index < 0 || index > size) throw IndexOutOfRange();
-        T* helpArray = new T[size + 1];
-        int i = 0;
-        for (; i < index; ++i) {
-            helpArray[i] = array[i];
+        UnqPtr<T[]> newArray(new T[size + 1]);
+        for (int i = 0; i < index; ++i) {
+            newArray[i] = array[i];
         }
-        helpArray[i++] = item;
-        for (; i < size + 1; ++i) {
-            helpArray[i] = array[i - 1];
+        newArray[index] = item;
+        for (int i = index; i < size; ++i) {
+            newArray[i + 1] = array[i];
         }
-        delete[] array;
-        array = helpArray;
-        size = size + 1;
+        array.swap(newArray);
+        size += 1;
     }
 
     void print() const {
         for (int i = 0; i < size; i++){
-            if (i != size - 1) std::cout << this->get(i) << " ";
-            else std::cout << this->get(i);
+            std::cout << array[i] << (i != size - 1 ? " " : "");
         }
-    }
-
-    friend std::ostream& operator << (std::ostream& os, const DynamicArray<T>& value) {
-        int i = 0;
-        for (; i < value.getSize() - 1; ++i) {
-            os << value[i] << " ";
-        }
-        os << value[i] << "\n";
-        return os;
     }
 };

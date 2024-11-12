@@ -8,7 +8,7 @@ struct ControlBlock {
     int ref_count;      // Счётчик сильных ссылок (SharedPtr)
     int weak_count;     // Счётчик слабых ссылок (WeakPtr)
 
-    // Конструктор для инициализации контрольного блока
+
     ControlBlock(T* ptr = nullptr) : s_ptr(ptr), ref_count(1), weak_count(0) {}
 
     // Уничтожение объекта, но не самого контрольного блока
@@ -48,7 +48,6 @@ public:
         }
     }
 
-    // Деструктор
     ~SharedPtr() {
         release();
     }

@@ -53,7 +53,7 @@ public:
     const bool isNull() const { return u_ptr == nullptr; }
     bool isNull() {return u_ptr == nullptr; }
 
-    // Get the raw pointer
+
     const T* get() const {
         return u_ptr;
     }
@@ -78,6 +78,65 @@ public:
         u_ptr = other.u_ptr;
         other.u_ptr = temp;
     }
+};
+
+// Специализация для массивов
+template <typename T>
+class UnqPtr<T[]> {
+private:
+    T* ptr;
+
+public:
+
+    UnqPtr() : ptr(nullptr) {}
+
+    explicit UnqPtr(T* p) : ptr(p) {}
+
+    UnqPtr(const UnqPtr&) = delete;
+    UnqPtr& operator=(const UnqPtr&) = delete;
+
+    UnqPtr(UnqPtr&& other) noexcept : ptr(other.ptr) {
+        other.ptr = nullptr;
+    }
+
+    UnqPtr& operator=(UnqPtr&& other) noexcept {
+        if (this != &other) {
+            delete[] ptr;
+            ptr = other.ptr;
+            other.ptr = nullptr;
+        }
+        return *this;
+    }
+
+    ~UnqPtr() {
+        delete[] ptr;
+    }
+
+    T& operator[](size_t index) const {
+        if(ptr == nullptr) throw std::out_of_range("The pointer have expired.\n");
+        return ptr[index];
+    }
+
+    explicit operator bool() const { return ptr != nullptr; }
+
+    T* release() {
+        T* temp = ptr;
+        ptr = nullptr;
+        return temp;
+    }
+
+    void reset(T* p = nullptr) {
+        delete[] ptr;
+        ptr = p;
+    }
+
+    void swap(UnqPtr& other) noexcept {
+        std::swap(ptr, other.ptr);
+    }
+
+    const T* get() const { return ptr;}
+
+    T* get() { return ptr;}
 };
 
 

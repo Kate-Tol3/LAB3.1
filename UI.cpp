@@ -281,7 +281,7 @@ int getElemsType() {
 }
 
 void showMenu() {
-    std::cout << "Hello user!! This program allows you to operate Sequences. Let's start!\n\n";
+    std::cout << "This program allows you to operate Sequences. Let's start!\n\n";
     int sequenceType = getElemsType();
     if (sequenceType == 1) {
         UI_Sequence<int> ui;

@@ -10,18 +10,17 @@ add_executable(3_1LAB main.cpp
         WeakPtrTest.h
         UnqPtrTest.cpp
         UnqPtrTest.h
-        ShrdPtr.h
+        SharedPtr.h
         Test.cpp
         Test.h
-        ShrdPtrTest.cpp
-        ShrdPtrTest.h
-        "Atomic Pointers/ShrdPtrAtomic.h"
-        "Atomic Pointers/ShrdPtrAtomicTest.cpp"
-        "Atomic Pointers/ShrdPtrAtomicTest.h"
+        SharedPtrTest.cpp
+        SharedPtrTest.h
+        "Atomic Pointers/SharedPtrAtomic.h"
+        "Atomic Pointers/SharedPtrAtomicTest.cpp"
+        "Atomic Pointers/SharedPtrAtomicTest.h"
         "Atomic Pointers/WeakPtrAtomicTest.cpp"
         "Atomic Pointers/WeakPtrAtomicTest.h"
         "Atomic Pointers/WeakPtrAtomic.h"
-        LoadTest.cpp
         LoadTest.h
         LinkedListTest.cpp
         LinkedListTest.h
@@ -33,5 +32,11 @@ add_executable(3_1LAB main.cpp
         MutableSequenceTest.h
         DynamicArray.h
         MutableArraysequence.h
+        DynamicArrayTest.cpp
+        DynamicArrayTest.h
+        UI.cpp
+        UI.h
+        TestUI.cpp
+        TestUI.h
 
 )
