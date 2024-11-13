@@ -53,9 +53,19 @@ void WeakPtrTest::testRelease() {
     int a = 5;
     SharedPtr<int> p1(new int(a));
     WeakPtr<int> p2(p1);
-    assert(p1.useCount() == 1 && p2.useCount() == 1);
+    WeakPtr<int> p3(p1);
+    WeakPtr<int> p4(p1);
+    p3.release();
+    p3.release();
+    p3.release();
+
+    assert(p3.expired());
+    assert(!p2.expired());
+    assert(!p4.expired());
+
+    assert(p1.useCount() == 1 && p2.useCount() == 2);
     p1.release();
-    assert(p1.useCount() == 0 && p2.useCount() == 1);
+    assert(p1.useCount() == 0 && p2.useCount() == 2);
     assert(p1.get() == nullptr);
     p2.release();
     assert(p1.expired());

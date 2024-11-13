@@ -66,8 +66,8 @@ public:
         if (control_block) {
             if (--control_block->weak_count == 0 && control_block->ref_count == 0) {
                 delete control_block;  // Удаляем контрольный блок, если нет сильных и слабых ссылок
-                control_block = nullptr;
             }
+            control_block = nullptr;
         }
     }
 

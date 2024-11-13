@@ -84,6 +84,7 @@ public:
                     delete control_block;  // Удаляем и контрольный блок, если слабых ссылок больше нет
                 }
             }
+            control_block = nullptr;
         }
     }
 
