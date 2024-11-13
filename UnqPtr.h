@@ -112,7 +112,12 @@ public:
         delete[] ptr;
     }
 
-    T& operator[](size_t index) const {
+    T& operator[](size_t index) {
+        if(ptr == nullptr) throw std::out_of_range("The pointer have expired.\n");
+        return ptr[index];
+    }
+
+    const T& operator[](size_t index) const {
         if(ptr == nullptr) throw std::out_of_range("The pointer have expired.\n");
         return ptr[index];
     }
